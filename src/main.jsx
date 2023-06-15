@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import './fonts/roboto'
 import { RouterProvider } from 'react-router-dom'
 import './fonts/roboto.js'
 import './index.css'
