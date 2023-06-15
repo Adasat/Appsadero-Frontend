@@ -1,0 +1,9 @@
+#profile-section:hover{
+    color: #546a2f;
+    transition: 2s;
+}
+
+#profile-logout:hover{
+    transition: 1s ease-in;
+    background-color: #ab4f53;
+}
