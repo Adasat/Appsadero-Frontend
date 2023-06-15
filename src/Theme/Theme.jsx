@@ -29,8 +29,5 @@ export const customTheme = createTheme({
     },
   },
 })
-<<<<<<< HEAD
 
 
-=======
->>>>>>> Adasat3
