@@ -8,3 +8,20 @@ Installed:
 - npm install -D eslint-config-prettier
 - npm i prop-types
 - npm i react-router-dom@6
+
+
+
+
+
+Abel - Login
+
+Router
+Email Format Validation
+Pass Format Validation
+----
+Service for log to backend
+----
+
+
+                           
+Enlace A Signup
