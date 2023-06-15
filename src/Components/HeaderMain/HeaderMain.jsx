@@ -2,7 +2,7 @@ import { AccountCircle, Menu } from '@mui/icons-material'
 import { AppBar, Box, IconButton, Toolbar, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 
-function HeaderMain() {
+function HeaderMain({title}) {
   return (
     <>
       <Box sx={{ flexGrow: 1}}>
@@ -25,7 +25,7 @@ function HeaderMain() {
               sx={{ flexGrow: 1, textAlign: 'center', m: 2 }}
             >
               <Link className="links" to="/dashboard">
-                APPSADERO
+                {title}
               </Link>
             </Typography>
             <IconButton
