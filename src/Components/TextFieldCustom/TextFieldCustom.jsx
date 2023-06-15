@@ -1,19 +1,25 @@
-import { TextField } from '@mui/material'
+import { InputAdornment, TextField } from '@mui/material'
+import { Mail, Visibility, VisibilityOff } from '@mui/icons-material'
 
-function TextFieldInput({ label, type, InputAdorment, onChange }) {
+
+function TextFieldInput({ label, type, onChange}) {
+
+  /*  const visibilityPass  = (e) => {
+    return (e === true) ? <VisibilityOff/> : <Visibility/>
+  }
+ */
   return (
     <TextField
       label={label}
       type={type}
-      variant="contained"
+      variant="outlined"
       required
       margin="dense"
       fullWidth
       color="primary"
-      sx={{ backgroundColor: 'white' }}
-      InputAdorment={InputAdorment}
-      onChange={(e) => onChange(e.target.value)}
+      
     ></TextField>
+
   )
 }
 

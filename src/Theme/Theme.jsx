@@ -1,4 +1,4 @@
-import { createTheme } from "@mui/material";
+import { createTheme } from '@mui/material'
 
 export const customTheme = createTheme({
   palette: {
@@ -29,5 +29,8 @@ export const customTheme = createTheme({
     },
   },
 })
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> Adasat3
