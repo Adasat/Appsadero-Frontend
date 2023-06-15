@@ -8,6 +8,7 @@ import { Typography, Box, Grid, Paper, Button, Link, TextField } from '@mui/mate
 import './Signup.css'
 import { useNavigate } from 'react-router-dom'
 import TextFieldEmail from '../../Components/TextFieldEmail/TextFieldEmail'
+import TextFieldPassword from '../../Components/TextFieldPassword/TextFieldPassword'
 
 function Signup() {
   const navigate = useNavigate()
@@ -19,8 +20,11 @@ function Signup() {
   const [emailRepeat, setEmailRepeat] = useState('')
   const [passwordRepeat, setPasswordRepeat] = useState('')
 
+  const handleName = (e) => {
+    setName(e.target.value)
+  }
   // Password visibility.
-  const [isPassVisible, setIsPassVisible] = useState(false)
+  /* const [isPassVisible, setIsPassVisible] = useState(false)
   const [isRepPassVisible, setIsRepPassVisible] = useState(false)
 
   const handlePassVisible = () => {
@@ -31,23 +35,16 @@ function Signup() {
   }
 
   //Manage the user's data
-  const handleName = (e) => {
-    setName(e.target.value)
-  }
-  const handleEmail = (value) => {
-    setEmail(value)
-  }
+  
   const handlePassword = (value) => {
     setPassword(value)
   }
 
-  //Manage the control's data
-  const handleEmailRepeat = (value) => {
-    setEmailRepeat(value)
-  }
+ 
+  
   const handlePasswordRepeat = (value) => {
     setPasswordRepeat(value)
-  }
+  } */
 
   const signupButton = async () => {
     if (email === emailRepeat) {
@@ -112,36 +109,18 @@ function Signup() {
 
                 
 
-                <TextFieldEmail/>
+                <TextFieldEmail label="Introduce un email"/>
+                <TextFieldEmail label="Repita el correo introducido"/>
+
+                <TextFieldPassword label='Introduce una contraseña'/>
+                <TextFieldPassword label='Repita su contraseña'/>
 
 
 
 
 
-                <TextFieldInput
-                  label="Introduce un email"
-                  type="email"
-                  onChange={handleEmail}
-                  getIcon="Mail"
-                />
-                <TextFieldInput
-                  label="Repite el email"
-                  type="email"
-                  onChange={handleEmailRepeat}
-                  getIcon="Mail"
-                />
-                <TextFieldInput
-                  label="Introduce tu contraseña"
-                  type="password"
-                  onChange={handlePassword}
-                  getIcon="Mail"
-                />
-                <TextFieldInput
-                  label="Repite la contraseña"
-                  type="password"
-                  onChange={handlePasswordRepeat}
-                  getIcon="Mail"
-                />
+
+
                 <Button
                   type="button"
                   fullWidth

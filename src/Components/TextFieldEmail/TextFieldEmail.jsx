@@ -3,7 +3,7 @@ import { Mail } from '@mui/icons-material'
 import { useState } from 'react'
 
 
-function TextFieldEmail() {
+function TextFieldEmail({label}) {
   const [email, setEmail] = useState('')
   const [statusEmail, setStatusEmail] = useState(false)
   const [msgEmail, setMsgEmail] = useState('')
@@ -27,6 +27,7 @@ function TextFieldEmail() {
   return (
     <>
       <TextField
+        label={label}
         variant="outlined"
         required
         margin="dense"
