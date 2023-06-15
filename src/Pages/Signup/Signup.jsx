@@ -1,14 +1,16 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useNavigate } from 'react'
+//import { userSignup } from '../../services/auth.service'
 
-
-import TextFieldInput from '../../Components/TextFieldCustom/TextFieldCustom'
 import { Typography, Box, Grid, Paper, Button, Link, TextField } from '@mui/material'
 
-import './Signup.css'
-import { useNavigate } from 'react-router-dom'
+//import TextFieldInput from '../../Components/TextFieldCustom/TextFieldCustom'
 import TextFieldEmail from '../../Components/TextFieldEmail/TextFieldEmail'
 import TextFieldPassword from '../../Components/TextFieldPassword/TextFieldPassword'
+
+import './Signup.css'
+
+
 
 function Signup() {
   const navigate = useNavigate()
@@ -23,7 +25,7 @@ function Signup() {
   const handleName = (e) => {
     setName(e.target.value)
   }
-  // Password visibility.
+
   /* const [isPassVisible, setIsPassVisible] = useState(false)
   const [isRepPassVisible, setIsRepPassVisible] = useState(false)
 
@@ -40,8 +42,6 @@ function Signup() {
     setPassword(value)
   }
 
- 
-  
   const handlePasswordRepeat = (value) => {
     setPasswordRepeat(value)
   } */
@@ -107,19 +107,10 @@ function Signup() {
                   onChange={handleName}
                 />
 
-                
-
                 <TextFieldEmail label="Introduce un email"/>
                 <TextFieldEmail label="Repita el correo introducido"/>
-
                 <TextFieldPassword label='Introduce una contraseña'/>
                 <TextFieldPassword label='Repita su contraseña'/>
-
-
-
-
-
-
 
                 <Button
                   type="button"
