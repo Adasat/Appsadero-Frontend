@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import {  Link ,Avatar, Box, Button, Checkbox, FormControlLabel, Grid, TextField, Typography, Paper, InputAdornment, IconButton } from '@mui/material'
-//import { LockOutlined, TryOutlined, Visibility } from '@mui/icons-material'
+import { Avatar, Box, Button, Checkbox, FormControlLabel, Grid, TextField, Typography, Paper, InputAdornment, IconButton } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import './Login.css'
 import { tryLogin } from '../../services/auth.service';
-//import { loging } from '../../services/auth';
+import { Link } from 'react-router-dom'
+import { blue } from '@mui/material/colors';
 
 function LogIn() {
   const [email, SetEmail] = useState('')
@@ -17,9 +17,8 @@ function LogIn() {
   }
 
   const isPassword = () => {
-    return password.length > 6
+    return password.length >= 6
   }
-
 
   const doLogin = async () => {
     try {
@@ -29,25 +28,7 @@ function LogIn() {
     }
   }
 
-  /*
- async function onLogin() {
-   try {
-     const loginResponse = await loging({ email, password });
-     localStorage.setItem("token", loginResponse);
-   } catch (err) {
-      console.log(err)
-   }
- }
 
- 
- useEffect(() => {
-
-  onLogin()
-LogIn
-  },[])
-  
-  
-*/
   return (
     <div className="grid-content">
       <Paper elevation={24}>
@@ -79,7 +60,7 @@ LogIn
               maxHeight="350px"
             >
               <Avatar sx={{ m: 1, mt: 4 }}>
-                <AccountCircleIcon/>
+                <AccountCircleIcon />
               </Avatar>
               <Typography component="h1" variant="h5">
                 Login
@@ -126,12 +107,7 @@ LogIn
                     !isPassword() && error
                   }}
                 />
-                {/*
-                <FormControlLabel
-                  control={<Checkbox value="remember" />}
-                  label="Remember me"
-                />
-                */}
+
                 <Button
                   type="button"
                   fullWidth
@@ -146,7 +122,7 @@ LogIn
                     <Link variant="body2">Forgot password?</Link>
                   </Grid>
                   <Grid item>
-                    <Link variant="body2">
+                    <Link className='link'>
                       {"Don't have an account? Sign Up"}
                     </Link>
                   </Grid>
