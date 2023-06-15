@@ -1,0 +1,15 @@
+.links, 
+.links:focus,
+.links:hover,
+.links:visited,
+.links:link,
+.links:active {
+    text-decoration: none;
+    color: inherit;
+}
+
+.links:hover{
+   /* color: #546a2f; */
+    transition: 1s ease-out;
+    text-shadow: 6px 8px 8px #e8e8f186;
+}
