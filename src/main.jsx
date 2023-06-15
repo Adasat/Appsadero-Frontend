@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './fonts/roboto'
 import { RouterProvider } from 'react-router-dom'
-import { router } from './Router/index.jsx'
+import { router } from './Router/router'
 
 
 import './index.css'
