@@ -16,7 +16,12 @@ Installed:
 Abel - Login
 
 Router
-Email Validation
-Pass Validation
+Email Format Validation
+Pass Format Validation
+----
+Service for log to backend
+----
+
+
                            
 Enlace A Signup

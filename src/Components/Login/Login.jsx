@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import {  Link ,Avatar, Box, Button, Checkbox, FormControlLabel, Grid, TextField, Typography, Paper, InputAdornment, IconButton } from '@mui/material'
-import { LockOutlined, Visibility } from '@mui/icons-material'
+import { LockOutlined, TryOutlined, Visibility } from '@mui/icons-material'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import './Login.css'
 //import { loging } from '../../services/auth';
 
@@ -16,6 +17,16 @@ function LogIn() {
 
   const isPassword = () => {
     return password.length > 6
+  }
+
+
+  const doLogin = async () => {
+    try {
+        //const res = 
+        //pasar contraseña e email al servicio para comprobar datos contra la db
+    } catch (err) {
+      
+    }
   }
 
   /*
@@ -67,11 +78,11 @@ LogIn
               //backgroundColor= '#795548'
               maxHeight="350px"
             >
-              <Avatar sx={{ m: 1, mt: 4, bgcolor: 'background.default' }}>
-                <LockOutlined />
+              <Avatar sx={{ m: 1, mt: 4 }}>
+                <AccountCircleIcon/>
               </Avatar>
               <Typography component="h1" variant="h5">
-                Sign in
+                Login
               </Typography>
 
               <Box component="form" noValidate sx={{ m: 4 }}>
@@ -112,13 +123,15 @@ LogIn
                     SetPassword(e.target.value)
                   }}
                   onBlur={(e) => {
-                    isPassword()
+                    !isPassword() && error
                   }}
                 />
+                {/*
                 <FormControlLabel
                   control={<Checkbox value="remember" />}
                   label="Remember me"
                 />
+                */}
                 <Button
                   type="button"
                   fullWidth
@@ -126,7 +139,7 @@ LogIn
                   sx={{ mt: 3, mb: 2 }}
                   onClick={(e) => console.log('asd')}
                 >
-                  Signup
+                  Login
                 </Button>
                 <Grid container>
                   <Grid item xs>
