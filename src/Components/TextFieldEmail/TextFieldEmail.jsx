@@ -20,26 +20,24 @@ function TextFieldEmail() {
       setMsgEmail('')
     } else {
       setStatusEmail(false)
-      setMsgEmail('Incorrect email entry.')
+      setMsgEmail('Formato de email incorrecto.')
     }
   }
 
   return (
     <>
       <TextField
-        label={label}
-        type={type}
         variant="outlined"
         required
         margin="dense"
         fullWidth
-        color="primary"
+        type='email'
         InputProps={{
           endAdornment: (
             <Mail/>
           )
         }}
-        onChange={(e) => onChange(e.target.value)}
+        onChange={(e) => handleEmail(e)}
         color={statusEmail ? 'success' : 'error'}
         helperText={msgEmail}
       ></TextField>

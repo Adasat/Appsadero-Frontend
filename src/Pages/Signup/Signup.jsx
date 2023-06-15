@@ -7,6 +7,7 @@ import { Typography, Box, Grid, Paper, Button, Link, TextField } from '@mui/mate
 
 import './Signup.css'
 import { useNavigate } from 'react-router-dom'
+import TextFieldEmail from '../../Components/TextFieldEmail/TextFieldEmail'
 
 function Signup() {
   const navigate = useNavigate()
@@ -108,6 +109,15 @@ function Signup() {
                   color="primary"
                   onChange={handleName}
                 />
+
+                
+
+                <TextFieldEmail/>
+
+
+
+
+
                 <TextFieldInput
                   label="Introduce un email"
                   type="email"
