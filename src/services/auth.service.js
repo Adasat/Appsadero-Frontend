@@ -1,5 +1,10 @@
-import './api'
+import { api } from './api.js'
 
-const tryLogin = (email, pass) => {
-    const 
+export const tryLogin = async (email, password) => {
+    try{
+        const { data } = await api.post('/auth/login', {email, password})
+        localStorage.setItem('token', data.token)
+    }catch(err){
+        console.error(err)
+    }
 }

@@ -1,8 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {  Link ,Avatar, Box, Button, Checkbox, FormControlLabel, Grid, TextField, Typography, Paper, InputAdornment, IconButton } from '@mui/material'
-import { LockOutlined, TryOutlined, Visibility } from '@mui/icons-material'
+//import { LockOutlined, TryOutlined, Visibility } from '@mui/icons-material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import './Login.css'
+import { tryLogin } from '../../services/auth.service';
 //import { loging } from '../../services/auth';
 
 function LogIn() {
@@ -22,10 +23,9 @@ function LogIn() {
 
   const doLogin = async () => {
     try {
-        //const res = 
-        //pasar contraseña e email al servicio para comprobar datos contra la db
+        await tryLogin(email, password)
     } catch (err) {
-      
+      console.log(err)
     }
   }
 
@@ -137,7 +137,7 @@ LogIn
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
-                  onClick={(e) => console.log('asd')}
+                  onClick={(e) => doLogin()}
                 >
                   Login
                 </Button>
