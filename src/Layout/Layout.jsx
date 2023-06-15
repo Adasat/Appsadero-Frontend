@@ -1,14 +1,14 @@
 import { Outlet } from 'react-router-dom'
-import Header from '../Components/Header/Header'
+import HeaderMain from '../Components/HeaderMain/HeaderMain'
 import Footer from '../Components/Footer/Footer'
 
 function Root() {
   return (
-    <div>
-        <Header/>
+    <>
+        <HeaderMain/>
         <Outlet/>
         <Footer/>
-    </div>
+    </>
   )
 }
 export default Root

@@ -11,6 +11,7 @@ export const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
         { path: '/dashboard', element: <Dashboard /> },
+        { path: '/myprofile', element: <Dashboard /> }, // MODIFICAR:
     ],
   },
 ])
