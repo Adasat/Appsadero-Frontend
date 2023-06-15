@@ -1,8 +1,13 @@
+import { Button, CardHeader } from "@mui/material"
 
 
 function Header() {
   return (
-    <div>El header guapo de Appsadero</div>
+    <>
+      <CardHeader   >El header guapo de Appsadero</CardHeader>
+      <Button variant="contained" color="primary_light">texto</Button>
+
+    </>
   )
 }
 
