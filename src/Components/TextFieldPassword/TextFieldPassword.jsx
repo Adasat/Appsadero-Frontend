@@ -8,9 +8,8 @@ import { Visibility, VisibilityOff } from '@mui/icons-material'
     TextFieldPassword.propTypes = {
       handlePassword: PropTypes.func.isRequired
     };
-
+   
     const [password, setPassword] = useState({
-      label: '',
       value: '',
       validPassword: false,
       msg: '',
@@ -26,15 +25,17 @@ import { Visibility, VisibilityOff } from '@mui/icons-material'
 
 
   const handleChange = (e) => {
+    handlePassword(password)
     if (passValidator(e.target.value)) {
     setPassword({...password,
       value: e.target.value,
       validPassword: true,
       msg: ''})
-    handlePassword(password)
+    console.log("handle password en componente" + password)
     } else {
       setPassword({
         ...password,
+        value: e.target.value,
         validPassword: false,
         msg: 'La contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial ',
       })
@@ -42,14 +43,14 @@ import { Visibility, VisibilityOff } from '@mui/icons-material'
   }
 
    const handlePassVisible = () => {
-     setPassword({...password, iconVisible: !iconVisible})
+     setPassword({...password, iconVisible: !password.iconVisible})
    }
  
 
    return (
      <>
        <TextField
-         label={password.label}
+         label="Contraseña"
          variant="outlined"
          required
          margin="dense"
@@ -62,33 +63,12 @@ import { Visibility, VisibilityOff } from '@mui/icons-material'
              </IconButton>
            ),
          }}
-         onChange={(e) => handleChange(e)}
+         onChange={handleChange}
          color={password.validPassword ? 'success' : 'error'}
          helperText={password.msg}
        ></TextField>
      </>
-   )
-/* 
- 
-  return (
-
-    <TextField
-      label='Contraseña'
-      type= 'password'
-      variant="outlined"
-      required
-      error={password.validPassword}
-      value={password.value}
-      margin="dense"
-      fullWidth
-      color="primary"
-      onChange={handleChange}
-      onBlur={handleChange}
-    >
-    </TextField>
-
-  ) */
- 
+   ) 
 }
 
 export default TextFieldPassword

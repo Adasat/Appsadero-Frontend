@@ -9,8 +9,6 @@ import TextFieldEmail from '../../Components/TextFieldEmail/TextFieldEmail';
 
 function LogIn() {
 
-  
-
   const [password, setPassword] = useState({
     value: '',
     validPassword: false
@@ -35,7 +33,6 @@ const handleEmail = (email) => {
 
 const doLogin = async () => {
   try {
-    console.log(password.value)
     await tryLogin(email.value, password.value)
   } catch (err) {
     console.log(err)
