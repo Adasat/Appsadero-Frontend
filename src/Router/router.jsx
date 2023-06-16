@@ -15,13 +15,9 @@ export const router = createBrowserRouter([
     children: [
         { path: '/dashboard', element: <Dashboard /> },
         { path: '/myprofile', element: <Dashboard /> }, // MODIFICAR:
-        { path: '/signup', element: <Signup/>}
+        { path: '/signup', element: <Signup/>},
+        { path: '/login', element: <Login/>}
     ],
   },
-  {
-    path: '/login',
-    element: <Login/>,
-    errorElement: <NotFound />
-  }
 ])
 

@@ -1,46 +1,55 @@
 import { TextField } from '@mui/material'
 import { Mail } from '@mui/icons-material'
 import { useState } from 'react'
+import PropTypes from 'prop-types';
 
 
-function TextFieldEmail({label}) {
-  const [email, setEmail] = useState('')
-  const [statusEmail, setStatusEmail] = useState(false)
-  const [msgEmail, setMsgEmail] = useState('')
+function TextFieldEmail({handleEmail}) {
+
+  TextFieldEmail.propTypes = {
+    handleEmail: PropTypes.func.isRequired
+  };
+
+  const [email, setEmail] = useState({
+    value: '',
+    msg: '',
+    valid: false,
+  })
+  
 
   const emailValidator = (email) => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
     return re.test(email)
   }
 
-  const handleEmail = (e) => {
+  const handleChange = (e) => {
     if (emailValidator(e.target.value)) {
-      setEmail(e.target.value)
-      setStatusEmail(true)
-      setMsgEmail('')
+      setEmail({...email, value: (e.target.value), valid: emailValidator(e.target.value), msg: ''})
+      handleEmail(email)
     } else {
-      setStatusEmail(false)
-      setMsgEmail('Formato de email incorrecto.')
+      setEmail({...email, valid: false, msg: 'Formato de email incorrecto.'})
+      handleEmail(email)
     }
   }
 
   return (
     <>
       <TextField
-        label={label}
+        label={'label'}
+        type={'type'}
         variant="outlined"
         required
         margin="dense"
         fullWidth
-        type='email'
+        color={email.valid ? 'success' : 'error'}
         InputProps={{
           endAdornment: (
             <Mail/>
           )
         }}
-        onChange={(e) => handleEmail(e)}
-        color={statusEmail ? 'success' : 'error'}
-        helperText={msgEmail}
+        onChange={handleChange}
+        onBlur={handleChange}
+        helperText={email.msg}
       ></TextField>
     </>
   )
