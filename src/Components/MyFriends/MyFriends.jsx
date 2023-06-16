@@ -39,7 +39,6 @@ function MyFriends() {
           
           </List>
         </Card>
-    
       )
     }else{
       return <Typography variant="h5">Seguimos buscando. <Link to =''>Añade algún amigo más</Link></Typography>
