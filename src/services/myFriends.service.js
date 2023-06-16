@@ -4,9 +4,11 @@ import { api } from './api'
 export const getAllFriends = async () => {
   try {
     const { data } = await api.get('/friend/', {
+      
       headers: {
         token: localStorage.getItem('token'),
       },
+      
     })
     return data
   } catch (error) {

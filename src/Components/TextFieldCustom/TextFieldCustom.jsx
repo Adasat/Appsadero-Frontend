@@ -1,13 +1,9 @@
-import { InputAdornment, TextField } from '@mui/material'
-import { Mail, Visibility, VisibilityOff } from '@mui/icons-material'
+import { TextField } from '@mui/material'
 
 
-function TextFieldInput({ label, type, onChange}) {
 
-  /*  const visibilityPass  = (e) => {
-    return (e === true) ? <VisibilityOff/> : <Visibility/>
-  }
- */
+function TextFieldCustom({ label, type, onChange}) {
+
   return (
     <TextField
       label={label}
@@ -17,10 +13,11 @@ function TextFieldInput({ label, type, onChange}) {
       margin="dense"
       fullWidth
       color="primary"
+      onChange={(e) => onChange(e.target.value)}
       
-    ></TextField>
+    />
 
   )
 }
 
-export default TextFieldInput
+export default TextFieldCustom

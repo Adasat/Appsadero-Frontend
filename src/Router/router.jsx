@@ -10,8 +10,9 @@ import CreateAsadero from '../Pages/CreateAsadero/CreateAsadero'
 
 
 import Abel from '../Pages/Pruebas/Abel'
-import Pedro from '../Pages/Pruebas/Pedro'
-import Diana from '../Pages/Pruebas/Diana'
+/* import Pedro from '../Pages/Pruebas/Pedro'
+ */import Diana from '../Pages/Pruebas/Diana'
+import Friends from '../Pages/Friends/Friends'
 
 
 export const router = createBrowserRouter([
@@ -26,7 +27,7 @@ export const router = createBrowserRouter([
       { path: '/login', element: <Login /> },
       { path: '/createAsadero', element: <CreateAsadero /> },
       { path: '/abel', element: <Abel /> },
-      { path: '/pedro', element: <Pedro /> },
+      { path: '/pedro', element: <Friends /> },
       { path: '/diana', element: <Diana /> },
     ],
   },

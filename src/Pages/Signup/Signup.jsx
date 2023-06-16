@@ -1,6 +1,5 @@
-import React from 'react'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { userSignup } from '../../services/auth.service'
 
 import {
@@ -9,20 +8,19 @@ import {
   Grid,
   Paper,
   Button,
-  Link,
-  TextField,
-  IconButton,
 } from '@mui/material'
 
-//import TextFieldInput from '../../Components/TextFieldCustom/TextFieldCustom'
 import TextFieldEmail from '../../Components/TextFieldEmail/TextFieldEmail'
 import TextFieldPassword from '../../Components/TextFieldPassword/TextFieldPassword'
+import TextFieldCustom from '../../Components/TextFieldCustom/TextFieldCustom'
+
 
 import './Signup.css'
-import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { CheckBox } from '@mui/icons-material'
+
 
 function Signup() {
-    const navigate = useNavigate()
+  const navigate = useNavigate()
   
   const [first_name, setName] = useState('')
   const [nickname, setNickname] = useState('')
@@ -39,69 +37,34 @@ function Signup() {
     validPassword: false,
   })
 
-  const [passwordRepeat, setPasswordRepeat] = useState({
-    value: '',
-    validPassword: false,
-    msg: '',
-    iconVisible: false,
-  })
-
-  const [flag, setFlag] = useState(false)
-
-  
-
-  const handlePassVisible = () => {
-    setPasswordRepeat({
-      ...passwordRepeat,
-      iconVisible: !passwordRepeat.iconVisible,
-    })
+  const handleName = (value) => {
+    setName(value)
   }
-
   const handlePassword = (password) => {
     setPassword({ ...password, password })
   }
-
-  const handleRepeatPassword = (e) => {
-    setPasswordRepeat({ ...passwordRepeat, value: e.target.value })
-  }
-
-  const validatePasswords = () => {
-    console.log("Contraseña" + password.value +  'Contraseña2:' + passwordRepeat.value)
-    password.value === passwordRepeat.value/* 
-      ? (passwordRepeat.validPassword = true)
-      : (passwordRepeat.validPassword = false)
-    passwordRepeat.validPassword */
-      ? (passwordRepeat.msg = '')
-      : (passwordRepeat.msg = 'Las contraseñas no coinciden')
-  }
-  
-  
 
   const handleEmail = (email) => {
     setEmail({ ...email, email })
   }
 
-  const handleName = (e) => {
-    setName(e.target.value)
-  }
-
-  const handleNickName = (e) => {
-    setNickname(e.target.value)
+   const handleNickName = (value) => {
+    setNickname(value)
   }
 
   const signupButton = async () => {
-    validatePasswords()
-    if (passwordRepeat.validPassword) {
-      await userSignup(first_name, nickname, email.value, passwordRepeat.value)
+    console.log (email.valid, password.validPassword)
+    if(email.valid && password.validPassword){
+      await userSignup(first_name, nickname, email.value, password.value)
         navigate('/login')
-
-    } else {
-      alert('Las contraseñas no coinciden')
-    }
+    }else{
+      alert("Por favor, revisa los campos introducidos")
+    }   
   }
 
+  
   return (
-    <Box
+      <Box
       sx={{
         display: 'flex',
         margin: 'auto',
@@ -146,65 +109,25 @@ function Signup() {
               display={'flex'}
               flexDirection={'column'}
               alignItems={'center'}
-              maxWidth="450px" // Limitar el ancho del formulario
+              maxWidth="500px" // Limitar el ancho del formulario
               mx="auto" // Centrar el formulario horizontalmente
-              p={4} // Agregar un espaciado interno al formulario
+              p={2} // Agregar un espaciado interno al formulario
             >
-              <Typography component="h1" variant="h5">
+              <Typography component="h1" variant="h6">
                 Regístrate
               </Typography>
 
               <Box
                 component="form"
                 noValidate
-                sx={{ mt: 4, width: '100%', height: '100vh' }}
+                sx={{mt: 2, width: '100%', height: '70vh' }}
               >
-                <TextField
-                  label="Introduce tu nombre"
-                  type="text"
-                  variant="outlined"
-                  required
-                  margin="dense"
-                  fullWidth
-                  color="primary"
-                  onChange={handleName}
-                />
-                <TextField
-                  label="Introduce un nickname"
-                  type="text"
-                  variant="outlined"
-                  required
-                  margin="dense"
-                  fullWidth
-                  color="primary"
-                  onChange={handleNickName}
-                />
+                <TextFieldCustom label="Introduce tu nombre" type="text" onChange={handleName} />
+                <TextFieldCustom label="Introduce tu nickname" type="text" onChange={handleNickName} />
                 <TextFieldEmail handleEmail={handleEmail} />
                 <TextFieldPassword
                   label="Introduzca una contraseña"
                   handlePassword={handlePassword}
-                />
-                <TextField
-                  label="Repite la contraseña"
-                  type={passwordRepeat.iconVisible ? 'text' : 'password'}
-                  variant="outlined"
-                  required
-                  margin="dense"
-                  fullWidth
-                  InputProps={{
-                    endAdornment: (
-                      <IconButton onClick={handlePassVisible}>
-                        {passwordRepeat.iconVisible ? (
-                          <Visibility />
-                        ) : (
-                          <VisibilityOff />
-                        )}
-                      </IconButton>
-                    ),
-                  }}
-                  color={passwordRepeat.validPassword ? 'success' : 'error'}
-                  onChange={handleRepeatPassword}
-                  helperText={passwordRepeat.msg}
                 />
                 <Button
                   type="button"
@@ -213,13 +136,15 @@ function Signup() {
                   sx={{ mt: 3, mb: 2 }}
                   onClick={signupButton}
                 >
+                  
                   Signup
                 </Button>
+                
                 ¿Ya tienes cuenta? {'   '}
                 <Link to="/login" variant="body2">
                   Pincha aquí
                 </Link>
-              </Box>
+             </Box>
             </Box>
           </Grid>
         </Grid>

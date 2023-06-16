@@ -19,24 +19,23 @@ import { Visibility, VisibilityOff } from '@mui/icons-material'
 
     const passValidator = (password) => {
         const regex =
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/
+          /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{7,}$/
         return regex.test(password)
       }
 
   const handleChange = (e) => {
     handlePassword(password)
     if (passValidator(e.target.value)) {
-    setPassword({...password,
+    setPassword({
       value: e.target.value,
       validPassword: true,
       msg: ''})
-    console.log("handle password en componente" + password)
     } else {
       setPassword({
         ...password,
         value: e.target.value,
         validPassword: false,
-        msg: 'La contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial ',
+        msg: 'La contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula, un número y dos carácteresespeciales ',
       })
     }
   }
@@ -48,6 +47,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material'
 
    return (
      <>
+      
        <TextField
          label="Contraseña"
          variant="outlined"
