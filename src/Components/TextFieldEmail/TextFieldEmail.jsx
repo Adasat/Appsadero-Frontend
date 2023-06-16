@@ -11,6 +11,7 @@ function TextFieldEmail({handleEmail}) {
   };
 
   const [email, setEmail] = useState({
+    label: '',
     value: '',
     msg: '',
     valid: false,
@@ -24,7 +25,7 @@ function TextFieldEmail({handleEmail}) {
 
   const handleChange = (e) => {
     if (emailValidator(e.target.value)) {
-      setEmail({...email, value: (e.target.value), valid: emailValidator(e.target.value), msg: ''})
+      setEmail({...email, value: (e.target.value), valid: true, msg: ''})
       handleEmail(email)
     } else {
       setEmail({...email, valid: false, msg: 'Formato de email incorrecto.'})
@@ -35,8 +36,9 @@ function TextFieldEmail({handleEmail}) {
   return (
     <>
       <TextField
-        label={'label'}
-        type={'type'}
+      
+        label={email.label}
+        type={email}
         variant="outlined"
         required
         margin="dense"

@@ -9,79 +9,67 @@ import { Visibility, VisibilityOff } from '@mui/icons-material'
       handlePassword: PropTypes.func.isRequired
     };
 
-    const hasError = (password) => {
-      return password.length <= 5
-    } 
-  
-       const [isPassVisible, setIsPassVisible] = useState(false)
-       const [statusPassword, setStatusPassword] = useState(false)
-         const [msgPassword, setMsgPassword] = useState('')
-
-       const passValidator = (password) => {
-         const regex =
-           /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/
-         return regex.test(password)
-       }
-
-
     const [password, setPassword] = useState({
+      label: '',
       value: '',
-      validPassword: false
-      
+      validPassword: false,
+      msg: '',
+      iconVisible: false,
+
     })
 
+    const passValidator = (password) => {
+        const regex =
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/
+        return regex.test(password)
+      }
+
+
   const handleChange = (e) => {
-    setPassword({...password, value: e.target.value, validPassword: hasError(e.target.value)})
+    if (passValidator(e.target.value)) {
+    setPassword({...password,
+      value: e.target.value,
+      validPassword: true,
+      msg: ''})
     handlePassword(password)
+    } else {
+      setPassword({
+        ...password,
+        validPassword: false,
+        msg: 'La contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial ',
+      })
+    }
   }
 
-
-   const handlePassword = (e) => {
-     console.log('Albaricoque')
-     if (passValidator(e.target.value)) {
-       console.log('manzana')
-       setPassword(e.target.value)
-       console.log(statusPassword)
-
-       setStatusPassword(true)
-       setMsgPassword('')
-     } else {
-       setStatusPassword(false)
-       setMsgPassword(
-         'La contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula, un número y un carácter especial '
-       )
-     }
-   }
-
    const handlePassVisible = () => {
-     setIsPassVisible(!isPassVisible)
+     setPassword({...password, iconVisible: !iconVisible})
    }
  
 
    return (
      <>
        <TextField
-         label={label}
+         label={password.label}
          variant="outlined"
          required
          margin="dense"
          fullWidth
-         type={isPassVisible ? 'text' : 'password'}
+         type={password.iconVisible ? 'text' : 'password'}
          InputProps={{
            endAdornment: (
              <IconButton onClick={handlePassVisible}>
-               {isPassVisible ? <Visibility /> : <VisibilityOff />}
+               {password.iconVisible ? <Visibility /> : <VisibilityOff />}
              </IconButton>
            ),
          }}
-         onChange={(e) => handlePassword(e)}
-         color={statusPassword ? 'success' : 'error'}
-         helperText={msgPassword}
+         onChange={(e) => handleChange(e)}
+         color={password.validPassword ? 'success' : 'error'}
+         helperText={password.msg}
        ></TextField>
      </>
    )
-
-  /*
+/* 
+ 
   return (
 
     <TextField
@@ -99,8 +87,8 @@ import { Visibility, VisibilityOff } from '@mui/icons-material'
     >
     </TextField>
 
-  )
-  */
+  ) */
+ 
 }
 
 export default TextFieldPassword

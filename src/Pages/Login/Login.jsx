@@ -16,6 +16,7 @@ function LogIn() {
     validPassword: false
   })
   const [email, setEmail] = useState({
+    label: 'Email1',
     value: '',
     msg: '',
     valid: false,
@@ -28,8 +29,8 @@ function LogIn() {
 
 const handleEmail = (email) => {
   setEmail({...email, email})
-  console.log(email.value)
 }
+
   
 
 const doLogin = async () => {
@@ -82,7 +83,7 @@ const doLogin = async () => {
 
                 <TextFieldEmail key={1} handleEmail={handleEmail}/>
                 
-                <TextFieldPassword key={2} handlePassword={handlePassword}/>
+                <TextFieldPassword key={2} label='text' handlePassword={handlePassword}/>
 
 
 
