@@ -9,14 +9,12 @@ import TextFieldEmail from '../../Components/TextFieldEmail/TextFieldEmail';
 
 function LogIn() {
 
-  
-
   const [password, setPassword] = useState({
     value: '',
     validPassword: false
   })
   const [email, setEmail] = useState({
-    label: 'Email1',
+    label: '',
     value: '',
     msg: '',
     valid: false,
@@ -29,9 +27,8 @@ function LogIn() {
 
 const handleEmail = (email) => {
   setEmail({...email, email})
-}
 
-  
+}
 
 const doLogin = async () => {
   try {
@@ -49,8 +46,8 @@ const doLogin = async () => {
         <Grid
           container
           component="main" //Principal container
-          height="80vh"
-          width="80vw"
+          height="60vh"
+          width="60vw"
         >
           {/*Grid Img*/}
           <Grid item xs={12} sm={6} md={6}
@@ -75,19 +72,10 @@ const doLogin = async () => {
               </Typography>
 
               <Box component="form" noValidate sx={{ m: 4 }}>
-              
-
-
-
-
 
                 <TextFieldEmail key={1} handleEmail={handleEmail}/>
                 
-                <TextFieldPassword key={2} label='text' handlePassword={handlePassword}/>
-
-
-
-
+                <TextFieldPassword key={2} label='Contraseña' handlePassword={handlePassword}/>
 
 
                 <Button
@@ -101,10 +89,12 @@ const doLogin = async () => {
                 </Button>
                 <Grid container>
                   <Grid item xs>
-                    <Link variant="body2">Forgot password?</Link>
+                  {
+                   // <Link variant="body2">Forgot password?</Link>
+                  }
                   </Grid>
                   <Grid item>
-                    <Link className='link'>
+                    <Link className='link' to={'/signup'}>
                       {"Don't have an account? Sign Up"}
                     </Link>
                   </Grid>
