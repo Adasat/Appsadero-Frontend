@@ -100,12 +100,6 @@ const doLogin = async () => {
                   </Grid>
                 </Grid>
                 <Typography variant="body2" align="center" sx={{ mt: 5 }}>
-                  {'Copyright © '}
-                  <Link color="inherit" href="https://mui.com/">
-                    Chuletapp Company
-                  </Link>{' '}
-                  {new Date().getFullYear()}
-                  {'.'}
                 </Typography>
               </Box>
             </Box>
