@@ -37,6 +37,7 @@ function TextFieldEmail({handleEmail}) {
       <TextField
       
         label='Email'
+        label= 'Email'
         type={email}
         variant="outlined"
         required

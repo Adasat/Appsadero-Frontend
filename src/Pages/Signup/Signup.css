@@ -1,7 +1,7 @@
 .grid-contentSignup{
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
+    margin: 20px 0;
+    height: 74vh;
     width: 100vw;
 }

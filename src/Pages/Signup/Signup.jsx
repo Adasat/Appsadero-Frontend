@@ -2,62 +2,87 @@
 import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-//import { userSignup } from '../../services/auth.service'
+import { userSignup } from '../../services/auth.service'
 
-import { Typography, Box, Grid, Paper, Button, Link, TextField } from '@mui/material'
+import { Typography, Box, Grid, Paper, Button, Link, TextField, IconButton } from '@mui/material'
 
 //import TextFieldInput from '../../Components/TextFieldCustom/TextFieldCustom'
 import TextFieldEmail from '../../Components/TextFieldEmail/TextFieldEmail'
 import TextFieldPassword from '../../Components/TextFieldPassword/TextFieldPassword'
 
 import './Signup.css'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
 
 
 
 function Signup() {
-  const navigate = useNavigate()
+/*   const navigate = useNavigate()
+ */
+  const [first_name, setName] = useState('')
+  const [nickname, setNickname] = useState('')
+                                                                                 
+  const [email, setEmail] = useState({
+    value: '',
+    msg: '',
+    valid: false
+  })
 
-  const [name, setName] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [password, setPassword] = useState({
+    value: '',
+    msg: '',
+    validPassword: false
+  })
+  
+  const [passwordRepeat, setPasswordRepeat] = useState({
+    value: '',
+    validPassword: false,
+    msg: '',
+    iconVisible: false,
+  })
 
-  const [emailRepeat, setEmailRepeat] = useState('')
-  const [passwordRepeat, setPasswordRepeat] = useState('')
+  
+
+  const handlePassVisible = () => {
+    setPasswordRepeat({
+      ...passwordRepeat,
+      iconVisible: !passwordRepeat.iconVisible,
+    })
+  }
+
+  const handlePassword = (password) => {
+    setPassword({ ...password, password })
+  }
+  
+  const handleRepeatPassword = (e) => {
+    setPasswordRepeat({ ...passwordRepeat, value: e.target.value })
+
+  }
+
+  const validatePasswords = () => {
+      password.value === passwordRepeat.value ? passwordRepeat.validPassword = true : passwordRepeat.validPassword = false
+      passwordRepeat.validPassword ? passwordRepeat.msg = '' : passwordRepeat.msg = 'Las contraseñas no coinciden'
+  }
+
+  const handleEmail = (email) => {
+    setEmail({ ...email, email })
+  }
 
   const handleName = (e) => {
     setName(e.target.value)
   }
 
-  /* const [isPassVisible, setIsPassVisible] = useState(false)
-  const [isRepPassVisible, setIsRepPassVisible] = useState(false)
-
-  const handlePassVisible = () => {
-    setIsPassVisible(!isPassVisible)
+  const handleNickName = (e) => {
+   setNickname(e.target.value)
   }
-  const handleRepPassVisible = () => {
-    setIsRepPassVisible(!isRepPassVisible)
-  }
-
-  //Manage the user's data
   
-  const handlePassword = (value) => {
-    setPassword(value)
-  }
-
-  const handlePasswordRepeat = (value) => {
-    setPasswordRepeat(value)
-  } */
-
   const signupButton = async () => {
-    if (email === emailRepeat) {
-      if (password == passwordRepeat) {
-        // await signup(name, email, password)
-        navigate('/login')
-      }
-      alert('Las contraseñas no coinciden')
-    }
-    alert('los emails introducidos no coinciden')
     
+      if (validatePasswords) {
+        await userSignup(first_name, nickname, email.value, passwordRepeat.value)
+/*         navigate('/login')
+ */      } else {
+        alert('Las contraseñas no coinciden')
+      }
   }
 
   return (
@@ -66,10 +91,9 @@ function Signup() {
         <Grid
           container
           component="main" //Principal container
-          height="80vh"
-          width="80vw"
+          height="73vh"
+          width="60vw"
         >
-          
           <Grid
             item
             xs={12}
@@ -99,7 +123,7 @@ function Signup() {
 
               <Box component="form" noValidate sx={{ m: 4 }}>
                 <TextField
-                  label="Introduce tu nombre y apellido"
+                  label="Introduce tu nombre"
                   type="text"
                   variant="outlined"
                   required
@@ -108,12 +132,43 @@ function Signup() {
                   color="primary"
                   onChange={handleName}
                 />
-
-                <TextFieldEmail label="Introduce un email"/>
-                <TextFieldEmail label="Repita el correo introducido"/>
-                <TextFieldPassword label='Introduce una contraseña'/>
-                <TextFieldPassword label='Repita su contraseña'/>
-
+                <TextField
+                  label="Introduce un nickname"
+                  type="text"
+                  variant="outlined"
+                  required
+                  margin="dense"
+                  fullWidth
+                  color="primary"
+                  onChange={handleNickName}
+                />
+                <TextFieldEmail handleEmail={handleEmail} />
+                <TextFieldPassword
+                  label="Introduzca una contraseña"
+                  handlePassword={handlePassword}
+                />
+                <TextField
+                  label="Repite la contraseña"
+                  type={passwordRepeat.iconVisible ? 'text' : 'password'}
+                  variant="outlined"
+                  required
+                  margin="dense"
+                  fullWidth
+                  InputProps={{
+                    endAdornment: (
+                      <IconButton onClick={handlePassVisible}>
+                        {passwordRepeat.iconVisible ? (
+                          <Visibility />
+                        ) : (
+                          <VisibilityOff />
+                        )}
+                      </IconButton>
+                    ),
+                  }}
+                  color={passwordRepeat.validPassword ? 'success' : 'error'}
+                  onChange={handleRepeatPassword}
+                  helperText={passwordRepeat.msg}
+                />
                 <Button
                   type="button"
                   fullWidth
@@ -132,14 +187,6 @@ function Signup() {
                     </Link>
                   </Grid>
                 </Grid>
-                <Typography variant="body2" align="center" sx={{ mt: 5 }}>
-                  {'Copyright © '}
-                  <Link color="inherit" href="https://mui.com/">
-                    Chuletapp Company
-                  </Link>{' '}
-                  {new Date().getFullYear()}
-                  {''}
-                </Typography>
               </Box>
             </Box>
           </Grid>
