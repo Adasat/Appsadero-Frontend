@@ -66,10 +66,11 @@ function Signup() {
   }
 
   const validatePasswords = () => {
-    password.value === passwordRepeat.value
+    console.log("Contraseña" + password.value +  'Contraseña2:' + passwordRepeat.value)
+    password.value === passwordRepeat.value/* 
       ? (passwordRepeat.validPassword = true)
       : (passwordRepeat.validPassword = false)
-    passwordRepeat.validPassword
+    passwordRepeat.validPassword */
       ? (passwordRepeat.msg = '')
       : (passwordRepeat.msg = 'Las contraseñas no coinciden')
   }
@@ -89,7 +90,7 @@ function Signup() {
   }
 
   const signupButton = async () => {
-    validatePasswords
+    validatePasswords()
     if (passwordRepeat.validPassword) {
       await userSignup(first_name, nickname, email.value, passwordRepeat.value)
         navigate('/login')

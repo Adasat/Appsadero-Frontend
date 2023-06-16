@@ -37,7 +37,7 @@ function TextFieldEmail({handleEmail}) {
       <TextField
       
         label='Email'
-        type={email}
+        type='email'
         variant="outlined"
         required
         margin="dense"
