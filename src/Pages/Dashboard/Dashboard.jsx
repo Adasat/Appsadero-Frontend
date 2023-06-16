@@ -1,10 +1,13 @@
-import React from 'react'
+import MyAsaderos from '../../Components/MyAsaderos/MyAsaderos'
+import MyFriends from '../../Components/MyFriends/MyFriends'
 
 function Dashboard() {
   return (
-    <div>Dashboard
-
-    </div>
+    <>
+      Dashboard
+      <MyAsaderos/>
+      <MyFriends/>
+    </>
   )
 }
 
