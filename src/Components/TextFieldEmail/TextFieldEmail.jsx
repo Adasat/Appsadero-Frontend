@@ -11,7 +11,6 @@ function TextFieldEmail({handleEmail}) {
   };
 
   const [email, setEmail] = useState({
-    label: '',
     value: '',
     msg: '',
     valid: false,
@@ -37,7 +36,7 @@ function TextFieldEmail({handleEmail}) {
     <>
       <TextField
       
-        label={email.label}
+        label='Email'
         type={email}
         variant="outlined"
         required
