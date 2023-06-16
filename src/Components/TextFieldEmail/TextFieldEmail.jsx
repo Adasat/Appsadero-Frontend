@@ -27,7 +27,6 @@ function TextFieldEmail({handleEmail}) {
       setEmail({...email, value: (e.target.value), valid: emailValidator(e.target.value), msg: ''})
       handleEmail(email)
     } else {
-      console.log(`color ${email.valid}`)
       setEmail({...email, valid: false, msg: 'Incorrect email entry'})
       handleEmail(email)
     }
@@ -49,6 +48,7 @@ function TextFieldEmail({handleEmail}) {
           )
         }}
         onChange={handleChange}
+        onBlur={handleChange}
         helperText={email.msg}
       ></TextField>
     </>

@@ -35,8 +35,6 @@ const handleEmail = (email) => {
 const doLogin = async () => {
   try {
     console.log(password.value)
-    handleEmail(email)
-    handlePassword(password)
     await tryLogin(email.value, password.value)
   } catch (err) {
     console.log(err)
