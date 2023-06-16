@@ -13,3 +13,16 @@ export const getAllMyAsaderos = async () => {
     return error
   }
 }
+
+export const getMyOwnAsaderos = async () => {
+  try {
+    const {data} = await api.get('/asadero/myOwnAsaderos', {
+      headers: {
+        token: localStorage.getItem('token'),
+      },
+    })
+    return data;
+  } catch (error) {
+    return error
+  }
+}
