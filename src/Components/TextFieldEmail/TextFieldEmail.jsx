@@ -13,7 +13,7 @@ function TextFieldEmail({handleEmail}) {
   const [email, setEmail] = useState({
     value: '',
     msg: '',
-    validEmail: false,
+    valid: false,
   })
   
 
@@ -24,11 +24,11 @@ function TextFieldEmail({handleEmail}) {
 
   const handleChange = (e) => {
     if (emailValidator(e.target.value)) {
-      setEmail({...email, value: (e.target.value), validEmail: true, msg: ''})
+      setEmail({...email, value: (e.target.value), valid: emailValidator(e.target.value), msg: ''})
       handleEmail(email)
     } else {
-      console.log(`color ${email.validEmail}`)
-      setEmail({...email, validEmail: false, msg: 'Incorrect email entry'})
+      console.log(`color ${email.valid}`)
+      setEmail({...email, valid: false, msg: 'Incorrect email entry'})
       handleEmail(email)
     }
   }
@@ -42,7 +42,7 @@ function TextFieldEmail({handleEmail}) {
         required
         margin="dense"
         fullWidth
-        color={email.validEmail ? 'success' : 'error'}
+        color={email.valid ? 'success' : 'error'}
         InputProps={{
           endAdornment: (
             <Mail/>

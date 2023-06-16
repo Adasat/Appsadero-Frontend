@@ -9,18 +9,17 @@ import PropTypes from 'prop-types';
     };
 
     const hasError = (password) => {
-      return password.length <= 6
+      return password.length <= 5
     } 
   
-    const [user, setUser] = useState({
-      password: '',
+    const [password, setPassword] = useState({
+      value: '',
       validPassword: false
     })
 
   const handleChange = (e) => {
-    setUser({...user, password: e.target.value, validPassword: hasError(user.password)})
-    console.log(user.password)
-    handlePassword(user)
+    setPassword({...password, value: e.target.value, validPassword: hasError(e.target.value)})
+    handlePassword(password)
   }
   
   return (
@@ -30,8 +29,8 @@ import PropTypes from 'prop-types';
       type= 'password'
       variant="outlined"
       required
-      error={user.validPassword}
-      value={user.password}
+      error={password.validPassword}
+      value={password.value}
       margin="dense"
       fullWidth
       color="primary"

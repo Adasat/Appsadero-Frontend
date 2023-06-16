@@ -9,20 +9,21 @@ import TextFieldEmail from '../../Components/TextFieldEmail/TextFieldEmail';
 
 function LogIn() {
 
+  
 
   const [password, setPassword] = useState({
-    password: '',
+    value: '',
     validPassword: false
   })
   const [email, setEmail] = useState({
     value: '',
     msg: '',
-    validEmail: false,
+    valid: false,
   })
 
   const handlePassword = (password) => {
     setPassword({...password, password})
-    console.log()
+    console.log(password.value)
 }
 
 const handleEmail = (email) => {
@@ -33,25 +34,14 @@ const handleEmail = (email) => {
 
 const doLogin = async () => {
   try {
+    console.log(password.value)
+    handleEmail(email)
+    handlePassword(password)
     await tryLogin(email.value, password.value)
   } catch (err) {
     console.log(err)
   }
 }
-
-/* //Email Format Validation
-const handleEmail = (email) => {
-  let regexEmail = new RegExp('[a-z0-9]+@[a-z]+.[a-z]{2,3}')
-  return regexEmail.test(email)
-} */
-
-/* 
-  const handleChange = (e) => {
-    setUser({...user, email: e.target.value})
-    handleEmail(user)
-    console.log(user.email)
-  }
- */
 
   return (
 
