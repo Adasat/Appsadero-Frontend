@@ -18,7 +18,7 @@ export const userSignup = async (first_name, nickname, email, password) => {
 
   try {
     const { data } = await api.post('/auth/signup', {
-      "first_name": first_name,
+      first_name,
       "nickname": nickname,
       "email": email,
       "password":password,
