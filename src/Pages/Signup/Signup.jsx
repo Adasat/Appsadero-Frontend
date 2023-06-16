@@ -1,10 +1,18 @@
-
 import React from 'react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { userSignup } from '../../services/auth.service'
 
-import { Typography, Box, Grid, Paper, Button, Link, TextField, IconButton } from '@mui/material'
+import {
+  Typography,
+  Box,
+  Grid,
+  Paper,
+  Button,
+  Link,
+  TextField,
+  IconButton,
+} from '@mui/material'
 
 //import TextFieldInput from '../../Components/TextFieldCustom/TextFieldCustom'
 import TextFieldEmail from '../../Components/TextFieldEmail/TextFieldEmail'
@@ -13,32 +21,32 @@ import TextFieldPassword from '../../Components/TextFieldPassword/TextFieldPassw
 import './Signup.css'
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 
-
-
 function Signup() {
-/*   const navigate = useNavigate()
- */
+    const navigate = useNavigate()
+  
   const [first_name, setName] = useState('')
   const [nickname, setNickname] = useState('')
-                                                                                 
+
   const [email, setEmail] = useState({
     value: '',
     msg: '',
-    valid: false
+    valid: false,
   })
 
   const [password, setPassword] = useState({
     value: '',
     msg: '',
-    validPassword: false
+    validPassword: false,
   })
-  
+
   const [passwordRepeat, setPasswordRepeat] = useState({
     value: '',
     validPassword: false,
     msg: '',
     iconVisible: false,
   })
+
+  const [flag, setFlag] = useState(false)
 
   
 
@@ -52,16 +60,21 @@ function Signup() {
   const handlePassword = (password) => {
     setPassword({ ...password, password })
   }
-  
+
   const handleRepeatPassword = (e) => {
     setPasswordRepeat({ ...passwordRepeat, value: e.target.value })
-
   }
 
   const validatePasswords = () => {
-      password.value === passwordRepeat.value ? passwordRepeat.validPassword = true : passwordRepeat.validPassword = false
-      passwordRepeat.validPassword ? passwordRepeat.msg = '' : passwordRepeat.msg = 'Las contraseñas no coinciden'
+    password.value === passwordRepeat.value
+      ? (passwordRepeat.validPassword = true)
+      : (passwordRepeat.validPassword = false)
+    passwordRepeat.validPassword
+      ? (passwordRepeat.msg = '')
+      : (passwordRepeat.msg = 'Las contraseñas no coinciden')
   }
+  
+  
 
   const handleEmail = (email) => {
     setEmail({ ...email, email })
@@ -72,27 +85,47 @@ function Signup() {
   }
 
   const handleNickName = (e) => {
-   setNickname(e.target.value)
+    setNickname(e.target.value)
   }
-  
+
   const signupButton = async () => {
-    
-      if (validatePasswords) {
-        await userSignup(first_name, nickname, email.value, passwordRepeat.value)
-/*         navigate('/login')
- */      } else {
-        alert('Las contraseñas no coinciden')
-      }
+    validatePasswords
+    if (passwordRepeat.validPassword) {
+      await userSignup(first_name, nickname, email.value, passwordRepeat.value)
+        navigate('/login')
+
+    } else {
+      alert('Las contraseñas no coinciden')
+    }
   }
 
   return (
-    <div className="grid-contentSignup">
-      <Paper elevation={24}>
+    <Box
+      sx={{
+        display: 'flex',
+        margin: 'auto',
+        width: '80vw',
+        height: '78vh',
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: '10px',
+        flexGrow: 1,
+      }}
+    >
+      <Paper
+        elevation={24}
+        sx={{
+          display: 'flex',
+          height: '78vh',
+          width: '60vw',
+          maxWidth: '1000px',
+        }}
+      >
         <Grid
           container
-          component="main" //Principal container
-          height="73vh"
-          width="60vw"
+          component="main" // Principal container
+          height="100%" // Ajustar la altura al 100% del Paper
+          width="100%" // Ajustar el ancho al 100% del Paper
         >
           <Grid
             item
@@ -103,6 +136,7 @@ function Signup() {
               backgroundImage:
                 'url(https://source.unsplash.com/random?bbq,grill)',
               backgroundSize: 'cover',
+              height: '100%', // Ajustar la altura al 100% del Grid item
             }}
           ></Grid>
 
@@ -111,17 +145,19 @@ function Signup() {
               display={'flex'}
               flexDirection={'column'}
               alignItems={'center'}
-              maxHeight="350px"
+              maxWidth="450px" // Limitar el ancho del formulario
+              mx="auto" // Centrar el formulario horizontalmente
+              p={4} // Agregar un espaciado interno al formulario
             >
-              <Typography
-                component="h1"
-                variant="h5"
-                sx={{ marginTop: '25px' }}
-              >
+              <Typography component="h1" variant="h5">
                 Regístrate
               </Typography>
 
-              <Box component="form" noValidate sx={{ m: 4 }}>
+              <Box
+                component="form"
+                noValidate
+                sx={{ mt: 4, width: '100%', height: '100vh' }}
+              >
                 <TextField
                   label="Introduce tu nombre"
                   type="text"
@@ -178,21 +214,16 @@ function Signup() {
                 >
                   Signup
                 </Button>
-                <Grid container>
-                  <Grid item xs>
-                    ¿Ya tienes cuenta?{' '}
-                    <Link to="/login" variant="body2">
-                      {' '}
-                      aquí
-                    </Link>
-                  </Grid>
-                </Grid>
+                ¿Ya tienes cuenta? {'   '}
+                <Link to="/login" variant="body2">
+                  Pincha aquí
+                </Link>
               </Box>
             </Box>
           </Grid>
         </Grid>
       </Paper>
-    </div>
+    </Box>
   )
 }
 

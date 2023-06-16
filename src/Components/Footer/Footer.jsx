@@ -30,7 +30,7 @@ function Footer({ title }) {
             {column.links.map((link, linkIdx) => {
               return (
                 <>
-                  <Box textAlign={'center'}>
+                  <Box textAlign={'center'} key={linkIdx}>
                     <Button
                       key={linkIdx}
                       sx={{
