@@ -3,7 +3,7 @@ import { useState} from 'react'
 import PropTypes from 'prop-types';
 import { Visibility, VisibilityOff } from '@mui/icons-material'
 
-  function TextFieldPassword ({ handlePassword }) {
+  function TextFieldPassword ({ handlePassword, label }) {
     
     TextFieldPassword.propTypes = {
       handlePassword: PropTypes.func.isRequired
@@ -24,7 +24,6 @@ import { Visibility, VisibilityOff } from '@mui/icons-material'
         return regex.test(password)
       }
 
-
   const handleChange = (e) => {
     if (passValidator(e.target.value)) {
     setPassword({...password,
@@ -41,54 +40,33 @@ import { Visibility, VisibilityOff } from '@mui/icons-material'
     }
   }
 
-   const handlePassVisible = () => {
-     setPassword({...password, iconVisible: !iconVisible})
-   }
- 
+  const handlePassVisible = () => {
+    setPassword({...password, iconVisible: !password.iconVisible })
+  }
 
-   return (
-     <>
-       <TextField
-         label={password.label}
-         variant="outlined"
-         required
-         margin="dense"
-         fullWidth
-         type={password.iconVisible ? 'text' : 'password'}
-         InputProps={{
-           endAdornment: (
-             <IconButton onClick={handlePassVisible}>
-               {password.iconVisible ? <Visibility /> : <VisibilityOff />}
-             </IconButton>
-           ),
-         }}
-         onChange={(e) => handleChange(e)}
-         color={password.validPassword ? 'success' : 'error'}
-         helperText={password.msg}
-       ></TextField>
-     </>
-   )
-/* 
- 
   return (
-
-    <TextField
-      label='Contraseña'
-      type= 'password'
-      variant="outlined"
-      required
-      error={password.validPassword}
-      value={password.value}
-      margin="dense"
-      fullWidth
-      color="primary"
-      onChange={handleChange}
-      onBlur={handleChange}
-    >
-    </TextField>
-
-  ) */
- 
+    <>
+      <TextField
+        label={label}
+        variant="outlined"
+        required
+        margin="dense"
+        fullWidth
+        type={password.iconVisible ? 'text' : 'password'}
+        InputProps={{
+          endAdornment: (
+            <IconButton onClick={handlePassVisible}>
+              {password.iconVisible ? <Visibility /> : <VisibilityOff />}
+            </IconButton>
+          ),
+        }}
+        onChange={handleChange}
+        onBlur={handleChange}
+        color={password.validPassword ? 'success' : 'error'}
+        helperText={password.msg}
+      ></TextField>
+    </>
+  )
 }
 
 export default TextFieldPassword
