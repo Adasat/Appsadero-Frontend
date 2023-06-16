@@ -15,6 +15,7 @@ import PropTypes from 'prop-types';
     const [password, setPassword] = useState({
       value: '',
       validPassword: false
+      
     })
 
   const handleChange = (e) => {
