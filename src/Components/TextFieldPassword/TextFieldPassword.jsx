@@ -63,6 +63,7 @@ import { Visibility, VisibilityOff } from '@mui/icons-material'
            ),
          }}
          onChange={handleChange}
+         onBlur={handleChange}
          color={password.validPassword ? 'success' : 'error'}
          helperText={password.msg}
        ></TextField>
