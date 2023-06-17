@@ -2,10 +2,12 @@ import { TextField } from '@mui/material'
 
 
 
-function TextFieldCustom({ label, type, onChange}) {
+function TextFieldCustom({ label, type, onChange, multiline, rows}) {
 
   return (
     <TextField
+      multiline={multiline}
+      rows={rows}
       label={label}
       type={type}
       variant="outlined"

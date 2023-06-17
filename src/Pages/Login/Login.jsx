@@ -23,6 +23,7 @@ function LogIn() {
   })
 
   const handlePassword = (password) => {
+    console.log(password.value)
     setPassword({...password, password})
 }
 
@@ -33,10 +34,12 @@ const handleEmail = (email) => {
 
 const doLogin = async () => {
   try {
-    await tryLogin(email.value, password.value)
-    navigate('/dashboard')
-  } catch (err) {
-    console.log(err)
+    const res = await tryLogin(email.value, password.value)   
+    if(res !== undefined){
+      navigate('/dashboard')
+    } 
+  } catch (e) {
+    console.error(e)
   }
 }
 
@@ -84,7 +87,7 @@ const doLogin = async () => {
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
-                  onClick={(e) => doLogin()}
+                  onClick={doLogin}
                 >
                   Login
                 </Button>
