@@ -1,0 +1,58 @@
+h3{
+    margin-top: 40px;
+    text-align: center;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+}
+p{
+    display: block;
+    margin-block-start: 0em;
+    margin-block-end: 0em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+
+.container-buttons{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.container-buttons button{
+    margin: 4px;
+    margin-left: 8px;
+}
+
+.container-timers{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 32px;
+    margin-left: 32px;
+    margin-right: 32px;
+}
+
+
+.container-botton-buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.icon-buttons{
+    width: 220px;
+    padding: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 8px;
+    margin-left: 8px;
+}
+
+.button-next{
+    display: flex;
+    justify-content: end;
+    margin-top: 8px;
+}

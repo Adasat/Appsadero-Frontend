@@ -1,8 +1,7 @@
 import { Button } from '@mui/material'
-import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
-
+import './ButtonCustom.css'
 
 function ButtonCustom({handleButton, navigate, disabled = false, text, className}) {
     ButtonCustom.propTypes = {
