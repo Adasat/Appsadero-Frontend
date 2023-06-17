@@ -8,16 +8,8 @@ import { useNavigate } from 'react-router-dom'
 function CreateAsadero() {
   
     const navigate = useNavigate()
-
-    const buttonBack = {
-        text: 'Atrás',
-        action: '/login',
-        disabled: false
-    }
     
     const handleButton = (button) => {
-       
-       
         //setButt({ ...butt, text: butt.text }) 
        //setButt({...butt, button})
         //navigate()
@@ -38,9 +30,8 @@ function CreateAsadero() {
 
             <ButtonCustom
               handleButton={handleButton}
-              action={buttonBack.action}
-              disabled={buttonBack.disabled}
-              text={buttonBack.text}
+              text='Atrás'
+              navigate='/login'
             ></ButtonCustom>
           </Paper>
         </Grid>
