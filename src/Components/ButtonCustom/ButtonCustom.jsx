@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
 
-function ButtonCustom({handleButton, action , disabled, text}) {
+function ButtonCustom({handleButton, navigate, disabled = false, text, className}) {
     ButtonCustom.propTypes = {
     handleButton: PropTypes.func.isRequired,
     }
@@ -14,10 +14,18 @@ function ButtonCustom({handleButton, action , disabled, text}) {
     }
 
     return (
-    <Link to={action}>
+    <Link to={navigate}>
         <Button
+        className={className}
         disabled={disabled}
-        onClick={handleButton}>
+        onClick={handleButton}
+        color='primary'
+        size='large'
+        variant= 'contained'
+        sx={{
+           // Height: '24px',
+            //backgroundColor: 'red'
+            }}>
         {text}
         </Button>
     </Link>
