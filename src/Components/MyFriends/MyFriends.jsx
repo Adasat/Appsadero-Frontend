@@ -9,7 +9,6 @@ function MyFriends() {
 
   const listMyFriends = async () => {
     const res = await getAllFriends()
-    console.log(res)
     setFriends(res)
   }
 

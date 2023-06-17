@@ -53,7 +53,6 @@ function Signup() {
   }
 
   const signupButton = async () => {
-    console.log (email.valid, password.validPassword)
     if(email.valid && password.validPassword){
       await userSignup(first_name, nickname, email.value, password.value)
         navigate('/login')

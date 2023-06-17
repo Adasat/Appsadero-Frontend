@@ -1,13 +1,15 @@
-import { useState,  } from 'react';
+import { useState } from 'react';
 import { Avatar, Box, Button, Grid, Typography, Paper } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import './Login.css'
 import { tryLogin } from '../../services/auth.service';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import TextFieldPassword from '../../Components/TextFieldPassword/TextFieldPassword';
 import TextFieldEmail from '../../Components/TextFieldEmail/TextFieldEmail';
 
 function LogIn() {
+
+  const navigate = useNavigate()
 
   const [password, setPassword] = useState({
     value: '',
@@ -22,7 +24,6 @@ function LogIn() {
 
   const handlePassword = (password) => {
     setPassword({...password, password})
-    console.log(password.value)
 }
 
 const handleEmail = (email) => {
@@ -33,6 +34,7 @@ const handleEmail = (email) => {
 const doLogin = async () => {
   try {
     await tryLogin(email.value, password.value)
+    navigate('/dashboard')
   } catch (err) {
     console.log(err)
   }

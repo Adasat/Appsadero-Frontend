@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
       { path: '/login', element: <Login /> },
       { path: '/createAsadero', element: <CreateAsadero /> },
       { path: '/abel', element: <Abel /> },
-      { path: '/pedro', element: <Friends /> },
+      { path: '/friends', element: <Friends /> },
       { path: '/diana', element: <Diana /> },
     ],
   },

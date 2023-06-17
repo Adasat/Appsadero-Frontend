@@ -1,24 +1,21 @@
-import {  SearchTwoTone } from "@mui/icons-material"
-import { Box, InputAdornment, TextField } from "@mui/material"
+import { Box, Button, TextField } from "@mui/material"
 
 
-function SearchFriend() {
+function SearchFriend({onClick, onChange}) {
+
+
   return (
-    <Box sx={{ padding:'5px'}}>
+    <Box sx={{ padding:'5px', display:'flex', alignItems:'center'}}>
         
         <TextField           
             variant="standard"
             label="Añade nuevos amigos..." 
-            InputProps={{
-                startAdornment:(
-                    <InputAdornment position='start'>
-                    <SearchTwoTone />
-                    </InputAdornment>
-                    )
-            }}>
+            onChange={(e) => onChange(e.target.value)}
+            sx={{width:'80%'}}
+            >
           </TextField>
           
-    </Box>
+<Button variant="contained" sx={{justifyItems:'right'}} onClick={() => onClick()}>Buscar</Button>    </Box>
   )
 }
 
