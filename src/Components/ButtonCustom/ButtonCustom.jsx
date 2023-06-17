@@ -6,8 +6,12 @@ import './ButtonCustom.css'
 function ButtonCustom({handleButton, navigate, disabled = false, text, className}) {
     ButtonCustom.propTypes = {
     handleButton: PropTypes.func.isRequired,
-    }
-
+    navigate: PropTypes.string.isRequired,
+    disabled: PropTypes.bool.isRequired,
+    text: PropTypes.string.isRequired,
+    className: PropTypes.string.isRequired,
+    }   
+    // eslint-disable-next-line no-unused-vars
     const handleClick = (e) => {
     handleButton()
     }
@@ -17,7 +21,7 @@ function ButtonCustom({handleButton, navigate, disabled = false, text, className
         <Button
         className={className}
         disabled={disabled}
-        onClick={handleButton}
+        onClick={handleClick}
         color='primary'
         size='large'
         variant= 'contained'

@@ -6,7 +6,6 @@ import { tryLogin } from '../../services/auth.service';
 import { Link, useNavigate } from 'react-router-dom'
 import TextFieldPassword from '../../Components/TextFieldPassword/TextFieldPassword';
 import TextFieldEmail from '../../Components/TextFieldEmail/TextFieldEmail';
-import ValidationError from '../../services/error.service'
 
 function LogIn() {
   
