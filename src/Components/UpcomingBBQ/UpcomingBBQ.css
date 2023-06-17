@@ -1,0 +1,14 @@
+#bbqname {
+  color: #e49976;
+}
+.upcomingbbqlist {
+  height: 200px;
+  overflow-y: scroll;
+}
+.upcomingbbqlist::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+.upcomingbbqlist::-webkit-scrollbar-thumb {
+  background-color: #e49976;
+}
