@@ -3,12 +3,14 @@ import { Avatar, Box, Button, Grid, Typography, Paper } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import './Login.css'
 import { tryLogin } from '../../services/auth.service';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import TextFieldPassword from '../../Components/TextFieldPassword/TextFieldPassword';
 import TextFieldEmail from '../../Components/TextFieldEmail/TextFieldEmail';
+import ValidationError from '../../services/error.service'
 
 function LogIn() {
-
+  
+  const navigate = useNavigate()
   const [password, setPassword] = useState({
     value: '',
     validPassword: false
@@ -21,8 +23,8 @@ function LogIn() {
   })
 
   const handlePassword = (password) => {
-    setPassword({...password, password})
     console.log(password.value)
+    setPassword({...password, password})
 }
 
 const handleEmail = (email) => {
@@ -32,9 +34,12 @@ const handleEmail = (email) => {
 
 const doLogin = async () => {
   try {
-    await tryLogin(email.value, password.value)
-  } catch (err) {
-    console.log(err)
+    const res = await tryLogin(email.value, password.value)   
+    if(res !== undefined){
+      navigate('/dashboard')
+    } 
+  } catch (e) {
+    console.error(e)
   }
 }
 
@@ -82,7 +87,7 @@ const doLogin = async () => {
                   fullWidth
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
-                  onClick={(e) => doLogin()}
+                  onClick={doLogin}
                 >
                   Login
                 </Button>
