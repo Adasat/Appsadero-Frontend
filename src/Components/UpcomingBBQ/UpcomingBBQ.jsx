@@ -1,147 +1,62 @@
-import React, { useEffect, useState } from 'react'
-import { getAllMyAsaderos } from '../../services/myAsaderos.service'
+import { useEffect, useState } from 'react'
+import { getAllMyAsaderos } from '../../services/myBBQ.service'
 import {
+  Card,
   Divider,
-  Icon,
   List,
-  ListItem,
+  ListItemIcon,
   ListItemText,
   Typography,
 } from '@mui/material'
 import { OutdoorGrill } from '@mui/icons-material'
+import './UpcomingBBQ.css'
+import { Link } from 'react-router-dom'
+import { formatDate } from '../../validations/validations'
 
 //component rendering upcoming bbq, in front as próximos asaderos
-
 function UpcomingBBQ() {
   const [upcomingBBQ, setUpcomingBBQ] = useState([])
 
-  const listMyAsaderos = async () => {
+  const listUpcomingBBQ = async () => {
     const res = await getAllMyAsaderos()
     setUpcomingBBQ(res)
   }
 
   useEffect(() => {
-    listMyAsaderos()
+    listUpcomingBBQ()
   }, [])
 
-
-  return (
-    <>
-      <h1>Próximos asaderos</h1>
-        {upcomingBBQ.map((el) => (
-        <li key={el.id}>{el.description}</li>
-      ))}
-
-    </>
-  )
+  const returnUpComingBBQ = () => {
+    if (upcomingBBQ) {
+      return (
+        <Card elevation={3} sx={{ padding: '30px', borderRadius: 10 }}>
+          <Typography variant="h5">Próximos asaderos</Typography>
+          <Divider sx={{ marginBottom: '10px' }} />
+          <List className="upcomingbbqlist">
+            {upcomingBBQ.map((bbq) => (
+              <ListItemText key={bbq.id}>
+                <ListItemIcon>
+                  <OutdoorGrill />
+                </ListItemIcon>
+                <Typography variant="body">
+                  <b id="bbqname">{bbq.name}</b> -{' '}
+                  <i>{formatDate(bbq.date_time)}</i> - {bbq.description}
+                </Typography>
+              </ListItemText>
+            ))}
+          </List>
+        </Card>
+      )
+    } else {
+      return (
+        <Typography variant="h5">
+          Parece que no tienes próximos asaderos.{' '}
+          <Link to="">¡Organiza uno!</Link>
+        </Typography>
+      )
+    }
+  }
+  return returnUpComingBBQ()
 }
 
 export default UpcomingBBQ
-
-
-/*
-
-      <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background' }}>
-
-        {upcomingBBQ.map((el) => {
-            <React.Fragment key={el.id}>
-          <ListItem alignItems="flex-start">
-            <Icon>
-              <OutdoorGrill />
-            </Icon>
-            <ListItemText
-              primary={el.name}
-              secondary={
-                <>
-                  <Typography
-                    sx={{ display: 'inline' }}
-                    component="span"
-                    variant="body2"
-                    color="primary"
-                  >
-                    {el.description}
-                  </Typography>
-                  {" — I'll be in your neighborhood doing errands this…"}
-                  </>
-                }
-              />
-            </ListItem>
-            <Divider variant="inset" component="li" />
-            </React.Fragment>
-          })}
-        </List>
-
-
-*/
-
-/*
-
-
-        <ListItem alignItems="flex-start">
-          <Icon>
-            <OutdoorGrill />
-          </Icon>
-          <ListItemText
-            primary="Brunch this weekend?"
-            secondary={
-              <>
-                <Typography
-                  sx={{ display: 'inline' }}
-                  component="span"
-                  variant="body2"
-                  color="text.primary"
-                >
-                  Ali Connors
-                </Typography>
-                {" — I'll be in your neighborhood doing errands this…"}
-              </>
-            }
-          />
-        </ListItem>
-
-        <Divider variant="inset" component="li" />
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg" />
-          </ListItemAvatar>
-          <ListItemText
-            primary="Summer BBQ"
-            secondary={
-              <>
-                <Typography
-                  sx={{ display: 'inline' }}
-                  component="span"
-                  variant="body2"
-                  color="text.primary"
-                >
-                  to Scott, Alex, Jennifer
-                </Typography>
-                {" — Wish I could come, but I'm out of town this…"}
-              </>
-            }
-          />
-        </ListItem>
-        <Divider variant="inset" component="li" />
-        <ListItem alignItems="flex-start">
-          <ListItemAvatar>
-            <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg" />
-          </ListItemAvatar>
-          <ListItemText
-            primary="Oui Oui"
-            secondary={
-              <>
-                <Typography
-                  sx={{ display: 'inline' }}
-                  component="span"
-                  variant="body2"
-                  color="text.primary"
-                >
-                  Sandra Adams
-                </Typography>
-                {' — Do you have Paris recommendations? Have you ever…'}
-              </>
-            }
-          />
-        </ListItem>
-
-*/

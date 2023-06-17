@@ -1,0 +1,13 @@
+.myfriendslist{
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.myfriendslist::-webkit-scrollbar {
+    width: 0.5em;
+  }
+  
+  .myfriendslist::-webkit-scrollbar-thumb {
+    background-color: #e49976; 
+  }
+  

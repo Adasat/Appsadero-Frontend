@@ -14,7 +14,8 @@ export const getAllMyAsaderos = async () => {
   }
 }
 
-export const getMyOwnAsaderos = async () => {
+//service for back end to get all my asaderos created by me
+export const getMyOwnBbq = async () => {
   try {
     const {data} = await api.get('/asadero/myOwnAsaderos', {
       headers: {

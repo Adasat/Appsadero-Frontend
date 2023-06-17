@@ -3,7 +3,7 @@ import { Avatar, Box, Button, Grid, Typography, Paper } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import './Login.css'
 import { tryLogin } from '../../services/auth.service';
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import TextFieldPassword from '../../Components/TextFieldPassword/TextFieldPassword';
 import TextFieldEmail from '../../Components/TextFieldEmail/TextFieldEmail';
 
@@ -13,7 +13,7 @@ function LogIn() {
 
   const [password, setPassword] = useState({
     value: '',
-    validPassword: false
+    validPassword: false,
   })
   const [email, setEmail] = useState({
     label: '',
@@ -27,10 +27,9 @@ function LogIn() {
     setPassword({...password, password})
 }
 
-const handleEmail = (email) => {
-  setEmail({...email, email})
-
-}
+  const handleEmail = (email) => {
+    setEmail({ ...email, email })
+  }
 
 const doLogin = async () => {
   try {
@@ -44,7 +43,6 @@ const doLogin = async () => {
 }
 
   return (
-
     <div className="grid-content">
       <Paper elevation={24}>
         <Grid
@@ -54,7 +52,11 @@ const doLogin = async () => {
           width="60vw"
         >
           {/*Grid Img*/}
-          <Grid item xs={12} sm={6} md={6}
+          <Grid
+            item
+            xs={12}
+            sm={6}
+            md={6}
             sx={{
               backgroundImage: 'url(https://source.unsplash.com/random?bbq)',
               backgroundSize: 'cover',
@@ -76,11 +78,13 @@ const doLogin = async () => {
               </Typography>
 
               <Box component="form" noValidate sx={{ m: 4 }}>
+                <TextFieldEmail key={1} handleEmail={handleEmail} />
 
-                <TextFieldEmail key={1} handleEmail={handleEmail}/>
-                
-                <TextFieldPassword key={2} label='Contraseña' handlePassword={handlePassword}/>
-
+                <TextFieldPassword
+                  key={2}
+                  label="Contraseña"
+                  handlePassword={handlePassword}
+                />
 
                 <Button
                   type="button"
@@ -93,18 +97,21 @@ const doLogin = async () => {
                 </Button>
                 <Grid container>
                   <Grid item xs>
-                  {
-                   // <Link variant="body2">Forgot password?</Link>
-                  }
+                    {
+                      // <Link variant="body2">Forgot password?</Link>
+                    }
                   </Grid>
                   <Grid item>
-                    <Link className='link' to={'/signup'}>
+                    <Link className="link" to={'/signup'}>
                       {"Don't have an account? Sign Up"}
                     </Link>
                   </Grid>
                 </Grid>
-                <Typography variant="body2" align="center" sx={{ mt: 5 }}>
-                </Typography>
+                <Typography
+                  variant="body2"
+                  align="center"
+                  sx={{ mt: 5 }}
+                ></Typography>
               </Box>
             </Box>
           </Grid>
