@@ -17,12 +17,26 @@ export const getAllMyAsaderos = async () => {
 //service for back end to get all my asaderos created by me
 export const getMyOwnBbq = async () => {
   try {
-    const {data} = await api.get('/asadero/myOwnAsaderos', {
+    const { data } = await api.get('/asadero/myOwnAsaderos', {
       headers: {
         token: localStorage.getItem('token'),
       },
     })
-    return data;
+    return data
+  } catch (error) {
+    return error
+  }
+}
+
+//service for backend to get users from one asadero
+export const getUsersFromAsadero = async () => {
+  try {
+    const { data } = await api.get('/:asaderoId/users', {
+      headers: {
+        token: localStorage.getItem('token'),
+      },
+    })
+    return data
   } catch (error) {
     return error
   }

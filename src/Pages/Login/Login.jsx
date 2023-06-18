@@ -1,20 +1,20 @@
-import { useState } from 'react';
+import { useState } from 'react'
 import { Avatar, Box, Button, Grid, Typography, Paper } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import './Login.css'
-import { tryLogin } from '../../services/auth.service';
+import { tryLogin } from '../../services/auth.service'
 import { Link, useNavigate } from 'react-router-dom'
-import TextFieldPassword from '../../Components/TextFieldPassword/TextFieldPassword';
-import TextFieldEmail from '../../Components/TextFieldEmail/TextFieldEmail';
+import TextFieldPassword from '../../Components/TextFieldPassword/TextFieldPassword'
+import TextFieldEmail from '../../Components/TextFieldEmail/TextFieldEmail'
 
 function LogIn() {
-
   const navigate = useNavigate()
-  
+
   const [password, setPassword] = useState({
     value: '',
     validPassword: false,
   })
+
   const [email, setEmail] = useState({
     label: '',
     value: '',
@@ -23,23 +23,23 @@ function LogIn() {
   })
 
   const handlePassword = (password) => {
-    setPassword({...password, password})
-}
+    setPassword({ ...password, password })
+  }
 
   const handleEmail = (email) => {
     setEmail({ ...email, email })
   }
 
-const doLogin = async () => {
-  try {
-    const res = await tryLogin(email.value, password.value)   
-    if(res){
-      navigate('/dashboard')
-    } 
-  } catch (err) {
-    return err
+  const doLogin = async () => {
+    try {
+      const res = await tryLogin(email.value, password.value)
+      if (res) {
+        navigate('/home/dashboard')
+      }
+    } catch (err) {
+      return err
+    }
   }
-}
 
   return (
     <div className="grid-content">
@@ -102,7 +102,7 @@ const doLogin = async () => {
                   </Grid>
                   <Grid item>
                     <Link className="link" to={'/signup'}>
-                      {"No tengo cuenta. Quiero registrarme."}
+                      {'No tengo cuenta. Quiero registrarme.'}
                     </Link>
                   </Grid>
                 </Grid>

@@ -13,7 +13,7 @@ function HeaderMain({title}) {
               component="div"
               sx={{ flexGrow: 1, textAlign: 'center', m: 2 }}
             >
-              <Link className="links" to="/dashboard">
+              <Link className="links" to="/home/dashboard">
                 {title}
               </Link>
             </Typography>

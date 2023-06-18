@@ -1,6 +1,6 @@
-import { Button } from '@mui/base'
 import { AppBar, Box, Toolbar, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
+import ButtonCustom from '../ButtonCustom/ButtonCustom'
 
 function HeaderWelcome({ title }) {
   return (
@@ -17,8 +17,10 @@ function HeaderWelcome({ title }) {
                 {title}
               </Link>
             </Typography>
-            <Button>login</Button>
-            <Button>signup</Button>
+            <div style={{ display: 'flex', gap: '30px'  }}>
+              <ButtonCustom props={{ navigate: '/login', text: 'Login' }} />
+              <ButtonCustom props={{ navigate: '/signup', text: 'Signup' }} />
+            </div>
           </Toolbar>
         </AppBar>
       </Box>

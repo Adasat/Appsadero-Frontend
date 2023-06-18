@@ -1,18 +1,27 @@
-import { Button, Card, Divider, Paper, Typography } from '@mui/material'
+import { Card, Divider, Paper, Typography } from '@mui/material'
 import ManageBBQ from '../../Components/ManageBBQ/ManageBBQ'
 import UpcomingBBQ from '../../Components/UpcomingBBQ/UpcomingBBQ'
 import MyFriends from '../../Components/MyFriends/MyFriends'
 import { Link } from 'react-router-dom'
 import './Dashboard.css'
-
+import ButtonCustom from '../../Components/ButtonCustom/ButtonCustom'
 
 function Dashboard() {
-
   return (
     <div className="container">
-      <Paper className="welcome-tag" elevation={3} sx={{ borderRadius: 10, textAlign: 'center'}} >
+      <Paper
+        className="welcome-tag"
+        elevation={3}
+        sx={{ borderRadius: 10, textAlign: 'center' }}
+      >
         <img src="../src/assets/appsadero_logo-2.png" alt="logo-appsadero" />
-        <h2>Bienvenida {localStorage.getItem('first_name')}</h2>
+        <Link
+          to="/home/myProfile"
+          className="link"
+          style={{ textDecoration: 'none' }}
+        >
+          <h2>Bienvenida {localStorage.getItem('first_name')}</h2>
+        </Link>
       </Paper>
       <div className="upcomingbbq">
         <UpcomingBBQ />
@@ -22,23 +31,30 @@ function Dashboard() {
         elevation={3}
         sx={{ padding: '30px', borderRadius: 10 }}
       >
-        <Typography variant="h5">Crea tu asadero</Typography>
+        <Link
+          to="/home/manageAsadero"
+          className="link"
+          style={{ textDecoration: 'none' }}
+        >
+          <Typography variant="h5">Crea tu asadero</Typography>
+        </Link>
         <Divider sx={{ marginBottom: '10px' }} />
         <Typography variant="body">
           ¿Aún no has probado a crear tu propio asadero?
           <br />
           Te lo ponemos facilito...!
           <br />
-          Haz click{' '}
-          <Link className="links" to="/createBBQ">
-            aquí
-          </Link>{' '}
-          y podrás personalizar tu asadero.
+          Haz
+          <Link to="/home/createAsadero"> click aquí</Link> y podrás
+          personalizar tu asadero.
         </Typography>
-        <Button>¡Vamos allá!</Button>
+        <br />
+        <ButtonCustom
+          props={{ navigate: '/home/createAsadero', text: '¡Vamos allá!' }}
+        />
       </Card>
       <div className="myfriends">
-      <MyFriends width={'350px'}/>
+        <MyFriends width={'350px'} />
       </div>
       <div className="managebbq">
         <ManageBBQ />
