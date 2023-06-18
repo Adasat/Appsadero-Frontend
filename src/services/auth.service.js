@@ -1,30 +1,27 @@
 import { api } from './api.js'
 
 export const tryLogin = async (email, password) => {
-    try{
-        const { data } = await api.post('/auth/login', {email, password})
-        localStorage.setItem('token', data.token)
-    }catch(err){
-        console.error(err)
-    }
+  try {
+    const { data } = await api.post('/auth/login', { email, password })
+    localStorage.setItem('token', data.userDetails.token)
+    localStorage.setItem('first_name', data.userDetails.first_name)
+    localStorage.setItem('nickname', data.userDetails.nickname)
+    return true
+  } catch (err) {
+    return err
+  }
 }
 
 export const userSignup = async (first_name, nickname, email, password) => {
-  console.log(first_name)
-  console.log(nickname)
-  console.log(email)
-  console.log(password)
-
   try {
     const { data } = await api.post('/auth/signup', {
-      first_name ,
+      first_name: first_name,
       nickname: nickname,
       email: email,
       password: password,
     })
     localStorage.setItem('token', data.token)
-    console.log(data)
   } catch (err) {
-    console.error(err)
+    return err
   }
 }

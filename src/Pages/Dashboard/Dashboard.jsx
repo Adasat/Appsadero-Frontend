@@ -8,13 +8,11 @@ import './Dashboard.css'
 
 function Dashboard() {
 
-  const user = ''
-
   return (
     <div className="container">
       <Paper className="welcome-tag" elevation={3} sx={{ borderRadius: 10 }}>
         <img src="../src/assets/appsadero_logo-2.png" alt="logo-appsadero" />
-        <h2>Bienvenida diana</h2>
+        <h2>Bienvenida {localStorage.getItem('first_name')}</h2>
       </Paper>
       <div className="upcomingbbq">
         <UpcomingBBQ />
@@ -40,7 +38,7 @@ function Dashboard() {
         <Button>¡Vamos allá!</Button>
       </Card>
       <div className="myfriends">
-        <MyFriends width={'350px'} />
+      <MyFriends width={'350px'}/>
       </div>
       <div className="managebbq">
         <ManageBBQ />
