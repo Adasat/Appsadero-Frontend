@@ -40,7 +40,7 @@ function Dashboard() {
         <Button>¡Vamos allá!</Button>
       </Card>
       <div className="myfriends">
-        <MyFriends />
+        <MyFriends width={'350px'} />
       </div>
       <div className="managebbq">
         <ManageBBQ />

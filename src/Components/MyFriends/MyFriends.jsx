@@ -13,7 +13,7 @@ import { AccountCircle } from '@mui/icons-material'
 import './MyFriends.css'
 import SearchBar from './SearchBar/SearchBar'
 
-function MyFriends() {
+function MyFriends({width, height}) {
   const [friends, setFriends] = useState([])
   const [filterListFriend, setfilterListFriend] = useState([])
 
@@ -45,12 +45,12 @@ function MyFriends() {
       return (
         <Paper
           elevation={3}
-          sx={{ padding: '30px', borderRadius: 10, width: 450 }}
+          sx={{ padding: '30px', borderRadius: 10, width: {width}}}
         >
           <Typography variant="h5">Mis amigos</Typography>
           <Divider sx={{ marginBottom: '10px' }} />
           <SearchBar handleSearch={handleSearch}/>
-          <List className="myfriendslist">
+          <List className="myfriendslist" sx={{height: {height}}}>
             {filterListFriend.map((el) => (
               <ListItemText key={el.id}>
                 <ListItemIcon>
