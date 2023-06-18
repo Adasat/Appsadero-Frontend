@@ -12,6 +12,7 @@ import { OutdoorGrill } from '@mui/icons-material'
 import './UpcomingBBQ.css'
 import { Link } from 'react-router-dom'
 import { formatDate } from '../../validations/validations'
+import ButtonCustom from '../ButtonCustom/ButtonCustom'
 
 //component rendering upcoming bbq, in front as próximos asaderos
 function UpcomingBBQ() {
@@ -47,9 +48,9 @@ function UpcomingBBQ() {
       return (
         <Typography variant="body">
           Parece que no tienes próximos asaderos. <br />
-          <Link to="/" className="link">
-            ¡Organiza uno!
-          </Link>
+          <ButtonCustom
+            props={{ navigate: '/home/createAsadero', text: '¡Organiza uno!' }}
+          />
         </Typography>
       )
     }
@@ -57,7 +58,7 @@ function UpcomingBBQ() {
 
   return (
     <Card elevation={3} sx={{ padding: '30px', borderRadius: 10 }}>
-      <Typography variant="h5">Próximos asaderos</Typography>
+      <Typography variant="h5"><Link Link to='/home/upcomingAsadero' className='link' style={{ textDecoration: 'none' }}>Próximos asaderos</Link></Typography>
       <Divider sx={{ marginBottom: '10px' }} />
       {returnUpComingBBQ()}
     </Card>

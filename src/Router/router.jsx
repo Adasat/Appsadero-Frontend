@@ -5,41 +5,45 @@ import Dashboard from '../Pages/Dashboard/Dashboard'
 import Login from '../Pages/Login/Login'
 import Signup from '../Pages/Signup/Signup'
 import CreateAsadero from '../Pages/CreateAsadero/CreateAsadero'
-
+import MyProfile from '../Pages/MyProfile/MyProfile'
 
 import Abel from '../Pages/Pruebas/Abel'
 /* import Pedro from '../Pages/Pruebas/Pedro'
  */
-import Diana from '../Pages/Pruebas/Diana'
 import Friends from '../Pages/Friends/Friends'
-
+import ManageAsadero from '../Pages/manageAsadero/manageAsadero'
+import UpcomingAsadero from '../Pages/UpcomingAsadero/UpcomingAsadero'
 
 const checkLogin = () => {
-  return localStorage.getItem('token') ?  redirect('/dashboard') : null
+  return localStorage.getItem('token') ? redirect('/dashboard') : null
 }
 
 const checkAuth = () => {
   return !localStorage.getItem('token') ? redirect('/login') : null
 }
 
-
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <LayoutMain/> ,
+    element: <LayoutMain />,
     errorElement: <NotFound />,
     children: [
-      { path: '/login', element: <Login />, loader: checkLogin},
+      { path: '/login', element: <Login />, loader: checkLogin },
       { path: '/signup', element: <Signup /> },
-      { path: '/dashboard', element: <Dashboard /> },
-      { path: '/myprofile', element: <Dashboard /> }, // MODIFICAR:
-      
-      { path: '/createAsadero', element: <CreateAsadero /> },
-      { path: '/abel', element: <Abel /> },
-      { path: '/friends', element: <Friends /> },
-      { path: '/diana', element: <Diana /> },
     ],
   },
-  
+  {
+    path: '/home',
+    element: <LayoutMain />,loader: checkAuth,
+    errorElement: <NotFound />,
+    children: [
+      { path: '/home/dashboard', element: <Dashboard />, loader: checkAuth },
+      { path: '/home/myProfile', element: <MyProfile /> },
+      { path: '/home/createAsadero', element: <CreateAsadero /> },
+      { path: '/home/manageAsadero', element: <ManageAsadero /> },
+      { path: '/home/upcomingAsadero', element: <UpcomingAsadero /> },
+      { path: '/home/friends', element: <Friends /> },
+      { path: '/home/abel', element: <Abel /> },
+    ],
+  },
 ])
-

@@ -49,10 +49,10 @@ function Profile() {
         onClose={handleClose}
       >
         <MenuItem onClick={handleClose}>
-          <Link className="links" id="profile-section" to="/myProfile">Ver mi perfil</Link>
+          <Link className="links" id="profile-section" to="/home/myProfile">Ver mi perfil</Link>
         </MenuItem>
         <MenuItem onClick={handleClose} id="profile-logout">
-           <span onClick={logout} > Logout</span>
+           <span onClick={logout}> Logout</span>
         </MenuItem>
       </Menu>
     </div>

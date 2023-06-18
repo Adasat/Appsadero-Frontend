@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react'
 import { getMyOwnBbq } from '../../services/myBBQ.service'
 import '../UpcomingBBQ/UpcomingBBQ.css'
 import { Card, Divider, List, ListItemText, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
+
 import { formatDate } from '../../validations/validations'
+import ButtonCustom from '../ButtonCustom/ButtonCustom'
+import { Link } from 'react-router-dom'
 
 function ManageBBQ() {
   const [ownBbq, setOwnBbq] = useState([])
@@ -34,17 +36,27 @@ function ManageBBQ() {
       )
     } else {
       return (
-          <Typography variant="body">
-            Parece que no has organizado ningún asadero aún.{' '}
-            <Link to="">¡Organiza uno!</Link>
-          </Typography>
+        <Typography variant="body">
+          Parece que no has organizado ningún asadero aún. <br />
+          <ButtonCustom
+            props={{ navigate: '/home/createAsadero', text: '¡Organiza uno!' }}
+          />
+        </Typography>
       )
     }
   }
 
   return (
     <Card elevation={3} sx={{ padding: '30px', borderRadius: 10 }}>
-      <Typography variant="h5">Gestiona tus asaderos</Typography>
+      <Typography variant="h5">
+        <Link
+          to="/home/manageAsadero"
+          className="link"
+          style={{ textDecoration: 'none' }}
+        >
+          Gestiona tus asaderos
+        </Link>
+      </Typography>
       <Divider sx={{ marginBottom: '10px' }} />
       {returnManageBBQ()}
     </Card>

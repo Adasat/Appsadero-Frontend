@@ -64,7 +64,7 @@ function MyFriends({ width, height }) {
         <>
           <Typography variant="body">
             Seguimos buscando... <br />
-            <Link to="/friends" className="link">
+            <Link to="/home/friends" className="link">
               Añade algún amigo.
             </Link>
           </Typography>
@@ -74,8 +74,15 @@ function MyFriends({ width, height }) {
   }
 
   return (
-    <Paper elevation={3} sx={{ padding: '30px', borderRadius: 10, width: { width } }}>
-      <Typography variant="h5">Mis amigos</Typography>
+    <Paper
+      elevation={3}
+      sx={{ padding: '30px', borderRadius: 10, width: { width } }}
+    >
+      <Typography variant="h5">
+        <Link to="/home/friends" className="link" style={{ textDecoration: 'none' }}>
+          Mis amigos
+        </Link>
+      </Typography>
       <Divider sx={{ marginBottom: '10px' }} />
       {returnFriends()}
     </Paper>
