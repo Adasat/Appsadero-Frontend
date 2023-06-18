@@ -6,12 +6,23 @@ import { DateCalendar, DatePicker, StaticDatePicker } from '@mui/x-date-pickers'
 import { Box, Divider, Paper, Typography } from '@mui/material';
 import './Calendar.css'
 
-function Calendar(){
-    const[date, setDate] = useState(undefined)
+function Calendar({handleDate}){
     
-    const handleDateChange = (date) => {
-        setDate(date);
-      };
+    const [date, setDate] = useState();
+    const [dayInfo, setDayInfo] = useState('');
+
+   
+    const handleChange = (date) => {
+      
+      
+      console.log(date)
+
+      setDate({...date, date})
+      //setDayInfo({...dayInfo, date})
+      handleDate(date)
+      console.log(date)
+      
+    }
 
   return (
     <>
@@ -26,14 +37,11 @@ function Calendar(){
         <Paper variant="elevation" elevation={4}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DateCalendar  
-                size='small'              
-                value={date}
-                onChange={handleDateChange}
-                renderInput={(params) => <input {...params}/>}
+                value={date} onChange={handleChange} 
                 />
         </LocalizationProvider>
-         <Typography variant="subtitle1" component="subtitle" sx={{padding:4}}>
-                No has seleccionado ningún día.
+         <Typography variant="Subtitle" sx={{padding:4}}>
+                {dayInfo}
               </Typography>
         </Paper>
     </Box>
