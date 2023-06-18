@@ -5,18 +5,21 @@ import { useEffect, useState } from 'react'
 import {
   addFriendByNickname,
   getAllUsers,
+  getAllFriends
 } from '../../services/myFriends.service'
 
 function Friends() {
   const [nickname, setNickname] = useState('')
   const [friends, setFriends] = useState([])
   const [alert, setAlert] = useState('')
-  const [alertSeverity, setAlertSeverity] = useState('')
   const [alertMessage, setAlertMessage] = useState('')
+  const [AllFriends, setAllFriends] = useState('')
 
   const getUsers = async () => {
     const res = await getAllUsers()
+    const result = await getAllFriends()
     setFriends(res)
+    setAllFriends(result)
   }
 
   const handleSearchInput = (value) => {
@@ -24,16 +27,24 @@ function Friends() {
   }
 
   const handleButtonFriend = async () => {
-    const friend = friends.find((el) => el.nickname === nickname);
-    if (friend) {
+    const user = friends.find((el) => el.nickname === nickname)
+    const friend = AllFriends.find((el) => el.nickname === nickname)
+    if (friend){
+        setAlert('warning');
+        setAlertMessage(`Este usuario ${nickname} ya está entre tus amigos`);
+    
+    } else if (user) {
         await addFriendByNickname(nickname);
         setAlert('success')
-        setAlertMessage('Usuario añadido como amigo');
+        setAlertMessage(`Usuario ${nickname}, añadido como amigo`);
         
         location.reload()
+
+     
+    
     } else {
         setAlert('error');
-        setAlertMessage('Este usuario no está en nuestra BBDD');
+        setAlertMessage(`Este usuario ${nickname} no se encuentra en la aplicación`);
     }
 }
 
@@ -43,12 +54,13 @@ function Friends() {
 
   return (
     <Box marginTop={'20px'}>
-      <Grid container justifyContent={'space-around'}>
+      <Grid container spacing={2} justifyContent={'space-evenly'}>
         <Grid item xs={6}>
+          
           <MyFriends />
         </Grid>
-        <Grid item xs={3}>
-          <Paper>
+        <Grid item xs={2}>
+          <Paper elevation={7}>
             <SearchFriend
               onChange={handleSearchInput}
               onClick={handleButtonFriend}

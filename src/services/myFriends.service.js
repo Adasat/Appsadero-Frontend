@@ -33,23 +33,6 @@ export const getAllUsers = async () => {
   }
 }
 
-//service get one Profile for search friend
-/* router.get('/:email', checkAuth , getOneProfile);
- */
-
-/* export const getOneUser = async (nickname) => {
-  try{
-    const {data} = await api.get(`/profile/:${nickname}`, {
-      headers: {
-        token: localStorage.getItem('token'),
-      },
-    })
-    return data
-  }catch (error){
-    return error
-  }
-} */
-
 
 
 
