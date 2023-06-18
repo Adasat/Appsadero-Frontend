@@ -14,6 +14,7 @@ function SearchBar({ handleSearch }) {
         variant="outlined"
         placeholder="Busca por nick..."
         size="small"
+        style={{width: '80%' }}
       />
       <IconButton type="submit" aria-label="search">
         <Search />
