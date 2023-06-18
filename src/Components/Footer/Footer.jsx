@@ -20,13 +20,13 @@ function Footer({ title }) {
   function generateFooterElements() {
     const footerElements = elements.map((column, colIdx) => {
       return (
-        <Grid key={colIdx} item xs={12} md={4}>
+        <Grid key={colIdx} item xs={12} md={4} className='footer'>
           <Box textAlign={'center'} borderBottom={1}>
             <Button sx={{ color: 'black' }}>{column.header}</Button>
           </Box>
           {column.links.map((link, linkIdx) => {
             return (
-              <Box textAlign={'center'} key={linkIdx}>
+              <Box textAlign={'center'} key={linkIdx} >
                 <Button
                   sx={{
                     color: 'black',

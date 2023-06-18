@@ -8,10 +8,10 @@ import Signup from '../Pages/Signup/Signup'
 import CreateAsadero from '../Pages/CreateAsadero/CreateAsadero'
 
 
-
 import Abel from '../Pages/Pruebas/Abel'
 /* import Pedro from '../Pages/Pruebas/Pedro'
- */import Diana from '../Pages/Pruebas/Diana'
+ */
+import Diana from '../Pages/Pruebas/Diana'
 import Friends from '../Pages/Friends/Friends'
 
 
