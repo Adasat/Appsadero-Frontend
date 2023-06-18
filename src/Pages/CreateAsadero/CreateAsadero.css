@@ -2,7 +2,7 @@
 .container-list{
     display: flex;
     flex-wrap: wrap;
-    margin: 4px;
+    margin: 8px;
     margin-top: 24px;
     margin-left: 4px;
 }
@@ -10,6 +10,7 @@
 .container-timers{
     display: flex;
     flex-direction: column;
+    min-width: 90%;
     margin-top: 24px;
     margin-left: 16px;
     margin-right: 4px;

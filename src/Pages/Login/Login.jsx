@@ -57,7 +57,7 @@ const doLogin = async () => {
             sm={6}
             md={6}
             sx={{
-              backgroundImage: 'url(https://source.unsplash.com/random?bbq)',
+              backgroundImage: 'url(https://source.unsplash.com/random?bbq-fire)',
               backgroundSize: 'cover',
             }}
           ></Grid>

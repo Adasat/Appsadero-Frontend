@@ -165,23 +165,24 @@ function CreateAsadero() {
                     display={'flex'}
                     justifyContent={'center'}
                     alignContent={'center'}
-                  >
+                    >
+                   
                     <Box
+                    justifyContent={'center'}
                       className="container-list"
                       component={Paper}
                       variant="elevation"
                       elevation={4}
                     >
-                      <List
+                      <List alignItems='center'
                         sx={{
-                          width: '100%',
-                          maxWidth: '100',
+                          marginTop: '5px',
+                          width: '90%',
                           bgcolor: 'background.paper',
                         }}
                       >
-                        <ListItemButton
-                          display="flex"
-                          alignItems="center"
+                        <ListItemButton alignItems='center'
+                        sx={{width:'100%'}}
                           //selected={selectedIndex === 0}
                           onClick={(event) => handleListItemClick(event, 0)}
                         >
@@ -191,8 +192,6 @@ function CreateAsadero() {
                           <ListItemText primary="Invitar Amigos" />
                         </ListItemButton>
                         <ListItemButton
-                          display="flex"
-                          alignItems="center"
                           //selected={selectedIndex === 1}
                           onClick={(event) => handleListItemClick(event, 1)}
                         >
@@ -210,11 +209,12 @@ function CreateAsadero() {
                 <Grid
                   item
                   xs={12}
-                  sm={6}
+                  sm={12}
                   md={6}
                   // sx={{ backgroundColor: purple[600]}}
                 >
                   <Paper
+                    sx={{marginRight: 1}}
                     variant="elevation"
                     elevation={4}
                     className="container-timers"
