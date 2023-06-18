@@ -2,26 +2,21 @@ import React, { useState } from 'react'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 //import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateCalendar, DatePicker, StaticDatePicker } from '@mui/x-date-pickers';
-import { Box, Divider, Paper, Typography } from '@mui/material';
+import { DateCalendar } from '@mui/x-date-pickers';
+import { Box, Paper, Typography } from '@mui/material';
 import './Calendar.css'
+import dayjs from 'dayjs';
 
 function Calendar({handleDate}){
     
-    const [date, setDate] = useState();
+    const [date, setDate] = useState(dayjs('2022-04-17'));
     const [dayInfo, setDayInfo] = useState('');
 
    
     const handleChange = (date) => {
-      
-      
-      console.log(date)
-
       setDate({...date, date})
-      //setDayInfo({...dayInfo, date})
       handleDate(date)
       console.log(date)
-      
     }
 
   return (
@@ -37,7 +32,8 @@ function Calendar({handleDate}){
         <Paper variant="elevation" elevation={4}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DateCalendar  
-                value={date} onChange={handleChange} 
+                
+                defaultValue={date} onChange={handleChange} onViewChange={console.log('object')}
                 />
         </LocalizationProvider>
          <Typography variant="Subtitle" sx={{padding:4}}>
