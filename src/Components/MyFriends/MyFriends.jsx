@@ -13,7 +13,7 @@ import { AccountCircle } from '@mui/icons-material'
 import './MyFriends.css'
 import SearchBar from './SearchBar/SearchBar'
 
-function MyFriends({width, height}) {
+function MyFriends({ width, height }) {
   const [friends, setFriends] = useState([])
   const [filterListFriend, setfilterListFriend] = useState([])
 
@@ -29,7 +29,7 @@ function MyFriends({width, height}) {
 
   const handleSearch = (searchItem) => {
     if (searchItem.length > 0) {
-      const lowercaseSearchItem = searchItem.toLowerCase();
+      const lowercaseSearchItem = searchItem.toLowerCase()
       const result = friends.filter((el) => {
         const lowercaseNick = el.nickname.toLowerCase()
         return lowercaseNick.includes(lowercaseSearchItem)
@@ -43,37 +43,42 @@ function MyFriends({width, height}) {
   const returnFriends = () => {
     if (friends && friends.length > 0) {
       return (
-        <Paper
-          elevation={3}
-          sx={{ padding: '30px', borderRadius: 10, width: {width}}}
-        >
-          <Typography variant="h5">Mis amigos</Typography>
-          <Divider sx={{ marginBottom: '10px' }} />
-          <SearchBar handleSearch={handleSearch}/>
-          <List className="myfriendslist" sx={{height: {height}}}>
+        <>
+          <SearchBar handleSearch={handleSearch} />
+          <List className="myfriendslist" sx={{ height: { height } }}>
             {filterListFriend.map((el) => (
               <ListItemText key={el.id}>
                 <ListItemIcon>
                   <AccountCircle />
                 </ListItemIcon>
                 <Typography variant="body">
-                  {el.first_name} - <i>{el.nickname}</i> {/*- {el.email}*/}
+                  {el.first_name} - <i>{el.nickname}</i>
                 </Typography>
               </ListItemText>
             ))}
           </List>
-        </Paper>
+        </>
       )
     } else {
       return (
-        <Typography variant="h5">
-          Seguimos buscando. <Link to="">Añade algún amigo más</Link>
-        </Typography>
+        <>
+          <Typography variant="body">
+            Seguimos buscando... <br />
+            <Link to="/friends" className="link">
+              Añade algún amigo.
+            </Link>
+          </Typography>
+        </>
       )
     }
   }
 
-  return returnFriends()
+  return (
+    <Paper elevation={3} sx={{ padding: '30px', borderRadius: 10, width: { width } }}>
+      <Typography variant="h5">Mis amigos</Typography>
+      <Divider sx={{ marginBottom: '10px' }} />
+      {returnFriends()}
+    </Paper>
+  )
 }
-
 export default MyFriends

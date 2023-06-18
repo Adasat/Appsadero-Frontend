@@ -5,7 +5,6 @@ import { Card, Divider, List, ListItemText, Typography } from '@mui/material'
 import { Link } from 'react-router-dom'
 import { formatDate } from '../../validations/validations'
 
-
 function ManageBBQ() {
   const [ownBbq, setOwnBbq] = useState([])
 
@@ -19,34 +18,37 @@ function ManageBBQ() {
   }, [])
 
   const returnManageBBQ = () => {
-    if (ownBbq) {
+    if (ownBbq.length > 0) {
       return (
-        <Card elevation={3} sx={{ padding: '30px', borderRadius: 10 }}>
-          <Typography variant="h5">Gestiona tus asaderos</Typography>
-          <Divider sx={{ marginBottom: '10px' }} />
-          <List  className="upcomingbbqlist">
-            {ownBbq.map((el) => (
-              <ListItemText key={el.id}>
-                <Typography variant="body">
-                  <b id="bbqname">{el.name}</b> - <i>{ formatDate(el.date_time)}</i> -{' '}
-                  {el.description} - Plazo del pago: {formatDate(el.confirmation_date)}
-                </Typography>
-              </ListItemText>
-            ))}
-          </List>
-        </Card>
+        <List className="upcomingbbqlist">
+          {ownBbq.map((el) => (
+            <ListItemText key={el.id}>
+              <Typography variant="body">
+                <b id="bbqname">{el.name}</b> - {formatDate(el.date_time)} -{' '}
+                {el.description} - Plazo del pago:{' '}
+                {formatDate(el.confirmation_date)}
+              </Typography>
+            </ListItemText>
+          ))}
+        </List>
       )
     } else {
       return (
-        <Typography variant="h5">
-          Parece que no has organizado ningún asadero aún.{' '}
-          <Link to="">¡Organiza uno!</Link>
-        </Typography>
+          <Typography variant="body">
+            Parece que no has organizado ningún asadero aún.{' '}
+            <Link to="">¡Organiza uno!</Link>
+          </Typography>
       )
     }
   }
 
-  return returnManageBBQ()
+  return (
+    <Card elevation={3} sx={{ padding: '30px', borderRadius: 10 }}>
+      <Typography variant="h5">Gestiona tus asaderos</Typography>
+      <Divider sx={{ marginBottom: '10px' }} />
+      {returnManageBBQ()}
+    </Card>
+  )
 }
 
 export default ManageBBQ
