@@ -28,6 +28,11 @@ export const customTheme = createTheme({
       main: '#e4bad5',
     },
   },
+  typography: {
+    fontFamily: [    
+      'Bellota', 'cursive'
+    ].join(',')
+  }
 })
 
 
