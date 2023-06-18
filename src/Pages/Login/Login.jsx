@@ -3,7 +3,7 @@ import { Avatar, Box, Button, Grid, Typography, Paper } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import './Login.css'
 import { tryLogin } from '../../services/auth.service';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import TextFieldPassword from '../../Components/TextFieldPassword/TextFieldPassword';
 import TextFieldEmail from '../../Components/TextFieldEmail/TextFieldEmail';
 

@@ -2,16 +2,22 @@ import React, { useState } from 'react'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 //import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { DateCalendar, DatePicker, StaticDatePicker } from '@mui/x-date-pickers';
-import { Box, Divider, Paper, Typography } from '@mui/material';
+import { DateCalendar } from '@mui/x-date-pickers';
+import { Box, Paper, Typography } from '@mui/material';
 import './Calendar.css'
+import dayjs from 'dayjs';
 
-function Calendar(){
-    const[date, setDate] = useState(undefined)
+function Calendar({handleDate}){
     
-    const handleDateChange = (date) => {
-        setDate(date);
-      };
+    const [date, setDate] = useState(dayjs('2022-04-17'));
+    const [dayInfo, setDayInfo] = useState('');
+
+   
+    const handleChange = (date) => {
+      setDate({...date, date})
+      handleDate(date)
+      console.log(date)
+    }
 
   return (
     <>
@@ -26,14 +32,12 @@ function Calendar(){
         <Paper variant="elevation" elevation={4}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DateCalendar  
-                size='small'              
-                value={date}
-                onChange={handleDateChange}
-                renderInput={(params) => <input {...params}/>}
+                
+                defaultValue={date} onChange={handleChange} onViewChange={console.log('object')}
                 />
         </LocalizationProvider>
-         <Typography variant="subtitle1" component="subtitle" sx={{padding:4}}>
-                No has seleccionado ningún día.
+         <Typography variant="Subtitle" sx={{padding:4}}>
+                {dayInfo}
               </Typography>
         </Paper>
     </Box>

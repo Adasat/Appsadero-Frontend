@@ -20,12 +20,13 @@ function TimePickerCustom({title, value, onChange}) {
 
   return (
     <Paper className='time-pick'>
-      <Typography variant="button" component="subtitle" sx={{paddingTop:2}}>{title}</Typography>
+      <Typography variant="button" sx={{paddingTop:2}}>{title}</Typography>
     <LocalizationProvider dateAdapter={AdapterDayjs}>
     <TimePicker
           value={time}
           onChange={onChange}
           ampm={false}
+          
         />
     </LocalizationProvider>
     </Paper>
