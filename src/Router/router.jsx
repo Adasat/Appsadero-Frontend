@@ -1,5 +1,4 @@
 import { createBrowserRouter, redirect } from 'react-router-dom'
-import LayoutWelcome from '../Layout/LayoutWelcome/LayoutWelcome'
 import LayoutMain from '../Layout/LayoutMain/LayoutMain'
 import NotFound from '../Pages/NotFound/NotFound'
 import Dashboard from '../Pages/Dashboard/Dashboard'
@@ -16,21 +15,21 @@ import Friends from '../Pages/Friends/Friends'
 
 
 const checkLogin = () => {
-  localStorage.getItem('token') ? redirect('/login') : null
+  return localStorage.getItem('token') ?  redirect('/dashboard') : null
 }
 
 const checkAuth = () => {
-  !localStorage.getItem('token') ? redirect('/login') : null
+  return !localStorage.getItem('token') ? redirect('/login') : null
 }
 
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <LayoutWelcome />,
+    element: <LayoutMain/> ,
     errorElement: <NotFound />,
     children: [
-      { path: '/login', element: <Login />},
+      { path: '/login', element: <Login />, loader: checkLogin},
       { path: '/signup', element: <Signup /> },
       { path: '/dashboard', element: <Dashboard /> },
       { path: '/myprofile', element: <Dashboard /> }, // MODIFICAR:

@@ -10,7 +10,7 @@ function Dashboard() {
 
   return (
     <div className="container">
-      <Paper className="welcome-tag" elevation={3} sx={{ borderRadius: 10 }}>
+      <Paper className="welcome-tag" elevation={3} sx={{ borderRadius: 10, textAlign: 'center'}} >
         <img src="../src/assets/appsadero_logo-2.png" alt="logo-appsadero" />
         <h2>Bienvenida {localStorage.getItem('first_name')}</h2>
       </Paper>

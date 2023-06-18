@@ -41,6 +41,7 @@
 .myfriends {
   grid-column: 6 / 7;
   grid-row: 2;
+  justify-self: center;
 }
 
 .createbbq {

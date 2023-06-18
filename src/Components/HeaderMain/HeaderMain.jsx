@@ -26,21 +26,3 @@ function HeaderMain({title}) {
 }
 
 export default HeaderMain
-
-/*
-
-  menu hamburguesa, en ppio no es necesario
-
-              <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-              <Link className="links" to="/dashboard">
-                <Menu />
-              </Link>
-            </IconButton>
-
-*/

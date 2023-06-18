@@ -27,36 +27,41 @@ function UpcomingBBQ() {
   }, [])
 
   const returnUpComingBBQ = () => {
-    if (upcomingBBQ) {
+    if (upcomingBBQ.length > 0) {
       return (
-        <Card elevation={3} sx={{ padding: '30px', borderRadius: 10 }}>
-          <Typography variant="h5">Próximos asaderos</Typography>
-          <Divider sx={{ marginBottom: '10px' }} />
-          <List className="upcomingbbqlist">
-            {upcomingBBQ.map((bbq) => (
-              <ListItemText key={bbq.id}>
-                <ListItemIcon>
-                  <OutdoorGrill />
-                </ListItemIcon>
-                <Typography variant="body">
-                  <b id="bbqname">{bbq.name}</b> -{' '}
-                  <i>{formatDate(bbq.date_time)}</i> - {bbq.description}
-                </Typography>
-              </ListItemText>
-            ))}
-          </List>
-        </Card>
+        <List className="upcomingbbqlist">
+          {upcomingBBQ.map((bbq) => (
+            <ListItemText key={bbq.id}>
+              <ListItemIcon>
+                <OutdoorGrill />
+              </ListItemIcon>
+              <Typography variant="body">
+                <b id="bbqname">{bbq.name}</b> - {formatDate(bbq.date_time)} -{' '}
+                {bbq.description}
+              </Typography>
+            </ListItemText>
+          ))}
+        </List>
       )
     } else {
       return (
-        <Typography variant="h5">
-          Parece que no tienes próximos asaderos.{' '}
-          <Link to="">¡Organiza uno!</Link>
+        <Typography variant="body">
+          Parece que no tienes próximos asaderos. <br />
+          <Link to="/" className="link">
+            ¡Organiza uno!
+          </Link>
         </Typography>
       )
     }
   }
-  return returnUpComingBBQ()
+
+  return (
+    <Card elevation={3} sx={{ padding: '30px', borderRadius: 10 }}>
+      <Typography variant="h5">Próximos asaderos</Typography>
+      <Divider sx={{ marginBottom: '10px' }} />
+      {returnUpComingBBQ()}
+    </Card>
+  )
 }
 
 export default UpcomingBBQ

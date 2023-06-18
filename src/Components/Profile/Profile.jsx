@@ -1,11 +1,12 @@
 import { AccountCircle } from '@mui/icons-material'
 import { IconButton, Menu, MenuItem } from '@mui/material'
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './Profile.css'
 
 function Profile() {
   const [anchorEl, setAnchorEl] = useState(null)
+  const navigate = useNavigate()
 
   const handleMenu = (event) => {
     setAnchorEl(event.currentTarget)
@@ -13,6 +14,11 @@ function Profile() {
 
   const handleClose = () => {
     setAnchorEl(null)
+  }
+
+  const logout = () => {
+    localStorage.clear()
+    navigate('/login')
   }
 
   return (
@@ -46,7 +52,7 @@ function Profile() {
           <Link className="links" id="profile-section" to="/myProfile">Ver mi perfil</Link>
         </MenuItem>
         <MenuItem onClick={handleClose} id="profile-logout">
-        <Link className="links" to="/">Logout</Link>
+           <span onClick={logout} > Logout</span>
         </MenuItem>
       </Menu>
     </div>

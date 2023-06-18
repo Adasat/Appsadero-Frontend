@@ -7,3 +7,10 @@ export const formatDate = (date) => {
 
     return `${day}/${month}/${year}`
 }
+/*
+export const checkDate = (date) => {
+    const today = formatDate()
+
+
+
+}*/
