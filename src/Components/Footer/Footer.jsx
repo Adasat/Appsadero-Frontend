@@ -8,7 +8,7 @@ function Footer({ title }) {
       links: ['Historia'],
     },
     {
-      header: 'Meet the team',
+      header: 'Meat the team',
       links: ['Quiénes somos'],
     },
     {

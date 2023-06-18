@@ -3,14 +3,14 @@ import { Avatar, Box, Button, Grid, Typography, Paper } from '@mui/material'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import './Login.css'
 import { tryLogin } from '../../services/auth.service';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import TextFieldPassword from '../../Components/TextFieldPassword/TextFieldPassword';
 import TextFieldEmail from '../../Components/TextFieldEmail/TextFieldEmail';
 
 function LogIn() {
 
   const navigate = useNavigate()
-
+  
   const [password, setPassword] = useState({
     value: '',
     validPassword: false,
@@ -23,7 +23,6 @@ function LogIn() {
   })
 
   const handlePassword = (password) => {
-    console.log(password.value)
     setPassword({...password, password})
 }
 
@@ -34,11 +33,11 @@ function LogIn() {
 const doLogin = async () => {
   try {
     const res = await tryLogin(email.value, password.value)   
-    if(res !== undefined){
+    if(res){
       navigate('/dashboard')
     } 
-  } catch (e) {
-    console.error(e)
+  } catch (err) {
+    return err
   }
 }
 
@@ -103,7 +102,7 @@ const doLogin = async () => {
                   </Grid>
                   <Grid item>
                     <Link className="link" to={'/signup'}>
-                      {"Don't have an account? Sign Up"}
+                      {"No tengo cuenta. Quiero registrarme."}
                     </Link>
                   </Grid>
                 </Grid>
