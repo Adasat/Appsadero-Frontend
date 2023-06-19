@@ -1,14 +1,23 @@
 import { useEffect, useState } from 'react'
 import { getMyOwnBbq } from '../../services/myBBQ.service'
 import '../UpcomingBBQ/UpcomingBBQ.css'
-import { Card, Divider, List, ListItemText, Typography } from '@mui/material'
+import {
+  Card,
+  Divider,
+  List,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+} from '@mui/material'
 import { formatDate } from '../../validations/validations'
 import ButtonCustom from '../ButtonCustom/ButtonCustom'
 import { Link, useNavigate } from 'react-router-dom'
+import { OutdoorGrill } from '@mui/icons-material'
 
 function ManageBBQ() {
   const [ownBbq, setOwnBbq] = useState([])
   const navigate = useNavigate()
+  const menuTitle = 'Editar mis asaderos'
 
   const listMyOwnBbq = async () => {
     const res = await getMyOwnBbq()
@@ -29,6 +38,9 @@ function ManageBBQ() {
         <List className="upcomingbbqlist">
           {ownBbq.map((el) => (
             <ListItemText key={el.id}>
+              <ListItemIcon>
+                <OutdoorGrill />
+              </ListItemIcon>
               <Typography variant="body">
                 <b id="bbqname">{el.name}</b> - {formatDate(el.date_time)} -{' '}
                 {el.description} - Plazo del pago:{' '}
@@ -42,7 +54,8 @@ function ManageBBQ() {
       return (
         <Typography variant="body">
           Parece que no has organizado ningún asadero aún. <br />
-          <ButtonCustom handleButton={createbbq}
+          <ButtonCustom
+            handleButton={createbbq}
             props={{ navigate: '/home/createAsadero', text: '¡Organiza uno!' }}
           />
         </Typography>
@@ -58,7 +71,7 @@ function ManageBBQ() {
           className="link"
           style={{ textDecoration: 'none' }}
         >
-          Gestiona tus asaderos
+          {menuTitle}
         </Link>
       </Typography>
       <Divider sx={{ marginBottom: '10px' }} />

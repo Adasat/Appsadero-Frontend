@@ -33,11 +33,6 @@
   text-align: center;
 }
 
-.upcomingbbq {
-  grid-column: 1/6;
-  grid-row: 2;
-}
-
 .myfriends {
   grid-column: 6 / 7;
   grid-row: 2;
@@ -50,6 +45,11 @@
 }
 
 .managebbq {
+  grid-column: 1/6;
+  grid-row: 2;
+
+}
+.upcomingbbq {
   grid-column: 4/7;
   grid-row: 3;
 }

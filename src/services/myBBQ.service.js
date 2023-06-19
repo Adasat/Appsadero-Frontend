@@ -54,3 +54,16 @@ export const getOneAsadero = async (asaderoId) => {
     return error
   }
 }
+
+export const getUsersFromAsadero = async (asaderoId) => {
+  try {
+    const { data } = await api.get(`/asadero/${asaderoId}/users`, {
+      headers: {
+        token: localStorage.getItem('token'),
+      },
+    })
+    return data
+  } catch (error) {
+    return error
+  }
+}
