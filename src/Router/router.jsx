@@ -11,7 +11,7 @@ import Abel from '../Pages/Pruebas/Abel'
 /* import Pedro from '../Pages/Pruebas/Pedro'
  */
 import Friends from '../Pages/Friends/Friends'
-import ManageAsadero from '../Pages/manageAsadero/manageAsadero'
+import ManageAsadero from '../Pages/ManageAsadero/ManageAsadero'
 import UpcomingAsadero from '../Pages/UpcomingAsadero/UpcomingAsadero'
 
 const checkLogin = () => {

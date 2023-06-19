@@ -7,6 +7,14 @@ export const formatDate = (date) => {
 
     return `${day}/${month}/${year}`
 }
+
+export const formatTime = (time) => {
+    const formated = new Date (time);
+    const hours = formated.getHours()
+    const minutes = formated.getMinutes()
+
+    return `${hours}:${minutes}`
+}
 /*
 export const checkDate = (date) => {
     const today = formatDate()
