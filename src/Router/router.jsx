@@ -12,7 +12,6 @@ import Abel from '../Pages/Pruebas/Abel'
  */
 import Friends from '../Pages/Friends/Friends'
 import ManageAsadero from '../Pages/ManageAsadero/ManageAsadero'
-import UpcomingAsadero from '../Pages/UpcomingAsadero/UpcomingAsadero'
 import CategoriesNProducts from '../Components/CategoriesNProdcut/CategoriesNProducts'
 import UpcomingBBQpage from '../Pages/UpcomingBBQpage/UpcomingBBQpage'
 const checkLogin = () => {
