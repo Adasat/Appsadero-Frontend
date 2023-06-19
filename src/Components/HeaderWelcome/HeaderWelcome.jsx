@@ -1,8 +1,19 @@
 import { AppBar, Box, Toolbar, Typography } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import ButtonCustom from '../ButtonCustom/ButtonCustom'
 
 function HeaderWelcome({ title }) {
+
+  const navigate = useNavigate()
+
+  const handleLogin = () => {
+    navigate('/login')
+  }
+
+  const handleSignup = () => {
+    navigate('/signup')
+  }
+
   return (
     <>
       <Box sx={{ flexGrow: 1 }}>
@@ -18,8 +29,8 @@ function HeaderWelcome({ title }) {
               </Link>
             </Typography>
             <div style={{ display: 'flex', gap: '30px'  }}>
-              <ButtonCustom props={{ navigate: '/login', text: 'Login' }} />
-              <ButtonCustom props={{ navigate: '/signup', text: 'Signup' }} />
+              <ButtonCustom props={{ navigate: '/login', text: 'Login' }} handleButton={handleLogin}/>
+              <ButtonCustom props={{ navigate: '/signup', text: 'Signup' }} handleButton={handleSignup}/>
             </div>
           </Toolbar>
         </AppBar>

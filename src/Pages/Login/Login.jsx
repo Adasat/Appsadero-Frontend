@@ -6,9 +6,13 @@ import { tryLogin } from '../../services/auth.service'
 import { Link, useNavigate } from 'react-router-dom'
 import TextFieldPassword from '../../Components/TextFieldPassword/TextFieldPassword'
 import TextFieldEmail from '../../Components/TextFieldEmail/TextFieldEmail'
+import AlertSuccess from '../../Components/AlertSuccess/AlertSuccess'
 
 function LogIn() {
   const navigate = useNavigate()
+  const [showAlert, setShowAlert] = useState(false)
+
+  const textOk = '¡Welcome to Appsadero!'
 
   const [password, setPassword] = useState({
     value: '',
@@ -34,7 +38,15 @@ function LogIn() {
     try {
       const res = await tryLogin(email.value, password.value)
       if (res) {
+      setShowAlert(true)
+      const delay = setTimeout(() => {
         navigate('/home/dashboard')
+      },500)
+      return () => clearTimeout(delay)
+
+
+
+        
       }
     } catch (err) {
       return err
@@ -94,6 +106,7 @@ function LogIn() {
                 >
                   Login
                 </Button>
+                {showAlert &&<AlertSuccess text={textOk} />}
                 <Grid container>
                   <Grid item xs>
                     {

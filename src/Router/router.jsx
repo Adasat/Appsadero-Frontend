@@ -11,11 +11,11 @@ import Abel from '../Pages/Pruebas/Abel'
 /* import Pedro from '../Pages/Pruebas/Pedro'
  */
 import Friends from '../Pages/Friends/Friends'
-import ManageAsadero from '../Pages/manageAsadero/manageAsadero'
+import ManageAsadero from '../Pages/ManageAsadero/ManageAsadero'
 import UpcomingAsadero from '../Pages/UpcomingAsadero/UpcomingAsadero'
 
 const checkLogin = () => {
-  return localStorage.getItem('token') ? redirect('/dashboard') : null
+  return localStorage.getItem('token') ? redirect('/home/dashboard') : null
 }
 
 const checkAuth = () => {
@@ -34,7 +34,8 @@ export const router = createBrowserRouter([
   },
   {
     path: '/home',
-    element: <LayoutMain />,loader: checkAuth,
+    element: <LayoutMain />,
+    loader: checkAuth,
     errorElement: <NotFound />,
     children: [
       { path: '/home/dashboard', element: <Dashboard />, loader: checkAuth },

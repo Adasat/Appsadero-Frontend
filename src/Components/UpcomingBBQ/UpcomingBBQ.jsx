@@ -10,13 +10,14 @@ import {
 } from '@mui/material'
 import { OutdoorGrill } from '@mui/icons-material'
 import './UpcomingBBQ.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { formatDate } from '../../validations/validations'
 import ButtonCustom from '../ButtonCustom/ButtonCustom'
 
 //component rendering upcoming bbq, in front as próximos asaderos
 function UpcomingBBQ() {
   const [upcomingBBQ, setUpcomingBBQ] = useState([])
+  const navigate = useNavigate()
 
   const listUpcomingBBQ = async () => {
     const res = await getAllMyAsaderos()
@@ -26,6 +27,11 @@ function UpcomingBBQ() {
   useEffect(() => {
     listUpcomingBBQ()
   }, [])
+
+  const createbbq = () => {
+    navigate('/home/createAsadero')
+  }
+
 
   const returnUpComingBBQ = () => {
     if (upcomingBBQ.length > 0) {
@@ -48,7 +54,7 @@ function UpcomingBBQ() {
       return (
         <Typography variant="body">
           Parece que no tienes próximos asaderos. <br />
-          <ButtonCustom
+          <ButtonCustom handleButton={createbbq}
             props={{ navigate: '/home/createAsadero', text: '¡Organiza uno!' }}
           />
         </Typography>
@@ -58,7 +64,7 @@ function UpcomingBBQ() {
 
   return (
     <Card elevation={3} sx={{ padding: '30px', borderRadius: 10 }}>
-      <Typography variant="h5"><Link Link to='/home/upcomingAsadero' className='link' style={{ textDecoration: 'none' }}>Próximos asaderos</Link></Typography>
+      <Typography variant="h5"><Link to='/home/upcomingAsadero' className='link' style={{ textDecoration: 'none' }}>Próximos asaderos</Link></Typography>
       <Divider sx={{ marginBottom: '10px' }} />
       {returnUpComingBBQ()}
     </Card>

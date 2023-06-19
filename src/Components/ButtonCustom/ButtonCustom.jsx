@@ -23,13 +23,13 @@ function ButtonCustom({ handleButton, props }) {
   const handleClick = (button) => {
     setButtonProps({ ...buttonProps, props })
     handleButton(button)
-    console.log(button)
   }
 
   return (
     <Link to={props.navigate}>
       <Button
         className={props.className}
+        navigate={props.navigate}
         disabled={props.disabled}
         onClick={handleClick}
         color={props.color}

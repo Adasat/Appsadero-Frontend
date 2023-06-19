@@ -32,7 +32,7 @@ function Dashboard() {
         sx={{ padding: '30px', borderRadius: 10 }}
       >
         <Link
-          to="/home/manageAsadero"
+          to="/home/createAsadero"
           className="link"
           style={{ textDecoration: 'none' }}
         >

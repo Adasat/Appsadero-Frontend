@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react'
 import { getMyOwnBbq } from '../../services/myBBQ.service'
 import '../UpcomingBBQ/UpcomingBBQ.css'
 import { Card, Divider, List, ListItemText, Typography } from '@mui/material'
-
 import { formatDate } from '../../validations/validations'
 import ButtonCustom from '../ButtonCustom/ButtonCustom'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 function ManageBBQ() {
   const [ownBbq, setOwnBbq] = useState([])
+  const navigate = useNavigate()
 
   const listMyOwnBbq = async () => {
     const res = await getMyOwnBbq()
@@ -18,6 +18,10 @@ function ManageBBQ() {
   useEffect(() => {
     listMyOwnBbq()
   }, [])
+
+  const createbbq = () => {
+    navigate('/home/createAsadero')
+  }
 
   const returnManageBBQ = () => {
     if (ownBbq.length > 0) {
@@ -38,7 +42,7 @@ function ManageBBQ() {
       return (
         <Typography variant="body">
           Parece que no has organizado ningún asadero aún. <br />
-          <ButtonCustom
+          <ButtonCustom handleButton={createbbq}
             props={{ navigate: '/home/createAsadero', text: '¡Organiza uno!' }}
           />
         </Typography>
