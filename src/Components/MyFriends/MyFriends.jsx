@@ -40,6 +40,10 @@ function MyFriends({ width, height }) {
     }
   }
 
+  const handleClick = () => {
+    alert('click')
+  }
+
   const returnFriends = () => {
     if (friends && friends.length > 0) {
       return (
@@ -51,7 +55,7 @@ function MyFriends({ width, height }) {
                 <ListItemIcon>
                   <AccountCircle />
                 </ListItemIcon>
-                <Typography variant="body">
+                <Typography variant="body" onClick={handleClick}>
                   {el.first_name} - <i>{el.nickname}</i>
                 </Typography>
               </ListItemText>
