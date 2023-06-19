@@ -12,7 +12,7 @@ import Abel from '../Pages/Pruebas/Abel'
  */
 import Friends from '../Pages/Friends/Friends'
 import ManageAsadero from '../Pages/ManageAsadero/ManageAsadero'
-import UpcomingAsadero from '../Pages/UpcomingAsadero/UpcomingAsadero'
+import UpcomingBBQpage from '../Pages/UpcomingBBQpage/UpcomingBBQpage'
 
 const checkLogin = () => {
   return localStorage.getItem('token') ? redirect('/home/dashboard') : null
@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
       { path: '/home/myProfile', element: <MyProfile /> },
       { path: '/home/createAsadero', element: <CreateAsadero /> },
       { path: '/home/manageAsadero', element: <ManageAsadero /> },
-      { path: '/home/upcomingAsadero', element: <UpcomingAsadero /> },
+      { path: '/home/upcomingAsadero', element: <UpcomingBBQpage /> },
       { path: '/home/friends', element: <Friends /> },
       { path: '/home/abel', element: <Abel /> },
     ],

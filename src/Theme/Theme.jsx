@@ -16,7 +16,7 @@ export const customTheme = createTheme({
       main: '#546a2f',
     },
     background: {
-      default: '#e8e8f1',
+      default: '#c9c9d4 ',
     },
     error: {
       main: '#8a0000', //Button cancel/eliminate

@@ -28,10 +28,23 @@ export const getMyOwnBbq = async () => {
   }
 }
 
-//service for backend to get users from one asadero
-export const getUsersFromAsadero = async () => {
+// //service for backend to get users from one asadero
+// export const getUsersFromAsadero = async () => {
+//   try {
+//     const { data } = await api.get('/:asaderoId/users', {
+//       headers: {
+//         token: localStorage.getItem('token'),
+//       },
+//     })
+//     return data
+//   } catch (error) {
+//     return error
+//   }
+// }
+
+export const getOneAsadero = async (asaderoId) => {
   try {
-    const { data } = await api.get('/:asaderoId/users', {
+    const { data } = await api.get(`/asadero/myAsaderos/${asaderoId}`, {
       headers: {
         token: localStorage.getItem('token'),
       },
