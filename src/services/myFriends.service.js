@@ -49,3 +49,24 @@ export const addFriendByNickname = async (nickname) => {
     return error
   }
 }
+
+
+//service for get one profile' user
+
+export const getOneByNickname = async (nick) => {
+  try {
+    const { data } = await api.get(
+      `/profile/${nick}`,
+      
+      {
+        headers: {
+          token: localStorage.getItem('token'),
+        },
+      }
+    )
+    console.log(data)
+    return data
+  } catch (error) {
+    return error
+  }
+}

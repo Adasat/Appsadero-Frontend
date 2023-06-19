@@ -3,24 +3,32 @@ import {
   addFriendByNickname,
   getAllUsers,
   getAllFriends,
+  getOneByNickname,
 } from '../../services/myFriends.service'
 import { Alert, Box, Grid, Paper, Typography } from '@mui/material'
 
 import MyFriends from '../../Components/MyFriends/MyFriends'
 import SearchFriend from '../../Components/SearchFriend/SearchFriend'
+import { useParams } from 'react-router-dom'
 
 
 function Friends() {
   const [nickname, setNickname] = useState('')
-  const [friends, setFriends] = useState([])
+  const [users, setUsers] = useState([])
   const [alert, setAlert] = useState('')
   const [alertMessage, setAlertMessage] = useState('')
   const [AllFriends, setAllFriends] = useState('')
+  
+
+  const {nick} = useParams()
+ 
+
 
   const getUsers = async () => {
     const res = await getAllUsers()
     const result = await getAllFriends()
-    setFriends(res)
+
+    setUsers(res)
     setAllFriends(result)
   }
 
@@ -28,22 +36,35 @@ function Friends() {
     setNickname(value)
   }
 
+  
+
+
+
   const handleButtonFriend = async () => {
-    const user = friends.find((el) => el.nickname === nickname)
+    const user = users.find((el) => el.nickname === nickname)
     const friend = AllFriends.find((el) => el.nickname === nickname)
+
     if (friend) {
       setAlert('warning')
-      setAlertMessage(`Este usuario ${nickname} ya está entre tus amigos`)
+      setAlertMessage(`Esta persona ${nickname} ya está entre tus contactos`)
+    
+    } else if (localStorage.nickname === nickname){
+      setAlert('warning')
+      setAlertMessage(
+        `Esta persona ${localStorage.nickname} eres tú. No puedes añadirte a tus contactos`
+      )
+    
     } else if (user) {
+
       await addFriendByNickname(nickname)
       setAlert('success')
-      setAlertMessage(`Usuario ${nickname}, añadido como amigo`)
+      setAlertMessage(`Esta persona ${nickname}, añadido como contacto nuevo`)
 
       location.reload()
     } else {
       setAlert('error')
       setAlertMessage(
-        `Este usuario ${nickname} no se encuentra en la aplicación`
+        `Esta persona ${nickname} no se encuentra en la aplicación`
       )
     }
   }
@@ -60,9 +81,8 @@ function Friends() {
         </Grid>
         <Grid item xs={4} sm={3}>
           <Paper elevation={7}>
-            <SearchFriend
-              onChange={handleSearchInput}
-              onClick={handleButtonFriend}
+            <SearchFriend onChange={handleSearchInput}
+              onClick={handleButtonFriend} 
             />
             <Box marginBottom={2}>
               {alert && (
@@ -74,11 +94,17 @@ function Friends() {
           </Paper>
         </Grid>
       </Grid>
-    <Box marginTop={'20px'} marginRight={'20px'} sx={{ justifyContent: 'flex-end', textAlign: 'right'}}>
-        <Typography variant='h5' sx={{ fontStyle: 'italic'}}> "Un asadero sin amigos es como un parchis de un solo jugador" </Typography>
-        <Typography variant='body'>Nelson Mandela</Typography>
+      <Box
+        marginTop={'20px'}
+        marginRight={'20px'}
+        sx={{ justifyContent: 'flex-end', textAlign: 'right' }}
+      >
+        <Typography variant="h5" sx={{ fontStyle: 'italic' }}>
+          "Un asadero sin amigos es como un parchis de un solo jugador"
+        </Typography>
+        <Typography variant="body">Nelson Mandela</Typography>
+      </Box>
     </Box>
-  </Box>
   )
 }
 

@@ -20,7 +20,6 @@ export const userSignup = async (first_name, nickname, email, password) => {
       email: email,
       password: password,
     })
-    localStorage.setItem('token', data.token)
   } catch (err) {
     return err
   }

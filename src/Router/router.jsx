@@ -11,8 +11,9 @@ import Abel from '../Pages/Pruebas/Abel'
 /* import Pedro from '../Pages/Pruebas/Pedro'
  */
 import Friends from '../Pages/Friends/Friends'
-import ManageAsadero from '../Pages/manageAsadero/manageAsadero'
+import ManageAsadero from '../Pages/ManageAsadero/ManageAsadero'
 import UpcomingAsadero from '../Pages/UpcomingAsadero/UpcomingAsadero'
+import CategoriesNProducts from '../Components/CategoriesNProdcut/CategoriesNProducts'
 
 const checkLogin = () => {
   return localStorage.getItem('token') ? redirect('/dashboard') : null
@@ -44,6 +45,7 @@ export const router = createBrowserRouter([
       { path: '/home/upcomingAsadero', element: <UpcomingAsadero /> },
       { path: '/home/friends', element: <Friends /> },
       { path: '/home/abel', element: <Abel /> },
+      {path: '/home/pedro', element: <CategoriesNProducts/>}
     ],
   },
 ])
