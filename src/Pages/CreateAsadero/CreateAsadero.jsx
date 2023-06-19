@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Box,Dialog,DialogContent,Divider,Grid,List,ListItemButton,ListItemIcon,ListItemText,Paper,Typography, useStepContext } from '@mui/material'
 import ButtonCustom from '../../Components/ButtonCustom/ButtonCustom'
 import Calendar from '../../Components/Calendar/Calendar'
@@ -12,17 +12,16 @@ import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu'
 import './DatePicker/DatePicker.css'
 import FriendListSelect from '../../Components/FriendListSelect/FriendListSelect'
 import SearchFriend from '../../Components/SearchFriend/SearchFriend'
-import { formatDate, formatTime } from '../../validations/validations'
+import { formatDate, formatDateDB, formatTime } from '../../validations/validations'
+import { createBBQ } from '../../services/myBBQ.service'
 
 function CreateAsadero() {
   //Create Asadero Needed Data
   const [asadero, setAsadero] = useState({
     name: 'Nombre del Asadero',
-    description: '',
-    date: '',
+    description: 'Descripción de',
+    date_time: '',
     duration: '',
-    comments: '',
-    confirmation_date: '',
     payments_accepted: '',
     place: '',
   })
@@ -33,12 +32,14 @@ function CreateAsadero() {
   const [description, setDescription] = useState('Descripción')
   const [place, setPlace] = useState('Lugar')
   const [date, setDate] = useState()
-  const [guestList, setGuestList] = useState([])
+  const [guestList, setGuestList] = useState()
   //const [selectedIndex, setSelectedIndex] = useState()
   const [startTime, setStartTime] = useState()
   const [endTime, setEndTime] = useState()
-  const [payLimit, setPayDate] = useState()
+  const [payDate, setPayDate] = useState()
   
+  // eslint-disable-next-line no-unused-vars
+  const [nickname, setNickname] = useState()
   const [openFriendPopup, setOpenFriendPopup] = useState(false)
   const [openProductPopup, setOpenProductPopup] = useState(false)
 
@@ -60,7 +61,7 @@ function CreateAsadero() {
   const handleCloseProducts = () => {
     setOpenProductPopup(false)
   }
-
+  // eslint-disable-next-line no-unused-vars
   const handleButton = (button) => {}
 
   const handleSearchInput = (value) => {
@@ -83,8 +84,9 @@ function CreateAsadero() {
   const handleDatePicker = (date) => {
     setDate({ ...date, date })
   }
-  const hanleCustomDatePicker = (payLimit) => {
-    setPayDate(payLimit, payLimit)    
+  const hanleCustomDatePicker = (payDate) => {
+    console.log(payDate)
+    setPayDate(payDate, payDate)    
   }
   const handleStartTimePicker = (startTime) => {
     setStartTime(startTime, startTime)
@@ -96,22 +98,41 @@ function CreateAsadero() {
     setGuestList([guestList, guests])
   }
   
-  const createAsadero = () => {
-    
-    //((startTime, endTime)=> endTime - startTime),
-
-     setAsadero({
-      'name': name,
-      'description': description,
-      'date': formatDate(date.$d),
-      'duration': formatTime(startTime),
-      'comments': '',
-      'confirmation_date': '',
-      'payments_accepted': formatDate(payLimit),
-      'place': '',
-     })
+  //Continue Button
+  const handleBbq = () => {
+    setAsadero({
+     "name": name,
+     "description": description,
+     "date_time": formatDateDB(date.$d),
+     "duration": formatTime(startTime),
+     "payments_accepted": formatDateDB(payDate),
+     "place": place,
+   })
   }
-  console.log(asadero)
+  const createAsadero = async() => {
+    handleBbq()
+    try{
+      const res = await createBBQ(asadero, guestList)
+    }catch(err){
+      throw new Error(err)
+    }
+
+
+  }
+  
+
+  //To do
+  //Crear Servicio para recoger la lista de invitados
+
+  //Necesito
+  //  - Id del asadero q acabo de crear
+  // - Ids de los invitados
+  // - Endpoint para añadir los invitados al asadero
+
+  //Donde lo hago?
+  // {{baseURL}}/asadero/16/user/5
+  
+  //await createBBQ(asadero)
 
   return (
     <>

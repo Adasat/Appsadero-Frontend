@@ -4,9 +4,17 @@ import { parse } from "date-fns"
 export const formatDate = (date) => {
   const formated = new Date(date)
   const day = formated.getDate()
-  const month = formated.getMonth() + 1
+  const month = (formated.getMonth() + 1)
   const year = formated.getFullYear()
   return `${day}/${month}/${year}`
+}
+
+export const formatDateDB = (date) => {
+  const formated = new Date(date)
+  const day = formated.getDate()
+  const month = (formated.getMonth() + 1).toLocaleString(undefined, { minimumIntegerDigits: 2 });
+  const year = formated.getFullYear()
+  return `${year}${month}${day}`
 }
 
 export const checkDate = () => {
@@ -22,7 +30,7 @@ export const formatTime = (time) => {
     const hours = formated.getHours()
     const minutes = formated.getMinutes()
 
-    return `${hours}:${minutes}`
+    return `${hours}`
 }
 
 //function to calculate bbq duration -> import parse from date-fns
@@ -37,6 +45,7 @@ export const duration = (startTime, endTime) => {
 
     return hours;
 }
+
 /*
 export const checkDate = (date) => {
     const today = formatDate()
