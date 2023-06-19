@@ -6,32 +6,32 @@ import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import './TimePickerCustom.css'
 import { Paper, Typography } from '@mui/material';
 
-function TimePickerCustom({title, value, onChange}) {
-  
+function TimePickerCustom({ handleStartTimePicker, title, value, onChange }) {
   //const currentTime = dayjs()
   //const today = currentTime.format('DD-MM-YYYY')
   const today = dayjs()
 
-    const[time, setTime] = useState(today)    
-    const handleTimeChange = (time) => {
-        setTime(time);
-      };
-    
+  const [time, setTime] = useState(today)
+  const handleTimeChange = (time) => {
+    setTime(time, time)
+    handleStartTimePicker(time)
+  }
 
   return (
-    <Paper className='paper-pick'>
-
-      <div className='container-pick'>
-      <Typography variant="button" sx={{paddingTop:2}}>{title}</Typography>
-    <LocalizationProvider dateAdapter={AdapterDayjs}>
-    <TimePicker className='time-picker'
-          value={time}
-          onChange={onChange}
-          ampm={false}
-          
+    <Paper className="paper-pick">
+      <div className="container-pick">
+        <Typography variant="button" sx={{ paddingTop: 2 }}>
+          {title}
+        </Typography>
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <TimePicker
+            className="time-picker"
+            value={value}
+            onChange={handleTimeChange}
+            ampm={false}
           />
-    </LocalizationProvider>
-    </div>
+        </LocalizationProvider>
+      </div>
     </Paper>
   )
 }

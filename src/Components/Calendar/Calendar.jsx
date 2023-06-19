@@ -14,7 +14,7 @@ function Calendar({handleDate}){
 
    
     const handleChange = (date) => {
-      setDate({...date, date})
+      setDate({date})
       handleDate(date)
       console.log(date)
     }
@@ -33,7 +33,7 @@ function Calendar({handleDate}){
         <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DateCalendar  
                 
-                defaultValue={date} onChange={handleChange} onViewChange={console.log('object')}
+                defaultValue={date} onChange={handleChange} onViewChange={''}
                 />
         </LocalizationProvider>
          <Typography variant="Subtitle" sx={{padding:4}}>

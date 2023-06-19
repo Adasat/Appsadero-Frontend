@@ -1,19 +1,22 @@
 import { useEffect, useState } from 'react'
 import { getAllFriends } from '../../services/myFriends.service'
 import {
+  Checkbox,
   Divider,
+  FormControl,
   List,
+  ListItemButton,
   ListItemIcon,
   ListItemText,
   Paper,
   Typography,
 } from '@mui/material'
-import { Link } from 'react-router-dom'
-import { AccountCircle } from '@mui/icons-material'
-import './MyFriends.css'
+import { Form, Link } from 'react-router-dom'
+import { AccountCircle, CheckBox } from '@mui/icons-material'
+import './FriendListSelect.css'
 import SearchBar from './SearchBar/SearchBar'
 
-function MyFriends({ width, height }) {
+function FriendListSelect({handleFriends}) {
   const [friends, setFriends] = useState([])
   const [filterListFriend, setfilterListFriend] = useState([])
 
@@ -22,11 +25,11 @@ function MyFriends({ width, height }) {
     setFriends(res)
     setfilterListFriend(res)
   }
-
+  
   useEffect(() => {
     listMyFriends()
   }, [])
-
+  
   const handleSearch = (searchItem) => {
     if (searchItem.length > 0) {
       const lowercaseSearchItem = searchItem.toLowerCase()
@@ -39,22 +42,42 @@ function MyFriends({ width, height }) {
       setfilterListFriend(friends)
     }
   }
+  
+      const [checked, setChecked] = useState([])
+  
+
+
+      const handleCheckChange = (index) => {
+        //index => friend ID
+        setChecked((allreadyChecked)=>{
+          if(allreadyChecked.includes(index)){
+            return allreadyChecked.filter((checkbox) => checkbox !== index)
+          } else {
+            return [...allreadyChecked, index]
+          }
+        })
+        
+        handleFriends(checked)
+      }
 
   const returnFriends = () => {
     if (friends && friends.length > 0) {
       return (
         <>
-          <SearchBar handleSearch={handleSearch}/>
-          <List className="myfriendslist" sx={{ height: { height } }}>
+          <SearchBar handleSearch={handleSearch} />
+          <Divider sx={{ m: 2 }}></Divider>
+          <List className="ListSelect">
             {filterListFriend.map((el) => (
-              <ListItemText key={el.id}>
-                <ListItemIcon>
-                  <AccountCircle />
-                </ListItemIcon>
+              <ListItemButton key={el.id} className='list-item'>
+                <Checkbox
+                  checked={checked.includes(el.id)}
+                  onChange={() => handleCheckChange(el.id)}
+                  inputProps={{ 'aria-label': 'controlled' }}
+                  sx={{justifyItems: '5px'}}/>
                 <Typography variant="body">
                   {el.first_name} - <i>{el.nickname}</i>
                 </Typography>
-              </ListItemText>
+              </ListItemButton>
             ))}
           </List>
         </>
@@ -74,18 +97,19 @@ function MyFriends({ width, height }) {
   }
 
   return (
-    <Paper
-      elevation={3}
-      sx={{ padding: '30px', borderRadius: 10, width: { width } }}
-    >
-      <Typography variant="h5">
-        <Link to="/home/friends" className="link" style={{ textDecoration: 'none' }}>
+    <>
+      <Typography variant="h5" sx={{display:'flex', justifyContent:'center'}}>
+        <Link
+          to="/home/friends"
+          className="link"
+          style={{ textDecoration: 'none' }}
+          >
           Mis amigos
         </Link>
       </Typography>
       <Divider sx={{ marginBottom: '10px' }} />
       {returnFriends()}
-    </Paper>
+          </>
   )
 }
-export default MyFriends
+export default FriendListSelect
