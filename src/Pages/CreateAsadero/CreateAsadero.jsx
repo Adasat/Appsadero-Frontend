@@ -13,27 +13,16 @@ import './DatePicker/DatePicker.css'
 import FriendListSelect from '../../Components/FriendListSelect/FriendListSelect'
 import SearchFriend from '../../Components/SearchFriend/SearchFriend'
 import { formatDate, formatDateDB, formatTime } from '../../validations/validations'
-import { createBBQ } from '../../services/myBBQ.service'
+import { addGuests, createBBQ } from '../../services/myBBQ.service'
+import dayjs from 'dayjs'
 
 function CreateAsadero() {
-  //Create Asadero Needed Data
-  const [asadero, setAsadero] = useState({
-    name: 'Nombre del Asadero',
-    description: 'Descripción de',
-    date_time: '',
-    duration: '',
-    payments_accepted: '',
-    place: '',
-  })
-
-  //date BDDFormat 2023-06-19
 
   const [name, setName] = useState('Nombre del Asadero')
   const [description, setDescription] = useState('Descripción')
   const [place, setPlace] = useState('Lugar')
-  const [date, setDate] = useState()
-  const [guestList, setGuestList] = useState()
-  //const [selectedIndex, setSelectedIndex] = useState()
+  const [date, setDate] = useState(dayjs('2022-04-17'))
+  const [guestList, setGuestList] = useState([])
   const [startTime, setStartTime] = useState()
   const [endTime, setEndTime] = useState()
   const [payDate, setPayDate] = useState()
@@ -56,6 +45,7 @@ function CreateAsadero() {
 
   const handleCloseFriends = () => {
     setOpenFriendPopup(false)
+
   }
 
   const handleCloseProducts = () => {
@@ -73,66 +63,55 @@ function CreateAsadero() {
   }
 
   const handleName = (name) => {
-    setName(name, name)
+    setName(name)
   }
   const handleDescription = (desc) => {
-    setDescription(description, desc)
+    setDescription(desc)
   }
   const handlePlace = (place) => {
-    setPlace(place, place)
+    setPlace(place)
   }
   const handleDatePicker = (date) => {
-    setDate({ ...date, date })
+    setDate(date)
   }
   const hanleCustomDatePicker = (payDate) => {
-    console.log(payDate)
-    setPayDate(payDate, payDate)    
+    setPayDate(payDate)    
   }
   const handleStartTimePicker = (startTime) => {
-    setStartTime(startTime, startTime)
+    setStartTime(startTime)
   }
   const handleEndTimePicker = (endTime) => {
-    setEndTime(endTime, endTime)
+    setEndTime(endTime)
   }
-  const handleFriends = (guests) => {
-    setGuestList([guestList, guests])
+  const handleFriends = (guests) => { 
+    console.log(guestList)
+    setGuestList([...guestList, ...guests])
   }
   
+
   //Continue Button
-  const handleBbq = () => {
-    setAsadero({
-     "name": name,
-     "description": description,
-     "date_time": formatDateDB(date.$d),
-     "duration": formatTime(startTime),
-     "payments_accepted": formatDateDB(payDate),
-     "place": place,
-   })
-  }
   const createAsadero = async() => {
-    handleBbq()
+    console.log(guestList)
     try{
-      const res = await createBBQ(asadero, guestList)
+      const asadero = {
+        name: name,
+        description: description,
+        date_time: dayjs(date).format('YYYY-MM-DD'),
+        duration: formatTime(startTime),
+        payments_accepted: formatDateDB(payDate),
+        place: place,
+      }
+
+    const BbqId = await createBBQ(asadero)
+ 
+    BbqId ? await addGuests(BbqId, guestList) : console.log('Not guest invited')
+      
     }catch(err){
       throw new Error(err)
     }
 
 
   }
-  
-
-  //To do
-  //Crear Servicio para recoger la lista de invitados
-
-  //Necesito
-  //  - Id del asadero q acabo de crear
-  // - Ids de los invitados
-  // - Endpoint para añadir los invitados al asadero
-
-  //Donde lo hago?
-  // {{baseURL}}/asadero/16/user/5
-  
-  //await createBBQ(asadero)
 
   return (
     <>
@@ -175,7 +154,7 @@ function CreateAsadero() {
         >
           <DialogContent>
             <SearchFriend
-              handleFriends={handleFriends}
+              //handleFriends={handleFriends}
               onChange={handleSearchInput}
               onClick={handleSearchClick}
             />
@@ -198,9 +177,9 @@ function CreateAsadero() {
         <Grid item xs={12} sm={6} md={6}>
           <Box minHeight={80} sx={{ m: 4 }}>
             <Paper variant="elevation" elevation={18} sx={{ height: '600px' }}>
-              <Calendar handleDate={handleDatePicker} />
+              <Calendar handleDate={handleDatePicker}/>
               <Divider sx={{ m: 5 }}></Divider>
-              <Typography value={asadero.date}></Typography>
+              <Typography>{dayjs(date).format('DD/MM/YYYY')}</Typography>
               <Box sx={{ m: '24px' }}>
                 <ButtonCustom
                   handleButton={handleButton}
@@ -260,7 +239,6 @@ function CreateAsadero() {
                       elevation={4}
                     >
                       <List
-                        alignItems="center"
                         sx={{
                           marginTop: '5px',
                           width: '90%',
@@ -311,12 +289,14 @@ function CreateAsadero() {
                     <TimePickerCustom
                       title={'Hora de Inicio'}
                       value={startTime}
+                      selectEvent={true}
                       handleStartTimePicker={handleStartTimePicker}
                     ></TimePickerCustom>
                     <Divider></Divider>
                     <TimePickerCustom
                       title={'Hora de Fin'}
                       value={endTime}
+                      selectEvent={false}
                       handleEndTimePicker={handleEndTimePicker}
                     ></TimePickerCustom>
                   </Paper>
@@ -326,7 +306,7 @@ function CreateAsadero() {
               <div className="button-next">
                 <ButtonCustom
                   handleButton={() => {
-                    createAsadero() && handleButton
+                    createAsadero()
                   }}
                   props={{
                     text: 'Continuar',
