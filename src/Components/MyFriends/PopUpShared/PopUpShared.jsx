@@ -1,23 +1,18 @@
 import { Box, Modal, Typography } from '@mui/material'
 import { getSharedAsaderos } from '../../../services/myBBQ.service'
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
 
-function PopUpShared({ open, handlePopup, idSelected }) {
+function PopUpShared({ open, handleClose, dataUser }) {
   const [shared, setShared] = useState([])
 
-  
   const checkShared = async () => {
-    const res = await getSharedAsaderos(idSelected)
-    setShared(res)
+    const res = await getSharedAsaderos(dataUser.id)
+    setShared([...shared, res])
   }
 
   useEffect(() => {
     checkShared()
   }, [])
-
-
-
 
   const style = {
     position: 'absolute',
@@ -31,11 +26,13 @@ function PopUpShared({ open, handlePopup, idSelected }) {
     p: 4,
   }
 
+  console.log(shared)
+
   return (
     <div>
       <Modal
         open={open}
-        onClose={handleClick}
+        onClose={handleClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
         sx={{
@@ -44,12 +41,18 @@ function PopUpShared({ open, handlePopup, idSelected }) {
         }}
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Fulanito va a los siguientes asaderos:
+          <Typography variant="h6" component="h2" textAlign='center'>
+            {shared.length > 0
+              ? `${dataUser.nickname} y tú coinciden en los siguientes asaderos`
+              : ` Parece que ${dataUser.nickname} y tú no coinciden en ningún asadero..`}
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-           {shared.map((el) => <Typography key={el.id}>{el}</Typography>)}
-          </Typography>
+          {shared.map((el) => (
+            <div key={el.id}>
+              <Typography variant="body" sx={{ mt: 2, textAlign: 'center'}}>
+                {el.length > 0 && el}
+              </Typography><br />
+            </div>
+          ))}
         </Box>
       </Modal>
     </div>
