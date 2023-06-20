@@ -18,6 +18,7 @@ import ButtonCustom from '../ButtonCustom/ButtonCustom'
 function UpcomingBBQ() {
   const [upcomingBBQ, setUpcomingBBQ] = useState([])
   const navigate = useNavigate()
+  const menuTitle = 'Todos los asaderos'
 
   const listUpcomingBBQ = async () => {
     const res = await getAllMyAsaderos()
@@ -31,7 +32,6 @@ function UpcomingBBQ() {
   const createbbq = () => {
     navigate('/home/createAsadero')
   }
-
 
   const returnUpComingBBQ = () => {
     if (upcomingBBQ.length > 0) {
@@ -54,7 +54,8 @@ function UpcomingBBQ() {
       return (
         <Typography variant="body">
           Parece que no tienes próximos asaderos. <br />
-          <ButtonCustom handleButton={createbbq}
+          <ButtonCustom
+            handleButton={createbbq}
             props={{ navigate: '/home/createAsadero', text: '¡Organiza uno!' }}
           />
         </Typography>
@@ -64,7 +65,15 @@ function UpcomingBBQ() {
 
   return (
     <Card elevation={3} sx={{ padding: '30px', borderRadius: 10 }}>
-      <Typography variant="h5"><Link to='/home/upcomingAsadero' className='link' style={{ textDecoration: 'none' }}>Próximos asaderos</Link></Typography>
+      <Typography variant="h5">
+        <Link
+          to="/home/upcomingAsadero"
+          className="link"
+          style={{ textDecoration: 'none' }}
+        >
+          {menuTitle}
+        </Link>
+      </Typography>
       <Divider sx={{ marginBottom: '10px' }} />
       {returnUpComingBBQ()}
     </Card>

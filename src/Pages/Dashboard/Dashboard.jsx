@@ -23,8 +23,8 @@ function Dashboard() {
           <h2>Bienvenida {localStorage.getItem('first_name')}</h2>
         </Link>
       </Paper>
-      <div className="upcomingbbq">
-        <UpcomingBBQ />
+      <div className="managebbq">
+        <ManageBBQ/>
       </div>
       <Card
         className="createbbq"
@@ -36,7 +36,7 @@ function Dashboard() {
           className="link"
           style={{ textDecoration: 'none' }}
         >
-          <Typography variant="h5">Crea tu asadero</Typography>
+          <Typography variant="h5">Crear un asadero</Typography>
         </Link>
         <Divider sx={{ marginBottom: '10px' }} />
         <Typography variant="body">
@@ -46,7 +46,7 @@ function Dashboard() {
           <br />
           Haz
           <Link to="/home/createAsadero"> click aquí</Link> y podrás
-          personalizar tu asadero.
+          personalizarlo.
         </Typography>
         <br />
         <ButtonCustom
@@ -56,8 +56,8 @@ function Dashboard() {
       <div className="myfriends">
         <MyFriends width={'350px'} />
       </div>
-      <div className="managebbq">
-        <ManageBBQ />
+      <div className="upcomingbbq">
+        <UpcomingBBQ/>
       </div>
     </div>
   )

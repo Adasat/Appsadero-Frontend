@@ -8,12 +8,15 @@ import CreateAsadero from '../Pages/CreateAsadero/CreateAsadero'
 import MyProfile from '../Pages/MyProfile/MyProfile'
 
 import Abel from '../Pages/Pruebas/Abel'
-/* import Pedro from '../Pages/Pruebas/Pedro'
- */
 import Friends from '../Pages/Friends/Friends'
-import ManageAsadero from '../Pages/ManageAsadero/ManageAsadero'
 import CategoriesNProducts from '../Components/CategoriesNProdcut/CategoriesNProducts'
 import UpcomingBBQpage from '../Pages/UpcomingBBQpage/UpcomingBBQpage'
+import ManageAsaderoPage from '../Pages/ManageAsaderoPage/ManageAsaderoPage'
+
+
+
+
+
 const checkLogin = () => {
   return localStorage.getItem('token') ? redirect('/home/dashboard') : null
 }
@@ -41,7 +44,7 @@ export const router = createBrowserRouter([
       { path: '/home/dashboard', element: <Dashboard />, loader: checkAuth },
       { path: '/home/myProfile', element: <MyProfile /> },
       { path: '/home/createAsadero', element: <CreateAsadero /> },
-      { path: '/home/manageAsadero', element: <ManageAsadero /> },
+      { path: '/home/manageAsadero', element: <ManageAsaderoPage /> },
       { path: '/home/upcomingAsadero', element: <UpcomingBBQpage /> },
       { path: '/home/friends', element: <Friends /> },
       { path: '/home/abel', element: <Abel /> },

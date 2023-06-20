@@ -38,15 +38,11 @@ function LogIn() {
     try {
       const res = await tryLogin(email.value, password.value)
       if (res) {
-      setShowAlert(true)
-      const delay = setTimeout(() => {
-        navigate('/home/dashboard')
-      },500)
-      return () => clearTimeout(delay)
-      
-
-
-        
+        setShowAlert(true)
+        const delay = setTimeout(() => {
+          navigate('/home/dashboard')
+        }, 100)
+        return () => clearTimeout(delay)
       }
     } catch (err) {
       return err
@@ -69,7 +65,8 @@ function LogIn() {
             sm={6}
             md={6}
             sx={{
-              backgroundImage: 'url(https://source.unsplash.com/random?bbq-fire)',
+              backgroundImage:
+                'url(https://source.unsplash.com/random?bbq-fire)',
               backgroundSize: 'cover',
             }}
           ></Grid>
@@ -106,7 +103,7 @@ function LogIn() {
                 >
                   Login
                 </Button>
-                {showAlert &&<AlertSuccess text={textOk} />}
+                {showAlert && <AlertSuccess text={textOk} />}
                 <Grid container>
                   <Grid item xs>
                     {
