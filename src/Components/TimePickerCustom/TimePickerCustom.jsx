@@ -16,9 +16,10 @@ function TimePickerCustom({ handleStartTimePicker, handleEndTimePicker, selectEv
   //console.log(dateTest)
   
   const [time, setTime] = useState(today)
-  const handleTimeChange = (pepe) => {
-    setTime(pepe)    
+  const handleTimeChange = (time) => {
+    setTime(time)    
     selectEvent ? handleStartTimePicker(time) : handleEndTimePicker(time)
+    console.log(time)
 
   }
 
@@ -31,7 +32,7 @@ function TimePickerCustom({ handleStartTimePicker, handleEndTimePicker, selectEv
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <TimePicker
             className="time-picker"
-            value={value}
+            defaultValue={value}
             onChange={handleTimeChange}
             ampm={false}
           />
