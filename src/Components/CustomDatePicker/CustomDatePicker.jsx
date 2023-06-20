@@ -8,7 +8,7 @@ function CustomDatePicker({ hanleCustomDatePicker }) {
 
   const [time, setTime] = useState('12:00')
   const hanleChange = (time) => {
-    setTime(time, time)
+    setTime(time)
     hanleCustomDatePicker(time)
   }
 

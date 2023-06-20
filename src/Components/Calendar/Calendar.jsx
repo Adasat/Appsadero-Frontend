@@ -14,9 +14,9 @@ function Calendar({handleDate}){
     const [date, setDate] = useState(dayjs('2022-04-20'))
     const [dateLabel, setDateLabel] = useState()
     
-    const handleChange = (newDate) => {
-      setDate(newDate)
-      setDateLabel(dayjs(newDate).format('YYYY-MM-DD')
+    const handleChange = (date) => {
+      setDate(date)
+      setDateLabel(dayjs(date).format('YYYY-MM-DD')
 )
       handleDate(date)
     }
