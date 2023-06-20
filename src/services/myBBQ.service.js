@@ -19,22 +19,15 @@ export const createBBQ = async (bbq) => {
     return data
 
   } catch (err) {
-    console.log(err)
     throw new Error(err)
   }
 }
 
-const addGuests = async (id, guestList) => {
+export const addGuests = async (id, guestList) => {
   
   try {
-    
-    
-    console.log(guestList)
-    console.log(id)
     await Promise.all(
       guestList.map(async (user) => {
-          //const { id }= lg
-          console.log(user)
           return await api.put(`/asadero/${id}/user/${user}`, {}, {
             headers: {
               token: localStorage.getItem('token')

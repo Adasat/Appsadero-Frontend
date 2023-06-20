@@ -8,19 +8,16 @@ import { Paper, Typography } from '@mui/material';
 import { formatDateDB } from '../../validations/validations';
 
 function TimePickerCustom({ handleStartTimePicker, handleEndTimePicker, selectEvent, title, value, onChange }) {
-  //const currentTime = dayjs()
-  //const today = currentTime.format('DD-MM-YYYY')
-  //const [pickerDate, setPickerDate] = useState({dayjs('20022-01-10T15:30')})
 
-  const today = dayjs()
-  //console.log(dateTest)
   
-  const [time, setTime] = useState(today)
+const today = new Date()
+//const defaultTime = dayjs(today).format('HH:mm')
+
+  const [time, setTime] = useState()
+  
   const handleTimeChange = (time) => {
     setTime(time)    
     selectEvent ? handleStartTimePicker(time) : handleEndTimePicker(time)
-    console.log(time)
-
   }
 
   return (
@@ -32,7 +29,7 @@ function TimePickerCustom({ handleStartTimePicker, handleEndTimePicker, selectEv
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <TimePicker
             className="time-picker"
-            defaultValue={value}
+            defaultValue={time}
             onChange={handleTimeChange}
             ampm={false}
           />

@@ -50,10 +50,13 @@ function FriendListSelect({handleFriends}) {
       const handleCheckChange = (index) => {
         //index => friend ID
         setChecked((allreadyChecked)=>{
+          //Si arrayChecked incluye 
           if(allreadyChecked.includes(index)){
-            return allreadyChecked.filter((checkbox) => checkbox !== index)
+            return allreadyChecked.filter((checked) => checked !== index)
           } else {
+
             return [...allreadyChecked, index]
+
           }
         })
         

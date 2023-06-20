@@ -16,8 +16,7 @@ function Calendar({handleDate}){
     
     const handleChange = (date) => {
       setDate(date)
-      setDateLabel(dayjs(date).format('YYYY-MM-DD')
-)
+      setDateLabel(dayjs(date).format('YYYY-MM-DD'))
       handleDate(date)
     }
 
@@ -35,9 +34,6 @@ function Calendar({handleDate}){
               onChange={handleChange}
             />
           </LocalizationProvider>
-          <Typography variant="Subtitle" sx={{ padding: 4 }}>
-            { dateLabel }
-          </Typography>
         </Paper>
       </Box>
     </>
