@@ -12,10 +12,12 @@ import { Link } from 'react-router-dom'
 import { AccountCircle } from '@mui/icons-material'
 import './MyFriends.css'
 import SearchBar from './SearchBar/SearchBar'
+import PopUpShared from './PopUpShared/PopUpShared'
 
 function MyFriends({ width, height }) {
   const [friends, setFriends] = useState([])
   const [filterListFriend, setfilterListFriend] = useState([])
+  const [openPopUp, setOpenPopUp] = useState(false)
 
   const listMyFriends = async () => {
     const res = await getAllFriends()
@@ -41,14 +43,15 @@ function MyFriends({ width, height }) {
   }
 
   const handleClick = () => {
-    alert('click')
+    //const handleOpen = () => setOpen(true);
+    setOpenPopUp(!openPopUp)
   }
 
   const returnFriends = () => {
     if (friends && friends.length > 0) {
       return (
         <>
-          <SearchBar handleSearch={handleSearch}/>
+          <SearchBar handleSearch={handleSearch} />
           <List className="myfriendslist" sx={{ height: { height } }}>
             {filterListFriend.map((el) => (
               <ListItemText key={el.id}>
@@ -58,6 +61,7 @@ function MyFriends({ width, height }) {
                 <Typography variant="body" onClick={handleClick}>
                   {el.first_name} - <i>{el.nickname}</i>
                 </Typography>
+                <PopUpShared open={openPopUp} handle={handleClick} />
               </ListItemText>
             ))}
           </List>
@@ -83,7 +87,11 @@ function MyFriends({ width, height }) {
       sx={{ padding: '30px', borderRadius: 10, width: { width } }}
     >
       <Typography variant="h5">
-        <Link to="/home/friends" className="link" style={{ textDecoration: 'none' }}>
+        <Link
+          to="/home/friends"
+          className="link"
+          style={{ textDecoration: 'none' }}
+        >
           Mis amigos
         </Link>
       </Typography>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+
 import { api } from './api'
 
 export const createBBQ = async (bbq, guestList) => {
@@ -58,6 +58,10 @@ headers: {
   token: localStorage.getItem('token')
 },
  */
+
+
+
+
 //service for back end to get all my asaderos
 export const getAllMyAsaderos = async () => {
   try {
@@ -106,6 +110,20 @@ export const getUsersFromAsadero = async (asaderoId) => {
       headers: {
         token: localStorage.getItem('token'),
       },
+    })
+    return data
+  } catch (error) {
+    return error
+  }
+}
+
+
+export const getSharedAsaderos = async (userId2) => {
+  try {
+    const { data } = await api.get(`/sharedAsaderos/${userId2}`, {
+      headers:{
+        token: localStorage.getItem('token')
+      }
     })
     return data
   } catch (error) {
