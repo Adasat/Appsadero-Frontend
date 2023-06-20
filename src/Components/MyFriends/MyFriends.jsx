@@ -18,6 +18,7 @@ function MyFriends({ width, height }) {
   const [friends, setFriends] = useState([])
   const [filterListFriend, setfilterListFriend] = useState([])
   const [openPopUp, setOpenPopUp] = useState(false)
+  const [idSelected, setIdSelected] = useState()
 
   const listMyFriends = async () => {
     const res = await getAllFriends()
@@ -43,8 +44,12 @@ function MyFriends({ width, height }) {
   }
 
   const handleClick = () => {
-    //const handleOpen = () => setOpen(true);
     setOpenPopUp(!openPopUp)
+
+  }
+
+  const handleId = (id) => {
+    setIdSelected(id)
   }
 
   const returnFriends = () => {
@@ -58,10 +63,10 @@ function MyFriends({ width, height }) {
                 <ListItemIcon>
                   <AccountCircle />
                 </ListItemIcon>
-                <Typography variant="body" onClick={handleClick}>
+                <Typography variant="body" onClick={handleClick} handleId={(el.id})>
                   {el.first_name} - <i>{el.nickname}</i>
                 </Typography>
-                <PopUpShared open={openPopUp} handle={handleClick} />
+                <PopUpShared open={openPopUp} handlePopup={handleClick} idSelected={idSelected}/>
               </ListItemText>
             ))}
           </List>
