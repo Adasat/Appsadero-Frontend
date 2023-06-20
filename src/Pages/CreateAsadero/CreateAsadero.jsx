@@ -84,14 +84,13 @@ function CreateAsadero() {
     setEndTime(endTime)
   }
   const handleFriends = (guests) => { 
-    console.log(guestList)
-    setGuestList([...guestList, ...guests])
+    setGuestList([...guestList, guests])
   }
   
 
   //Continue Button
   const createAsadero = async() => {
-    console.log(guestList)
+    //console.log(guestList)
     try{
       const asadero = {
         name: name,
