@@ -76,26 +76,27 @@ function CreateAsadero() {
     setName(name, name)
   }
   const handleDescription = (desc) => {
-    setDescription(description, desc)
+    setDescription(desc)
   }
   const handlePlace = (place) => {
-    setPlace(place, place)
+    setPlace(place)
   }
   const handleDatePicker = (date) => {
-    setDate({ ...date, date })
+    setDate({...date, date })
   }
   const hanleCustomDatePicker = (payDate) => {
     console.log(payDate)
-    setPayDate(payDate, payDate)    
+    setPayDate(payDate)    
   }
   const handleStartTimePicker = (startTime) => {
     setStartTime(startTime, startTime)
   }
   const handleEndTimePicker = (endTime) => {
-    setEndTime(endTime, endTime)
+    console.log(endTime)
+    setEndTime(endTime)
   }
   const handleFriends = (guests) => {
-    setGuestList([guestList, guests])
+    setGuestList(guests)
   }
   
   //Continue Button
@@ -112,7 +113,12 @@ function CreateAsadero() {
   const createAsadero = async() => {
     handleBbq()
     try{
-      const res = await createBBQ(asadero, guestList)
+      const BbqId = await createBBQ(asadero)
+
+      if(BbqId > 0){
+        gridAdditionalRowGroupsSelector(BbqId, guestList)
+      }
+
     }catch(err){
       throw new Error(err)
     }
@@ -260,7 +266,6 @@ function CreateAsadero() {
                       elevation={4}
                     >
                       <List
-                        alignItems="center"
                         sx={{
                           marginTop: '5px',
                           width: '90%',
@@ -311,12 +316,14 @@ function CreateAsadero() {
                     <TimePickerCustom
                       title={'Hora de Inicio'}
                       value={startTime}
+                      selectEvent={true}
                       handleStartTimePicker={handleStartTimePicker}
                     ></TimePickerCustom>
                     <Divider></Divider>
                     <TimePickerCustom
                       title={'Hora de Fin'}
                       value={endTime}
+                      selectEvent={false}
                       handleEndTimePicker={handleEndTimePicker}
                     ></TimePickerCustom>
                   </Paper>

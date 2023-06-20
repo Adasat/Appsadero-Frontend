@@ -9,12 +9,13 @@ import dayjs from 'dayjs';
 
 function Calendar({handleDate}){
     
-    const [date, setDate] = useState(dayjs('2022-04-17'));
+    const [date, setDate] = useState(dayjs('2022-04-15'));
+    
     const [dayInfo, setDayInfo] = useState('');
 
    
     const handleChange = (date) => {
-      setDate({date})
+      setDate(date)
       handleDate(date)
       console.log(date)
     }
@@ -31,12 +32,12 @@ function Calendar({handleDate}){
         >
         <Paper variant="elevation" elevation={4}>
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DateCalendar  
-                
-                defaultValue={date} onChange={handleChange} onViewChange={''}
+            <DateCalendar
+                defaultValue={date}
+                onChange={handleChange}
                 />
         </LocalizationProvider>
-         <Typography variant="Subtitle" sx={{padding:4}}>
+        <Typography variant="Subtitle" sx={{padding:4}}>
                 {dayInfo}
               </Typography>
         </Paper>

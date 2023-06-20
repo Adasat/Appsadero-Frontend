@@ -5,16 +5,21 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker';
 import './TimePickerCustom.css'
 import { Paper, Typography } from '@mui/material';
+import { formatDateDB } from '../../validations/validations';
 
-function TimePickerCustom({ handleStartTimePicker, title, value, onChange }) {
+function TimePickerCustom({ handleStartTimePicker, handleEndTimePicker, selectEvent, title, value, onChange }) {
   //const currentTime = dayjs()
   //const today = currentTime.format('DD-MM-YYYY')
-  const today = dayjs()
+  //const [pickerDate, setPickerDate] = useState({dayjs('20022-01-10T15:30')})
 
+  const today = dayjs()
+  //console.log(dateTest)
+  
   const [time, setTime] = useState(today)
   const handleTimeChange = (time) => {
-    setTime(time, time)
-    handleStartTimePicker(time)
+    setTime(time)    
+    selectEvent ? handleStartTimePicker(time) : handleEndTimePicker(time)
+
   }
 
   return (
