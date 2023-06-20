@@ -17,8 +17,8 @@ import PopUpShared from './PopUpShared/PopUpShared'
 function MyFriends({ width, height }) {
   const [friends, setFriends] = useState([])
   const [filterListFriend, setfilterListFriend] = useState([])
-  const [openPopUp, setOpenPopUp] = useState(false)
-  const [idSelected, setIdSelected] = useState()
+  const [open, setOpen] = useState(false)
+  const [dataUser, setDataUser] = useState()
 
   const listMyFriends = async () => {
     const res = await getAllFriends()
@@ -43,14 +43,17 @@ function MyFriends({ width, height }) {
     }
   }
 
-  const handleClick = () => {
-    setOpenPopUp(!openPopUp)
-
+  const handleOpen = (el) => {
+    setOpen(true)
+    setDataUser(el)
   }
-
-  const handleId = (id) => {
+  const handleClose = () => setOpen(false)
+  /*
+  const handleClickId = (id) => {
     setIdSelected(id)
+    handleClick()
   }
+*/
 
   const returnFriends = () => {
     if (friends && friends.length > 0) {
@@ -63,10 +66,16 @@ function MyFriends({ width, height }) {
                 <ListItemIcon>
                   <AccountCircle />
                 </ListItemIcon>
-                <Typography variant="body" onClick={handleClick} handleId={(el.id})>
+                <Typography variant="body" onClick={() => handleOpen(el)}>
                   {el.first_name} - <i>{el.nickname}</i>
                 </Typography>
-                <PopUpShared open={openPopUp} handlePopup={handleClick} idSelected={idSelected}/>
+                {open && (
+                  <PopUpShared
+                    open={open}
+                    handleClose={handleClose}
+                    dataUser={dataUser}
+                  />
+                )}
               </ListItemText>
             ))}
           </List>
