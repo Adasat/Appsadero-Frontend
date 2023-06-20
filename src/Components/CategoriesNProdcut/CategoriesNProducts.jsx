@@ -1,35 +1,52 @@
 import { Box, Card, Grid, Paper, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { getAllProducts, getAllcategories } from '../../services/product.service'
-import CategoriesChip from './CategoriesChip/CategoriesGrid'
+import { getAllProducts, getAllProductsByCategory, getAllcategories } from '../../services/product.service'
+import CategoriesChip from './CategoriesChip/CategoriesChip'
 import ProductsCategoriesList from './ProductsCategoriesList/ProductsCategoriesList'
 import ShoppingCartList from '../ShoppingCartList/ShoppingCartList'
 
-function CategoriesNProducts() {
 
+
+function CategoriesNProducts() {
   //Relative to Categories of Products
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
+  const [productCart, setProductCart] = useState([])
 
- 
   const handleClick = (categId) => {
     setSelectedCategory(categId)
+    filterCategories(categId)
   }
 
+  //Products by categories
   const [products, setProducts] = useState([])
+  const [productCategory, setProductCategory] = useState([])
 
-  
+  const filterCategories = () => {
+    const category = productCategory.find(
+      (item) => item.id === selectedCategory
+    )
+    if (category) {
+      return category.name
+    } else {
+      return ''
+    }
+  }
+
+  //Handle for ProductsCategoriesList
+  const handleProductSelection = (listCart) => {
+    setProductCart(listCart)
+  }
 
 
-
-
-
-
- const showCategoriesAndProducts = async () => {
+  //Call to the product services
+  const showCategoriesAndProducts = async () => {
     const res = await getAllcategories()
     const prod = await getAllProducts()
+    const prodCat = await getAllProductsByCategory()
     setCategories(res)
     setProducts(prod)
+    setProductCategory(prodCat)
   }
 
   useEffect(() => {
@@ -53,33 +70,31 @@ function CategoriesNProducts() {
           Gestión de los productos
         </Typography>
         <Grid container padding={2} justifyContent={'space-around'}>
-          <Grid xs={12} sm={4} md={3} direction={'row'}>
-            
-              <Grid item >
-                Categories
-              </Grid>
-              {categories && categories.length > 0 ? (
-                categories.map((el) => (
-                  <CategoriesChip
-                    key={el.id}
-                    category={el}
-                    onClick={handleClick}
-                    filter={selectedCategory === el.id}
-                  />
-                ))
-              ) : (
-                <Card>Cargando</Card>
-              )}
-            
+          <Grid item xs={12} sm={4} md={3}>
+            <Grid item>Categories</Grid>
+            {categories && categories.length > 0 ? (
+              categories.map((el) => (
+                <CategoriesChip
+                  key={el.id}
+                  category={el}
+                  onClick={handleClick}
+                  filter={selectedCategory === el.id}
+                />
+              ))
+            ) : (
+              <Card>Cargando</Card>
+            )}
           </Grid>
 
-          <Grid xs={12} sm={8} md={5}>
-            <ProductsCategoriesList products={products}/>
-              
-            
+          <Grid item xs={12} sm={8} md={5}>
+            <ProductsCategoriesList
+              products={products}
+              selectedCategory={selectedCategory}
+              handleProductSelection={handleProductSelection}
+            />
           </Grid>
-          <Grid xs={6} sm={4} md={3}>
-            <ShoppingCartList/>
+          <Grid item xs={6} sm={4} md={3}>
+            <ShoppingCartList productCart={productCart} products={products} />
           </Grid>
         </Grid>
       </Paper>

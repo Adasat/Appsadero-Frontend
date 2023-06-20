@@ -1,0 +1,12 @@
+.productsList {
+    height: 80vh;
+    overflow-y: scroll;
+}
+
+.productsList::-webkit-scrollbar {
+    width: 0.5em;
+}
+
+.productsList::-webkit-scrollbar-thumb {
+    background-color: #e49976;
+}

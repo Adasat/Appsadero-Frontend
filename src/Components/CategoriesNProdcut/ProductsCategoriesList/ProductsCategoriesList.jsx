@@ -1,9 +1,20 @@
 import { DataGrid } from '@mui/x-data-grid'
-import React from 'react'
+import { useEffect, useState } from 'react'
 
-function ProductsCategoriesList({products}) {
+function ProductsCategoriesList({
+  products,
+  selectedCategory,
+  handleProductSelection,
+}) {
+  const [selectedRows, setSelectedRows] = useState([])
+  const [listCart, setListCart] = useState([])
+
   const columns = [
-    { field: 'id', headerName: 'ID', width: 90 },
+    {
+      field: 'id',
+      headerName: 'ID',
+      width: 90,
+    },
     {
       field: 'name',
       headerName: 'Producto',
@@ -12,33 +23,69 @@ function ProductsCategoriesList({products}) {
     },
     {
       field: 'price',
-      headerName: 'Price',
+      headerName: 'Precio',
       type: 'number',
       width: 90,
       editable: false,
     },
+    {
+      field: 'unit',
+      headerName: 'unidad',
+      width: 30,
+      editable: false,
+    },
   ]
 
-  const rows = products.map((product) => ({
+  const filterProducts = products.filter(
+    (product) =>
+      product.preferenceId === selectedCategory && {
+        id: product.id,
+        name: product.name,
+        price: product.price,
+        unit: product.unit,
+      }
+  )
+
+  const allProducts = products.map((product) => ({
     id: product.id,
     name: product.name,
     price: product.price,
-  }));
+    unit: product.unit,
+  }))
+
+  const rows = filterProducts.length > 0 ? filterProducts : allProducts
+
+  const handleSelectionModelChange = (e) => {
+    setListCart([...listCart, e.row.id])
+    handleProductSelection(listCart)
+  }
+
+  
+
+  const rowsWithSelection = rows.map((row) => {
+    if (selectedRows.includes(row.id)) {
+      return { ...row, checkboxSelection: true, disabled: true }
+    } else {
+      return { ...row, checkboxSelection: true }
+    }
+  })
 
   return (
     <DataGrid
-      rows={rows}
+      className="productsList"
+      rows={rowsWithSelection}
       columns={columns}
+      onCellClick={handleSelectionModelChange}
+      selectionModel={selectedRows}
       initialState={{
         pagination: {
           paginationModel: {
-            pageSize: 10,
+            pageSize: 30,
           },
         },
       }}
       pageSizeOptions={[5]}
-      checkboxSelection
-      disableRowSelectionOnClick
+      checkboxSelection={true}
     />
   )
 }

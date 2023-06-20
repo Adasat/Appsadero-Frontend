@@ -17,7 +17,7 @@ export const getAllcategories = async () => {
   }
 }
 
-// get all products of the one category
+// get all products 
 
 export const getAllProducts = async () => {
   try {
@@ -33,6 +33,21 @@ export const getAllProducts = async () => {
     return error
   }
 }
+
+// get all products from a category
+export const getAllProductsByCategory = async () => {
+  try {
+    const { data } = await api.get('/preference/products', {
+      headers: {
+        token: localStorage.getItem('token'),
+      },
+    })
+    return data
+  } catch (error) {
+    return error
+  }
+}
+
 
 
 // put product in one shopping cart
