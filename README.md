@@ -4,9 +4,8 @@
 
 Welcome to Appasadero! The perfect application to simplify the organization of your barbecues and ensure that your events are a complete success. With Appasadero, you can plan, manage, and optimize every detail of your barbecues, from the guest list to menu selection and payments, ensuring that you never run out of food or have excessive leftovers.
 
-<div>
-<p style = 'text-align:center;'>
-<img src="./src/assets/appsadero_logo-2.png" alt="JuveYell" width="300px">
+<div align='center'>
+<img src="./src/assets/appsadero_logo-2.png"  width="400px" >
 </p>
 </div>
 

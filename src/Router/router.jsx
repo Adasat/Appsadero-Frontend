@@ -12,6 +12,7 @@ import Friends from '../Pages/Friends/Friends'
 import CategoriesNProducts from '../Components/CategoriesNProdcut/CategoriesNProducts'
 import UpcomingBBQpage from '../Pages/UpcomingBBQpage/UpcomingBBQpage'
 import ManageAsaderoPage from '../Pages/ManageAsaderoPage/ManageAsaderoPage'
+import MeetTeam from '../Pages/MeetTeam/MeetTeam'
 
 
 
@@ -48,7 +49,8 @@ export const router = createBrowserRouter([
       { path: '/home/upcomingAsadero', element: <UpcomingBBQpage /> },
       { path: '/home/friends', element: <Friends /> },
       { path: '/home/abel', element: <Abel /> },
-      {path: '/home/pedro', element: <CategoriesNProducts/>}
+      { path: '/home/products', element: <CategoriesNProducts/>},
+      { path: '/home/pedro', element: <MeetTeam/>}
     ],
   },
 ])
