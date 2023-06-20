@@ -14,6 +14,7 @@ import FriendListSelect from '../../Components/FriendListSelect/FriendListSelect
 import SearchFriend from '../../Components/SearchFriend/SearchFriend'
 import { formatDate, formatDateDB, formatTime } from '../../validations/validations'
 import { createBBQ } from '../../services/myBBQ.service'
+import dayjs from 'dayjs'
 
 function CreateAsadero() {
   //Create Asadero Needed Data
@@ -31,7 +32,8 @@ function CreateAsadero() {
   const [name, setName] = useState('Nombre del Asadero')
   const [description, setDescription] = useState('Descripción')
   const [place, setPlace] = useState('Lugar')
-  const [date, setDate] = useState()
+  //const [date, setDate] = useState()
+      const [date, setDate] = useState(dayjs('2022-04-17'))
   const [guestList, setGuestList] = useState()
   //const [selectedIndex, setSelectedIndex] = useState()
   const [startTime, setStartTime] = useState()
@@ -73,7 +75,7 @@ function CreateAsadero() {
   }
 
   const handleName = (name) => {
-    setName(name, name)
+    setName(name)
   }
   const handleDescription = (desc) => {
     setDescription(desc)
@@ -82,14 +84,15 @@ function CreateAsadero() {
     setPlace(place)
   }
   const handleDatePicker = (date) => {
-    setDate({...date, date })
+    console.log(date)
+    setDate(date)
   }
   const hanleCustomDatePicker = (payDate) => {
     console.log(payDate)
     setPayDate(payDate)    
   }
   const handleStartTimePicker = (startTime) => {
-    setStartTime(startTime, startTime)
+    setStartTime(startTime)
   }
   const handleEndTimePicker = (endTime) => {
     console.log(endTime)
@@ -204,7 +207,7 @@ function CreateAsadero() {
         <Grid item xs={12} sm={6} md={6}>
           <Box minHeight={80} sx={{ m: 4 }}>
             <Paper variant="elevation" elevation={18} sx={{ height: '600px' }}>
-              <Calendar handleDate={handleDatePicker} />
+              <Calendar handleDate={handleDatePicker}/>
               <Divider sx={{ m: 5 }}></Divider>
               <Typography value={asadero.date}></Typography>
               <Box sx={{ m: '24px' }}>

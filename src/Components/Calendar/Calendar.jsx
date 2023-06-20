@@ -6,43 +6,41 @@ import { DateCalendar } from '@mui/x-date-pickers';
 import { Box, Paper, Typography } from '@mui/material';
 import './Calendar.css'
 import dayjs from 'dayjs';
+import { formatDate } from '../../validations/validations';
+import { format } from 'date-fns';
 
 function Calendar({handleDate}){
     
-    const [date, setDate] = useState(dayjs('2022-04-15'));
+    const [date, setDate] = useState(dayjs('2022-04-20'))
+    const [dateLabel, setDateLabel] = useState()
     
-    const [dayInfo, setDayInfo] = useState('');
-
-   
-    const handleChange = (date) => {
-      setDate(date)
+    const handleChange = (newDate) => {
+      setDate(newDate)
+      setDateLabel(dayjs(newDate).format('YYYY-MM-DD')
+)
       handleDate(date)
-      console.log(date)
     }
 
   return (
     <>
-          <Typography variant="h6" component="h2" sx={{padding:4}}>
-                Selecciona un día:
-              </Typography>
-    <Box
-        display={'flex'}
-        flexDirection={'column'}
-        alignItems={'center'}
-        >
+      <Typography variant="h6" component="h2" sx={{ padding: 4 }}>
+        Selecciona un día:
+      </Typography>
+      <Box display={'flex'} flexDirection={'column'} alignItems={'center'}>
         <Paper variant="elevation" elevation={4}>
-        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
             <DateCalendar
-                defaultValue={date}
-                onChange={handleChange}
-                />
-        </LocalizationProvider>
-        <Typography variant="Subtitle" sx={{padding:4}}>
-                {dayInfo}
-              </Typography>
+              value={date}
+              defaultValue={date}
+              onChange={handleChange}
+            />
+          </LocalizationProvider>
+          <Typography variant="Subtitle" sx={{ padding: 4 }}>
+            { dateLabel }
+          </Typography>
         </Paper>
-    </Box>
-  </>
+      </Box>
+    </>
   )
 }
 

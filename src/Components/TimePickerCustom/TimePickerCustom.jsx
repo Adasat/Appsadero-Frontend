@@ -16,8 +16,8 @@ function TimePickerCustom({ handleStartTimePicker, handleEndTimePicker, selectEv
   //console.log(dateTest)
   
   const [time, setTime] = useState(today)
-  const handleTimeChange = (time) => {
-    setTime(time)    
+  const handleTimeChange = (pepe) => {
+    setTime(pepe)    
     selectEvent ? handleStartTimePicker(time) : handleEndTimePicker(time)
 
   }
