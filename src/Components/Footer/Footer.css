@@ -1,8 +1,13 @@
 .footer{
-    width: 100%;
-    position: static;
-    bottom: 0;
-    padding: 20px;
-    text-align: center;
+    overflow-y: scroll;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: -195px;
+    transition: bottom 0.3s ease;
+    z-index: 99;
+}
 
+.visible {
+    bottom: 0;
 }

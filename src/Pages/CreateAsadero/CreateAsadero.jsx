@@ -115,7 +115,7 @@ function CreateAsadero() {
 
   return (
     <>
-      <Grid container height="80vh">
+      <Grid container height="100vh">
         {
           //Popup to choose Friends
         }
