@@ -12,6 +12,7 @@ function CategoriesNProducts() {
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [productCart, setProductCart] = useState([])
+  const [shoppingList, setShoopingList] = useState([])
 
   const handleClick = (categId) => {
     setSelectedCategory(categId)
@@ -37,6 +38,12 @@ function CategoriesNProducts() {
   const handleProductSelection = (listCart) => {
     setProductCart(listCart)
   }
+
+  const handleShoppingCart = (shoppingCart) => {
+  setShoopingList(shoppingCart)
+
+  }
+    console.log(shoppingList)
 
 
   //Call to the product services
@@ -94,7 +101,7 @@ function CategoriesNProducts() {
             />
           </Grid>
           <Grid item xs={6} sm={4} md={3}>
-            <ShoppingCartList productCart={productCart} products={products} />
+            <ShoppingCartList productCart={productCart} products={products} handleShoppingCart={handleShoppingCart}/>
           </Grid>
         </Grid>
       </Paper>

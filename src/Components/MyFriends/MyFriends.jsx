@@ -63,7 +63,7 @@ function MyFriends({ width, height }) {
                 <ListItemIcon>
                   <AccountCircle />
                 </ListItemIcon>
-                <Typography variant="body" onClick={handleClick} handleId={(el.id})>
+                <Typography variant="body" onClick={handleClick} handleId={el.id}>
                   {el.first_name} - <i>{el.nickname}</i>
                 </Typography>
                 <PopUpShared open={openPopUp} handlePopup={handleClick} idSelected={idSelected}/>
