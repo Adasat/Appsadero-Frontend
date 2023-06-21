@@ -7,6 +7,7 @@ import {
   List,
   ListItemIcon,
   ListItemText,
+  Paper,
   Typography,
 } from '@mui/material'
 import { OutdoorGrill } from '@mui/icons-material'
@@ -40,26 +41,32 @@ function UpcomingBBQ() {
       return (
         <List className="upcomingbbqlist">
           {upcomingBBQ.map((bbq) => (
-            <ListItemText key={bbq.id}>
+            <ListItemText className="list-item" key={bbq.id}>
               <Box>
-                <Box>
+                <Box  display={'flex'}
+                    justifyContent={'space-around'}
+                    margin={2}>
                   <ListItemIcon>
                     <OutdoorGrill />
                   </ListItemIcon>
-                  <Typography variant="body">
+                  <Typography variant="h5">
                     <b id="bbqname">{bbq.name}</b>
                   </Typography>
+                <Typography>{formatDate(bbq.date_time)}</Typography>
                 </Box>
                 <Box
                   sx={{
                   
                     display: 'flex',
-                    justifyContent: 'space-between',
+                   
                   }}
                 >
+                   <Paper sx={{mb:1 ,padding:1}}>
+
                   <Typography variant="body">{bbq.description}</Typography>
 
-                  <Typography>{formatDate(bbq.date_time)}</Typography>
+                   </Paper>
+
                 </Box>
               </Box>
             </ListItemText>
@@ -82,13 +89,20 @@ function UpcomingBBQ() {
   return (
     <Card elevation={3} sx={{ padding: '30px', borderRadius: 10 }}>
       <Typography variant="h5">
-        <Link
+      <ButtonCustom props={{
+          text: 'Todos Los Asaderos',
+          className:'button-header',
+          navigate: '/home/manageAsadero',
+          color: 'secondary'
+        }}>
+          </ButtonCustom>
+       {/*  <Link
           to="/home/upcomingAsadero"
           className="link"
           style={{ textDecoration: 'none' }}
         >
           {menuTitle}
-        </Link>
+        </Link> */}
       </Typography>
       <Divider sx={{ marginBottom: '10px' }} />
       {returnUpComingBBQ()}

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getAllFriends } from '../../services/myFriends.service'
 import {
+  Box,
   Divider,
   List,
   ListItemIcon,
@@ -13,6 +14,7 @@ import { AccountCircle } from '@mui/icons-material'
 import './MyFriends.css'
 import SearchBar from './SearchBar/SearchBar'
 import PopUpShared from './PopUpShared/PopUpShared'
+import ButtonCustom from '../ButtonCustom/ButtonCustom'
 
 function MyFriends({ width, height }) {
   const [friends, setFriends] = useState([])
@@ -52,9 +54,10 @@ function MyFriends({ width, height }) {
   const returnFriends = () => {
     if (friends && friends.length > 0) {
       return (
-        <>
+        <Paper  elevation={3}
+        sx={{ padding: '24px', boxSizing: 'unset'}}>
           <SearchBar handleSearch={handleSearch} />
-          <List className="myfriendslist" sx={{ height: { height } }}>
+          <List className="myfriendslist">
             {filterListFriend.map((el) => (
               <ListItemText key={el.id}>
                 <ListItemIcon>
@@ -65,15 +68,16 @@ function MyFriends({ width, height }) {
                 </Typography>
                 {open && (
                   <PopUpShared
-                    open={open}
-                    handleClose={handleClose}
-                    dataUser={dataUser}
+                  open={open}
+                  handleClose={handleClose}
+                  dataUser={dataUser}
+                  
                   />
-                )}
+                  )}
               </ListItemText>
             ))}
           </List>
-        </>
+            </Paper>
       )
     } else {
       return (
@@ -92,16 +96,23 @@ function MyFriends({ width, height }) {
   return (
     <Paper
       elevation={3}
-      sx={{ padding: '30px', borderRadius: 10, width: { width } }}
-    >
+      sx={{ padding: '24px', borderRadius: 4, boxSizing: 'unset'}}
+      >
       <Typography variant="h5">
-        <Link
+      <ButtonCustom props={{
+          text: 'Mis Amigos',
+          className:'button-header',
+          navigate: '/home/manageAsadero',
+          color: 'secondary'
+        }}>
+          </ButtonCustom>
+        {/* <Link
           to="/home/friends"
           className="link"
           style={{ textDecoration: 'none' }}
-        >
+          >
           Mis amigos
-        </Link>
+        </Link> */}
       </Typography>
       <Divider sx={{ marginBottom: '10px' }} />
       {returnFriends()}

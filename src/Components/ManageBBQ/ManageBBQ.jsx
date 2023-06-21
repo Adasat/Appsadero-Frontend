@@ -8,6 +8,7 @@ import {
   List,
   ListItemIcon,
   ListItemText,
+  Paper,
   Typography,
 } from '@mui/material'
 import { formatDate } from '../../validations/validations'
@@ -52,7 +53,7 @@ function ManageBBQ() {
                     <ListItemIcon>
                       <OutdoorGrill />
                     </ListItemIcon>
-                    <Typography variant="body">
+                    <Typography variant="h5">
                       <b id="bbqname">{el.name}</b>
                     </Typography>
                     <Typography align="right">
@@ -62,11 +63,14 @@ function ManageBBQ() {
 
                   <Box
                     display={'flex'}
-                  >
+                    >
+                  <Paper sx={{mb:1 ,padding:1}}>
                     <Typography>{el.description}</Typography>
+
                     <Typography align='center'>
-                      Plazo{formatDate(el.confirmation_date)}
+                      Pagar Antes de: {formatDate(el.confirmation_date)}
                     </Typography>
+                      </Paper>
                   </Box>
                 </Box>
               </ListItemText>
