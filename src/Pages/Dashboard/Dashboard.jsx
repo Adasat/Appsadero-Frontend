@@ -35,33 +35,54 @@ function Dashboard() {
 
       <Grid container spacing={4} component="main" sx={{ height: '100vh'}}>
         <Grid item xs={12} sm={6} md={4} sx={{ backgroundColor: '' }}>
-          <Paper sx={{m:2, padding:4, display:'flex', justifyContent: 'start', alignContent:'center'}}>
-            <Box>
+          <Paper sx={{m:2, padding:4, textAlign:'center'}}>
 
-          <Typography variant="h5" component="h2" align='center'>
-          ¡Crea un Asadero!
-          </Typography>;
 
-          <Typography variant="body">
-          ¿Aún no has probado a crear tu propio asadero?<br></br>      
-          Te lo ponemos facilito...! 
-          <br></br>  
-          Haz click aquí en el botón para ir al asistente.
-        </Typography>
+          <Grid container>
+
+          <Grid item xs={12} sm={6} md={6} sx={{ backgroundColor: '' }}>
+
+
+            <Box sx={{
+              padding: '8px'
+            }}>
+          <Typography variant="h5" component="h2" align='center' >
+            ¡Crea un Asadero!</Typography>
+          
         </Box>
+              </Grid>
+              <Grid item xs={12} sm={6} md={6} sx={{ backgroundColor: '' }}>
+
+        
         <Box sx={{
           display:'flex',
-          alignItems:'center'
+          height: '100%',
+          flexDirection: 'row',
+          justifyContent: 'center',
+          alignItems:'start',
+          padding:'2px'
         }}>
 
           <ButtonCustom props={{
             text: 'Nuevo Asadero',
             className:'button-header',
             navigate: '/home/manageAsadero',
-            color: 'secondary'
+            color: 'primary'
           }}>
           </ButtonCustom>
           </Box>
+
+
+
+
+
+            </Grid>
+            </Grid>
+           <Box>
+          <Typography variant="subtitle" align='start' sx={{m:3}}>¿Aún no has probado a crear tu propio asadero?<br>
+          </br>Te lo ponemos facilito...!<br>
+          </br>Haz click aquí en el botón para ir al asistente.</Typography>
+            </Box> 
           </Paper>
           <MyFriends/>
         </Grid>
