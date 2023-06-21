@@ -182,7 +182,16 @@ function FullScreenDialog() {
 
   return (
     <Card>
-      <Link className="links" to={`/home/manageAsadero/${bbq.id}`}>
+      {users
+        .filter(
+          (el) =>
+            el.status === 'pending' &&
+            el.first_name === localStorage.getItem('first_name')
+        )
+        .map((el) => (
+          <Chip key={el.id} label="NEW" color="error" sx={{ m: 1 }} onClick={handleNew}></Chip>
+        ))}
+      <Link className="links" /* to={`/home/manageAsadero/${bbq.id}`} */>
         <CardHeader
           title={bbq.name}
           sx={{ textAlign: 'center', fontWeight: 'bold' }}
@@ -208,37 +217,25 @@ function FullScreenDialog() {
             <Typography variant="body">Invitados</Typography>
           </AccordionSummary>
           <div>
-            {users && users !== undefined
-              ? users
-                  .filter((el) => el.status !== 'rejected')
-                  .map((el) => (
-                    <Typography variant="body1" key={el.id}>
-                      {el.first_name}{' '}
-                      {owner === true &&
-                        el.status !== 'rejected' &&
-                        `- ${el.status}`}{' '}
-                      {el.isChef === true && ' -> Chef'}
-                    </Typography>
-                  ))
-              : null}
+            {users.filter((el) => el.status !== 'rejected').map((el) => (
+              <Typography variant="body1" key={el.id}>
+                {el.first_name} {(owner === true && el.status !== 'rejected') && `- ${el.status}`}{' '}
+                {el.isChef === true && ' -> Chef'}
+              </Typography>
+            ))}
           </div>
           <Divider sx={{ marginBottom: '10px' }} />
           <Typography variant="body1" textAlign="right" alignContent="center">
-            {users &&
-              users !== undefined &&
-              (() => {
-                const userFiltered = users.filter(
-                  (el) => el.status !== 'rejected'
-                )
-                return userFiltered.length > 0
-                  ? userFiltered.length > 1
-                    ? `${userFiltered.length} personas`
-                    : `${userFiltered.length} persona`
-                  : 'No hay invitados aún.'
-              })()}
+            {(() => {
+      const userFiltered = users.filter((el) => el.status !== 'rejected');
+      return userFiltered.length > 0
+        ? userFiltered.length > 1
+          ? `${userFiltered.length} personas`
+          : `${userFiltered.length} persona`
+        : 'No hay invitados aún.';
+    })()}
           </Typography>
         </Accordion>
-
         {owner === true && (
           <Grid container justifyContent="flex-end">
             <Grid item>

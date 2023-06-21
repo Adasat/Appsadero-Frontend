@@ -7,7 +7,7 @@ import SubHeader from '../../Components/HeaderMain/SubHeader/SubHeader'
 
 function ManageAsaderoPage() {
   const [ownBbq, setOwnBbq] = useState([])
-  const menuTitle = 'Editar mis asaderos'
+  const menuTitle = 'Editando mis asaderos'
 
   const listMyOwnBbq = async () => {
     const res = await getMyOwnBbq()

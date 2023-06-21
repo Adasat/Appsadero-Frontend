@@ -43,6 +43,7 @@ function Dashboard() {
 
         <Grid item xs={12} sm={4} md={4} sx={{ backgroundColor: 'blue' }}>
           <MyFriends></MyFriends>
+          <UpcomingBBQ/>
         </Grid>
       </Grid>
     </div>

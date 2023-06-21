@@ -44,7 +44,7 @@ export const router = createBrowserRouter([
     errorElement: <NotFound />,
     children: [
       { path: '/home/dashboard', element: <Dashboard />, loader: checkAuth },
-      { path: '/home/myProfile', element: <MyProfile /> },
+      { path: '/home/myProfile', element: <MyProfile />, loader: checkAuth },
       { path: '/home/createAsadero', element: <CreateAsadero /> },
       { path: '/home/manageAsadero', element: <ManageAsaderoPage /> },
       { path: '/home/upcomingAsadero', element: <UpcomingBBQpage /> },

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom'
 
 function UpcomingBBQpage() {
   const [upcomingBBQ, setUpcomingBBQ] = useState([])
-  const menuTitle = 'Próximos asaderos'
+  const menuTitle = 'Todos los asaderos'
 
   const listUpcomingBBQ = async () => {
     const res = await getAllMyAsaderos()
@@ -15,8 +15,6 @@ function UpcomingBBQpage() {
   }
 
   useEffect(() => {
-
-    
     listUpcomingBBQ()
   }, [])
 

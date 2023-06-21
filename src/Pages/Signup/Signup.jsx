@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { userSignup } from '../../services/auth.service'
-import { Typography, Box, Grid, Paper, Button, TextField, Card } from '@mui/material'
+import { Typography, Box, Grid, Paper, Button, Card } from '@mui/material'
 
 import TextFieldEmail from '../../Components/TextFieldEmail/TextFieldEmail'
 import TextFieldPassword from '../../Components/TextFieldPassword/TextFieldPassword'
