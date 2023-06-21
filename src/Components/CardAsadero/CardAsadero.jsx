@@ -4,7 +4,6 @@ import {
   Card,
   CardContent,
   CardHeader,
-  CardMedia,
   Chip,
   Divider,
   Grid,
@@ -70,26 +69,32 @@ function CardAsadero({ bbq, owner }) {
     openVSclosed(bbq.confirmation_date)
   }, [currentDay, rejected])
 
-
-
-      const a = users.filter((el) => el.status === 'pending').map((el) => el.first_name === 'Ciru')
-  console.log(a)
+  // ESTA FUNCIÓN TE TIENE QUE LLEVAR A PODER VER LOS DATOS DE ESE ASADERO
+  // SIENDO INVITADO TENDRÁS QUE PODER ENVIAR EL PAGO, ASÍ COMO VER ESOS DATOS. SOLO VISUALIZAR
+  const handleNew = () => {
+    alert('e') // COMPROBCIÓN DE QUE FUNCIONA ESTE ON CLICK
+    //navigate(`/home/view/${bbq.id}`)
+  }
 
 
   return (
     <Card>
-      <Link className="links" to={`/home/manageAsadero/${bbq.id}`}>
+      {users
+        .filter(
+          (el) =>
+            el.status === 'pending' &&
+            el.first_name === localStorage.getItem('first_name')
+        )
+        .map((el) => (
+          <Chip key={el.id} label="NEW" color="error" sx={{ m: 1 }} onClick={handleNew}></Chip>
+        ))}
+      <Link className="links" /* to={`/home/manageAsadero/${bbq.id}`} */>
         <CardHeader
           title={bbq.name}
           sx={{ textAlign: 'center', fontWeight: 'bold' }}
         />
       </Link>
-      
-{users
-  .filter((el) => el.status === 'pending' && el.first_name === 'Ciru')
-  .map((el) => (
-    <Chip key={el.id} label='NEW' color='error'></Chip>
-  ))}      
+
       <Divider sx={{ marginBottom: '10px' }} />
       <CardContent>
         <Typography variant="body1">{formatDate(bbq.date_time)}</Typography>
@@ -103,26 +108,32 @@ function CardAsadero({ bbq, owner }) {
             <Typography variant="body">Invitados</Typography>
           </AccordionSummary>
           <div>
-            {users.filter((el) => el.status !== 'rejected').map((el) => (
-              <Typography variant="body1" key={el.id}>
-                {el.first_name} {(owner === true && el.status !== 'rejected') && `- ${el.status}`}{' '}
-                {el.isChef === true && ' -> Chef'}
-              </Typography>
-            ))}
+            {users
+              .filter((el) => el.status !== 'rejected')
+              .map((el) => (
+                <Typography variant="body1" key={el.id}>
+                  {el.first_name}{' '}
+                  {owner === true &&
+                    el.status !== 'rejected' &&
+                    `- ${el.status}`}{' '}
+                  {el.isChef === true && ' -> Chef'}
+                </Typography>
+              ))}
           </div>
           <Divider sx={{ marginBottom: '10px' }} />
           <Typography variant="body1" textAlign="right" alignContent="center">
             {(() => {
-      const userFiltered = users.filter((el) => el.status !== 'rejected');
-      return userFiltered.length > 0
-        ? userFiltered.length > 1
-          ? `${userFiltered.length} personas`
-          : `${userFiltered.length} persona`
-        : 'No hay invitados aún.';
-    })()}
+              const userFiltered = users.filter(
+                (el) => el.status !== 'rejected'
+              )
+              return userFiltered.length > 0
+                ? userFiltered.length > 1
+                  ? `${userFiltered.length} personas`
+                  : `${userFiltered.length} persona`
+                : 'No hay invitados aún.'
+            })()}
           </Typography>
         </Accordion>
-
         {owner === true && (
           <Grid container justifyContent="flex-end">
             <Grid item>

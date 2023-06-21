@@ -66,6 +66,7 @@ function Dashboard() {
           sx={{ backgroundColor: 'blue', }}
         >
           <MyFriends></MyFriends>
+          <UpcomingBBQ/>
         </Grid>
       </Grid>
     </div>
