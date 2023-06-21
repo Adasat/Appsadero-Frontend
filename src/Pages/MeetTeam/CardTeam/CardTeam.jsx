@@ -12,8 +12,8 @@ function CardTeam() {
   return (
      team &&
     team.map((el) => (
-    <Grid item xs={3}>
-      <Card key={el.name}>
+    <Grid  key={el.name} item xs={3}>
+      <Card>
         <CardHeader title={el.name} />
         <CardContent>
           <Typography variant='h6'>{el.last_name}</Typography>

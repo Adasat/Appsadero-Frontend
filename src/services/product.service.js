@@ -51,18 +51,26 @@ export const getAllProductsByCategory = async () => {
 
 
 // put product in one shopping cart
-export const addProductInTheShoppingCart = async (cartId, productId) => {
+
+export const addProductsToMenu = async (cartId, shoppingList) => {
+  
   try {
-    const { data } = await api.put(`/${cartId}/product/${productId}`, { cartId, productId }, {
-      headers: {
-        token: localStorage.getItem('token')
-      },
-    })
-    return data
-  } catch (error) {
-    return error
-  }
+    await Promise.all(
+      shoppingList.map(async (product) => {
+          return await api.put(`/${cartId}/product/${product}`, {
+            headers: {
+              token: localStorage.getItem('token')
+            }
+          })
+        })
+        )
+        
+      } catch (error) {
+        console.log(error)
+      }
 }
+
+
 
 // delete products in one shopping cart
 export const deleteProductOfTheShoppingCart = async (cartId, productId) => {
