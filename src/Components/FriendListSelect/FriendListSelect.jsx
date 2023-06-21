@@ -44,37 +44,8 @@ function FriendListSelect({handleFriends}) {
   }
   
       const [checked, setChecked] = useState([])
-  
-
-     // console.log(checked)
 
       const handleCheckChange = (index) => {
-
-         //console.log(index)
-
-          //
-
-
-
-        //index => friend ID
-        //setChecked()
-        //Click en la lista => 
-        //Onclick event => Seleccionar Registro 
-          // key
-          // Marcar Checkt
-          // Añadir a Array de chequeados
-/* 
-          (allreadyChecked)=>{
-          //Si arrayChecked incluye 
-          if(allreadyChecked.includes(index)){
-            return allreadyChecked.filter((checked) => checked !== index)
-          } else {
-
-            return [...allreadyChecked, index]
-
-          }
-        }
-         */
 
         setChecked([...checked, index])
 

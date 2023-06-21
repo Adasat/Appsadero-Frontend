@@ -57,7 +57,7 @@ export const addProductsToMenu = async (cartId, shoppingList) => {
   try {
     await Promise.all(
       shoppingList.map(async (product) => {
-          return await api.put(`/${cartId}/product/${product}`, {
+          return await api.put(`/cart/${cartId}/product/${product}`, {}, {
             headers: {
               token: localStorage.getItem('token')
             }

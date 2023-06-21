@@ -5,7 +5,7 @@ import Profile from '../Profile/Profile'
 function HeaderMain({title}) {
   return (
     <>
-      <Box sx={{ flexGrow: 1}}>
+      <Box sx={{ flexGrow: 1, zIndex: 10}}>
         <AppBar position="static" sx={{ height: '70px' }}>
           <Toolbar>
             <Typography

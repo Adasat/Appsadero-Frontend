@@ -7,7 +7,7 @@ import ShoppingCartList from '../ShoppingCartList/ShoppingCartList'
 
 
 
-function CategoriesNProducts() {
+function CategoriesNProducts({ handleProducts }) {
   //Relative to Categories of Products
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
@@ -37,14 +37,13 @@ function CategoriesNProducts() {
   //Handle for ProductsCategoriesList
   const handleProductSelection = (listCart) => {
     setProductCart(listCart)
+    handleProducts(listCart)
   }
 
   const handleShoppingCart = (shoppingCart) => {
-  setShoopingList(shoppingCart)
-
+    setShoopingList(shoppingCart)
   }
-    console.log(shoppingList)
-
+  //console.log(shoppingList)
 
   //Call to the product services
   const showCategoriesAndProducts = async () => {
@@ -101,7 +100,11 @@ function CategoriesNProducts() {
             />
           </Grid>
           <Grid item xs={6} sm={4} md={3}>
-            <ShoppingCartList productCart={productCart} products={products} handleShoppingCart={handleShoppingCart}/>
+            <ShoppingCartList
+              productCart={productCart}
+              products={products}
+              handleShoppingCart={handleShoppingCart}
+            />
           </Grid>
         </Grid>
       </Paper>

@@ -60,7 +60,8 @@ function Signup() {
   }
 
   return (
-     <>
+    <>
+    
       <Box
         sx={{
           display: 'flex',

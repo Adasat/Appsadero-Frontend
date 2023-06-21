@@ -2,22 +2,19 @@ import { api } from './api'
 
 export const createBBQ = async (bbq) => {
   try {
-    const { data } = await api.post(
-      '/asadero/',
-      {
-        name: bbq.name,
-        description: bbq.description,
-        date_time: bbq.date_time,
-        duration: bbq.duration,
-        confirmation_date: bbq.payments_accepted,
-        place: bbq.place,
-      },
-      {
-        headers: {
-          token: localStorage.getItem('token'),
-        },
+    const { data } = await api.post('/asadero/', {
+    "name": bbq.name,
+    "description": bbq.description,
+    "date_time": bbq.date_time,
+    "duration": bbq.duration,
+    "confirmation_date": bbq.payments_accepted,
+    "place": bbq.place,
+    }, {
+      headers: {
+        token: localStorage.getItem('token')
       }
-    )
+    })
+    console.log(data)
     return data
   } catch (err) {
     throw new Error(err)
@@ -28,10 +25,7 @@ export const addGuests = async (id, guestList) => {
   try {
     await Promise.all(
       guestList.map(async (user) => {
-        return await api.put(
-          `/asadero/${id}/user/${user}`,
-          {},
-          {
+          return await api.post(`/asadero/${id}/user/${user}`, {}, {
             headers: {
               token: localStorage.getItem('token'),
             },
