@@ -4,6 +4,8 @@ import {
   Card,
   CardContent,
   CardHeader,
+  CardMedia,
+  Chip,
   Divider,
   Grid,
   Typography,
@@ -24,6 +26,7 @@ function CardAsadero({ bbq, owner }) {
   const [open, setOpen] = useState(true)
   const [reject, setReject] = useState()
   const [currentDay, setCurrentDay] = useState(new Date())
+  const [notification, setNotification] = useState(false)
 
   const navigate = useNavigate()
 
@@ -67,6 +70,12 @@ function CardAsadero({ bbq, owner }) {
     openVSclosed(bbq.confirmation_date)
   }, [currentDay, rejected])
 
+
+
+      const a = users.filter((el) => el.status === 'pending').map((el) => el.first_name === 'Ciru')
+  console.log(a)
+
+
   return (
     <Card>
       <Link className="links" to={`/home/manageAsadero/${bbq.id}`}>
@@ -75,6 +84,12 @@ function CardAsadero({ bbq, owner }) {
           sx={{ textAlign: 'center', fontWeight: 'bold' }}
         />
       </Link>
+      
+{users
+  .filter((el) => el.status === 'pending' && el.first_name === 'Ciru')
+  .map((el) => (
+    <Chip key={el.id} label='NEW' color='error'></Chip>
+  ))}      
       <Divider sx={{ marginBottom: '10px' }} />
       <CardContent>
         <Typography variant="body1">{formatDate(bbq.date_time)}</Typography>

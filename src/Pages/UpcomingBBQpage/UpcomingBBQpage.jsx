@@ -15,6 +15,8 @@ function UpcomingBBQpage() {
   }
 
   useEffect(() => {
+
+    
     listUpcomingBBQ()
   }, [])
 
