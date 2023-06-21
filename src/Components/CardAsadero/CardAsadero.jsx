@@ -2,10 +2,12 @@ import {
   Accordion,
   AccordionSummary,
   AppBar,
+  Box,
   Button,
   Card,
   CardContent,
   CardHeader,
+  CardMedia,
   Chip,
   Dialog,
   Divider,
@@ -22,6 +24,7 @@ import {
 import { Link, useNavigate } from 'react-router-dom'
 import { formatDate } from '../../validations/validations'
 import {
+  getCartFromAsadero,
   getUsersFromAsadero,
   rejectUsersFromAsadero,
   updateAsadero,
@@ -36,7 +39,7 @@ function CardAsadero({ bbq, owner }) {
   const [reject, setReject] = useState()
   const [currentDay, setCurrentDay] = useState(new Date())
   const [notification, setNotification] = useState(false)
-  const [shoppingCart, setShoppingCar] = useState([])
+  const [shoppingCart, setShoppingCart] = useState([])
 
   const navigate = useNavigate()
 
@@ -45,6 +48,7 @@ function CardAsadero({ bbq, owner }) {
     const cartList = await getCartFromAsadero(bbq.id)
     setUsers(res.users)
     setShoppingCart(cartList)
+    console.log(cartList[0])
   }
 
   useEffect(() => {
@@ -99,8 +103,16 @@ function FullScreenDialog() {
 
   const handleClose = () => {
     setOpen(false);
+    location.reload()
   };
+  
+  const totalPrice = (param) => {
+    let sum = 0
+    sum += param
+    return sum
+  }
 
+  (open)
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -129,31 +141,53 @@ function FullScreenDialog() {
         </AppBar>
 
         <Grid container spacing={5} justifyContent={'center'} margin={1}>
-          <Grid item xs={12} sm={12} md={12}>
-            <Typography textAlign={'center'}>Título</Typography>
-          </Grid>
 
           <Grid item xs={12} sm={6} md={4}>
-            <Paper>
+            <Paper elevation={24}>
+              <Card>
+                <CardHeader title={bbq.name} sx={{fontWeight:'bold'}}/>
+                <CardMedia component="img"
+        height="194"
+        image="https://source.unsplash.com/random?bbq,rotisserie"
+        alt="Grill, barbacue"/>
+                <CardContent>
+
+                
               <Typography textAlign={'center'} variant="h4">
-                {bbq.name}
+                
               </Typography>
               <Divider sx={{ marginBottom: '10px' }} />
 
-              <Typography variant="h5">
+              <Typography variant="h7">
                 Descripción: {bbq.description}
               </Typography>
-              <Typography variant="h5">
+              <Typography variant="h6">
                 Fecha: {formatDate(bbq.date_time)}
               </Typography>
-              <Typography variant="h5">Duración: {bbq.duration}</Typography>
+              <Typography variant="h6">Hora de inicio: 11:00 horas </Typography>
+              <Typography variant="h7">Duración: {bbq.duration} horas</Typography>
+              <Divider sx={{ marginTop: '20px' }} />
+              <Typography>Último día de confirmación: {formatDate(bbq.confirmation_date)}</Typography>
+              </CardContent>
+              </Card>
             </Paper>
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
             <Typography variant="h5" textAlign="center">
               Menú
             </Typography>
-            <List>{(shoppingCart && shoppingCart.length) ? {shoppingCart.map((prod) => <ListItem>{prod.name}</ListItem>)} : 'No hay productos en tu lista'}</List>
+            <List sx={{textAlign:"center"}}>{(shoppingCart && shoppingCart.length) ? shoppingCart.map((prod, i) =>  
+            (<ListItem key={i}>- {prod.name}  {prod.price}{prod.unit}</ListItem>))
+            : 'No hay productos en tu lista'}
+            
+            <Box sx={{ textAlign: 'right', fontSize: '20px', fontWeight: 'bold'}}>
+      Total:  
+      {shoppingCart.reduce((total, prod) => total + prod.price, 0).toFixed(2)} €
+    
+  
+  </Box>
+            </List>
+            
           </Grid>
           <Grid item xs={12} sm={12} md={3}>
             <List>

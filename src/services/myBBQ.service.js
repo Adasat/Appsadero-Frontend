@@ -141,7 +141,7 @@ export const updateAsadero = async (asaderoId, fields) => {
 //Get cart from an bbq
 export const getCartFromAsadero = async (cartId) => {
   try {
-    const { data } = await api.get(`/asadero/sharedAsaderos/${cartId}`, {
+    const { data } = await api.get(`/cart/${cartId}/products`, {
       headers: {
         token: localStorage.getItem('token'),
       },
