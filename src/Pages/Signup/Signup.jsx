@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { userSignup } from '../../services/auth.service'
-import { Typography, Box, Grid, Paper, Button } from '@mui/material'
+import { Typography, Box, Grid, Paper, Button, TextField, Card } from '@mui/material'
 
 import TextFieldEmail from '../../Components/TextFieldEmail/TextFieldEmail'
 import TextFieldPassword from '../../Components/TextFieldPassword/TextFieldPassword'
@@ -85,22 +85,26 @@ function Signup() {
         >
           <Grid
             container
+            spacing={2}
             component="main" // Principal container
             height="100%" // Ajustar la altura al 100% del Paper
             width="100%" // Ajustar el ancho al 100% del Paper
           >
+            
             <Grid
               item
-              xs={12}
+              xs={0}
               sm={6}
               md={6}
-              sx={{
+              
+            >
+              <Card sx={{
                 backgroundImage:
                   'url(https://source.unsplash.com/random?bbq,grill)',
                 backgroundSize: 'cover',
-                height: '100%', // Ajustar la altura al 100% del Grid item
-              }}
-            ></Grid>
+                height: '78vh', // Ajustar la altura al 100% del Grid item
+              }}></Card>
+            </Grid>
 
             <Grid item xs={12} sm={6} md={6}>
               <Box
@@ -115,11 +119,11 @@ function Signup() {
                   Regístrate
                 </Typography>
 
-                <Box
+                {/* <Box
                   component="form"
                   noValidate
                   sx={{ mt: 2, width: '100%', height: '70vh' }}
-                >
+> */}
                   <TextFieldCustom
                     label="Introduce tu nombre"
                     type="text"
@@ -149,14 +153,14 @@ function Signup() {
                   <Link to="/login" variant="body2">
                     Pincha aquí
                   </Link>
-                </Box>
+               {/*  </Box> */}
               </Box>
             </Grid>
           </Grid>
         </Paper>
        
       </Box>
-    </>
+    </>   
   )
 }
 

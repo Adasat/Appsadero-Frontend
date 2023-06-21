@@ -41,6 +41,8 @@ export const addGuests = async (id, guestList) => {
       }
 }
 
+
+
 /* 
 headers: {
   token: localStorage.getItem('token')
@@ -108,10 +110,10 @@ export const getUsersFromAsadero = async (asaderoId) => {
 
 export const getSharedAsaderos = async (userId2) => {
   try {
-    const { data } = await api.get(`/sharedAsaderos/${userId2}`, {
+    const { data } = await api.get(`/asadero/sharedAsaderos/${userId2}`, {
       headers:{
         token: localStorage.getItem('token')
-      }
+      },
     })
     return data
   } catch (error) {

@@ -17,7 +17,7 @@ export const getAllcategories = async () => {
   }
 }
 
-// get all products of the one category
+// get all products 
 
 export const getAllProducts = async () => {
   try {
@@ -34,13 +34,12 @@ export const getAllProducts = async () => {
   }
 }
 
-
-// put product in one shopping cart
-export const addProductInTheShoppingCart = async (cartId, productId) => {
+// get all products from a category
+export const getAllProductsByCategory = async () => {
   try {
-    const { data } = await api.put(`/${cartId}/product/${productId}`, { cartId, productId }, {
+    const { data } = await api.get('/preference/products', {
       headers: {
-        token: localStorage.getItem('token')
+        token: localStorage.getItem('token'),
       },
     })
     return data
@@ -48,6 +47,30 @@ export const addProductInTheShoppingCart = async (cartId, productId) => {
     return error
   }
 }
+
+
+
+// put product in one shopping cart
+
+export const addProductsToMenu = async (cartId, shoppingList) => {
+  
+  try {
+    await Promise.all(
+      shoppingList.map(async (product) => {
+          return await api.put(`/${cartId}/product/${product}`, {
+            headers: {
+              token: localStorage.getItem('token')
+            }
+          })
+        })
+        )
+        
+      } catch (error) {
+        console.log(error)
+      }
+}
+
+
 
 // delete products in one shopping cart
 export const deleteProductOfTheShoppingCart = async (cartId, productId) => {
