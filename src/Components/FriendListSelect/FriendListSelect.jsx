@@ -16,7 +16,7 @@ import { AccountCircle, CheckBox } from '@mui/icons-material'
 import './FriendListSelect.css'
 import SearchBar from './SearchBar/SearchBar'
 
-function FriendListSelect({handleFriends}) {
+function FriendListSelect({handleFriends, handleNickNames}) {
   const [friends, setFriends] = useState([])
   const [filterListFriend, setfilterListFriend] = useState([])
 
@@ -45,11 +45,11 @@ function FriendListSelect({handleFriends}) {
   
       const [checked, setChecked] = useState([])
 
-      const handleCheckChange = (index) => {
-
+      const handleCheckChange = (index, nick) => {
         setChecked([...checked, index])
-
         handleFriends(index)
+        handleNickNames(nick)     
+
       }
 
   const returnFriends = () => {
@@ -63,7 +63,7 @@ function FriendListSelect({handleFriends}) {
               <ListItemButton key={el.id} className='list-item'>
                 <Checkbox
                   checked={checked.includes(el.id)}
-                  onChange={() => handleCheckChange(el.id)}
+                  onChange={() => handleCheckChange(el.id, el.nickname)}
                   inputProps={{ 'aria-label': 'controlled' }}
                   sx={{justifyItems: '5px'}}/>
                 <Typography variant="body">

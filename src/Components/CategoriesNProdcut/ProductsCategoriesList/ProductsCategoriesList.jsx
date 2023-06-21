@@ -56,7 +56,7 @@ function ProductsCategoriesList({
   const rows = filterProducts.length > 0 ? filterProducts : allProducts
 
   const handleSelectionModelChange = (e) => {
-  setListCart((prevListCart) => [...prevListCart, e.row.id]);
+  setListCart((prevListCart) => [...prevListCart, e.row]);
 };
 
 useEffect(() => {

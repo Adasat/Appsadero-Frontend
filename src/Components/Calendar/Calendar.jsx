@@ -11,7 +11,7 @@ import { format } from 'date-fns';
 
 function Calendar({handleDate}){
     
-    const [date, setDate] = useState(dayjs('2022-04-20'))
+    const [date, setDate] = useState(dayjs(new Date()))
     const [dateLabel, setDateLabel] = useState()
     
     const handleChange = (date) => {

@@ -6,9 +6,9 @@ function ShoppingCartList({ productCart, products, handleShoppingCart }) {
 
   function findCommonElements(products, productCart) {
     const commonProducts = products.filter((product) =>
-      productCart.includes(product.id)
-    )
-    return commonProducts
+      productCart.some((cartItem) => cartItem.id === product.id)
+    );
+    return commonProducts;
   }
 
   useEffect(() => {
