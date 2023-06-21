@@ -83,7 +83,7 @@ useEffect(() => {
       initialState={{
         pagination: {
           paginationModel: {
-            pageSize: 30,
+            pageSize: 10,
           },
         },
       }}

@@ -16,8 +16,15 @@ import { formatDate, formatDateDB, formatTime } from '../../validations/validati
 import { addGuests, createBBQ } from '../../services/myBBQ.service'
 import dayjs from 'dayjs'
 import CategoriesNProducts from '../../Components/CategoriesNProdcut/CategoriesNProducts'
+import SubHeader from '../../Components/HeaderMain/SubHeader/SubHeader'
+import { addProductsToMenu } from '../../services/product.service'
+import { checkGridRowIdIsValid } from '@mui/x-data-grid'
+import { useNavigate } from 'react-router-dom'
 
 function CreateAsadero() {
+
+  const navigate = useNavigate()
+  const menuTitle = 'Creando Asadero'
 
   const [name, setName] = useState('Nombre del Asadero')
   const [description, setDescription] = useState('Descripción')
@@ -27,6 +34,7 @@ function CreateAsadero() {
   const [startTime, setStartTime] = useState()
   const [endTime, setEndTime] = useState()
   const [payDate, setPayDate] = useState()
+  const [products, setProducts] = useState()
   
   // eslint-disable-next-line no-unused-vars
   const [nickname, setNickname] = useState()
@@ -87,7 +95,10 @@ function CreateAsadero() {
   const handleFriends = (guests) => { 
     setGuestList([...guestList, guests])
   }
-  
+  const handleProductSelection = (product) => {
+    //Gets Array of Products OBJ
+    setProducts(product)
+  }
 
   //Continue Button
   const createAsadero = async() => {
@@ -103,8 +114,20 @@ function CreateAsadero() {
       }
 
     const BbqId = await createBBQ(asadero)
+
+    console.log('Asadero Creado')
  
-    BbqId ? await addGuests(BbqId, guestList) : console.log('Not guest invited')
+    const guests = BbqId ? await addGuests(BbqId.id, guestList) : console.log('Not guest invited')
+
+    console.log('Invitaciones Enviadas')
+    //console.log(BbqId.id, products)
+    const menu = await addProductsToMenu(BbqId.id, products)
+
+    menu ? console.log('Menú Añadido') : console.log('paquete')
+
+//Añadir 
+  navigate('/home/dashboard')
+
       
     }catch(err){
       throw new Error(err)
@@ -115,6 +138,7 @@ function CreateAsadero() {
 
   return (
     <>
+      <SubHeader menu={menuTitle} />
       <Grid container height="100vh">
         {
           //Popup to choose Friends
@@ -151,21 +175,19 @@ function CreateAsadero() {
           open={openProductPopup}
           onClose={handleCloseProducts}
           className="dialog"
+          fullScreen={true}
+          scroll="paper"
+          sx={{ backgroundColor: 'transparent' }}
         >
           <DialogContent>
-            <SearchFriend
-              //handleFriends={handleFriends}
-              onChange={handleSearchInput}
-              onClick={handleSearchClick}
-            />
-            <CategoriesNProducts/>
-            <Box display={'flex'} justifyContent={'space-between'} m={2}>
+            <CategoriesNProducts handleProducts={handleProductSelection} />
+            <Box display={'flex'} justifyContent={'center'} m={2}>
               <ButtonCustom
                 handleButton={() => {
                   handleButton(), handleCloseProducts()
                 }}
                 props={{
-                  text: 'Añadir',
+                  text: 'Añadir Productos',
                   navigate: '',
                   color: 'secondary',
                 }}
