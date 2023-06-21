@@ -12,3 +12,16 @@
 .upcomingbbqlist::-webkit-scrollbar-thumb {
   background-color: #e49976;
 }
+
+.list-item{
+  display: flex;
+  border-color: #e49976;
+  border-style: dotted;
+  border-width: 1px;
+  height: 80px;
+  width: 100%;
+}
+
+.button-header{
+  width: 100%;
+}

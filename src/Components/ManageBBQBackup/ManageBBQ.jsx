@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { getMyOwnBbq } from '../../services/myBBQ.service'
 import '../UpcomingBBQ/UpcomingBBQ.css'
 import {
-  Box,
   Card,
   Divider,
   List,
@@ -14,7 +13,6 @@ import { formatDate } from '../../validations/validations'
 import ButtonCustom from '../ButtonCustom/ButtonCustom'
 import { Link, useNavigate } from 'react-router-dom'
 import { OutdoorGrill } from '@mui/icons-material'
-import { Row } from 'react-day-picker'
 
 function ManageBBQ() {
   const [ownBbq, setOwnBbq] = useState([])
@@ -22,10 +20,8 @@ function ManageBBQ() {
   const menuTitle = 'Editar mis asaderos'
 
   const listMyOwnBbq = async () => {
-
     const res = await getMyOwnBbq()
     setOwnBbq(res)
-    console.log(ownBbq)
   }
 
   useEffect(() => {
@@ -39,40 +35,20 @@ function ManageBBQ() {
   const returnManageBBQ = () => {
     if (ownBbq.length > 0) {
       return (
-        <>
-          <List className="upcomingbbqlist">
-            {ownBbq.map((el) => (
-              <ListItemText className="list-item" key={el.id}>
-                <Box>
-                  <Box
-                    display={'flex'}
-                    justifyContent={'space-around'}
-                    margin={2}
-                  >
-                    <ListItemIcon>
-                      <OutdoorGrill />
-                    </ListItemIcon>
-                    <Typography variant="body">
-                      <b id="bbqname">{el.name}</b>
-                    </Typography>
-                    <Typography align="right">
-                      {formatDate(el.date_time)}
-                    </Typography>
-                  </Box>
-
-                  <Box
-                    display={'flex'}
-                  >
-                    <Typography>{el.description}</Typography>
-                    <Typography align='center'>
-                      Plazo{formatDate(el.confirmation_date)}
-                    </Typography>
-                  </Box>
-                </Box>
-              </ListItemText>
-            ))}
-          </List>
-        </>
+        <List className="upcomingbbqlist">
+          {ownBbq.map((el) => (
+            <ListItemText key={el.id}>
+              <ListItemIcon>
+                <OutdoorGrill />
+              </ListItemIcon>
+              <Typography variant="body">
+                <b id="bbqname">{el.name}</b> - {formatDate(el.date_time)} -{' '}
+                {el.description} - Plazo del pago:{' '}
+                {formatDate(el.confirmation_date)}
+              </Typography>
+            </ListItemText>
+          ))}
+        </List>
       )
     } else {
       return (
@@ -88,23 +64,15 @@ function ManageBBQ() {
   }
 
   return (
-    <Card elevation={4} sx={{ padding: '30px', borderRadius: 4, height:'100%'}}>
+    <Card elevation={3} sx={{ padding: '30px', borderRadius: 10 }}>
       <Typography variant="h5">
-        <ButtonCustom props={{
-          text: 'Editar Mis Asaderos',
-          className:'button-header',
-          navigate: '/home/manageAsadero',
-          color: 'secondary'
-        }}>
-          </ButtonCustom>
-{/* 
         <Link
           to="/home/manageAsadero"
           className="link"
           style={{ textDecoration: 'none' }}
-          >
+        >
           {menuTitle}
-        </Link> */}
+        </Link>
       </Typography>
       <Divider sx={{ marginBottom: '10px' }} />
       {returnManageBBQ()}

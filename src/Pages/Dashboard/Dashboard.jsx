@@ -10,11 +10,10 @@ import { red } from '@mui/material/colors'
 import SubHeader from '../../Components/HeaderMain/SubHeader/SubHeader'
 
 function Dashboard() {
-
   const MENU_TITLE = 'Bienvenido'
 
   return (
-    <div className='container'>
+    <div className="container">
       <Paper
         className="welcom-container"
         sx={{
@@ -33,38 +32,16 @@ function Dashboard() {
         </div>
       </Paper>
 
-      <Grid
-        container
-        component="main"
-      >
-        <Grid
-          item
-          xs={12}
-          sm={6}
-          md={4}
-          sx={{ backgroundColor: 'violet',}}
-        >
-
-<ManageBBQ />
-
+      <Grid container component="main" sx={{ height: '100vh' }}>
+        <Grid item xs={12} sm={4} md={4} sx={{ backgroundColor: 'violet' }}>
+          <ManageBBQ />
         </Grid>
 
-        <Grid
-          item
-          xs={12}
-          sm={4}
-          md={4}
-          sx={{ backgroundColor: 'red',}}
-        >
+        <Grid item xs={12} sm={4} md={4} sx={{ backgroundColor: 'red' }}>
+          <UpcomingBBQ />
         </Grid>
 
-        <Grid
-          item
-          xs={12}
-          sm={6}
-          md={4}
-          sx={{ backgroundColor: 'blue', }}
-        >
+        <Grid item xs={12} sm={4} md={4} sx={{ backgroundColor: 'blue' }}>
           <MyFriends></MyFriends>
         </Grid>
       </Grid>

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getAllMyAsaderos } from '../../services/myBBQ.service'
 import {
+  Box,
   Card,
   Divider,
   List,
@@ -13,6 +14,7 @@ import './UpcomingBBQ.css'
 import { Link, useNavigate } from 'react-router-dom'
 import { formatDate } from '../../validations/validations'
 import ButtonCustom from '../ButtonCustom/ButtonCustom'
+import { blue, red, yellow } from '@mui/material/colors'
 
 //component rendering upcoming bbq, in front as próximos asaderos
 function UpcomingBBQ() {
@@ -39,13 +41,27 @@ function UpcomingBBQ() {
         <List className="upcomingbbqlist">
           {upcomingBBQ.map((bbq) => (
             <ListItemText key={bbq.id}>
-              <ListItemIcon>
-                <OutdoorGrill />
-              </ListItemIcon>
-              <Typography variant="body">
-                <b id="bbqname">{bbq.name}</b> - {formatDate(bbq.date_time)} -{' '}
-                {bbq.description}
-              </Typography>
+              <Box>
+                <Box>
+                  <ListItemIcon>
+                    <OutdoorGrill />
+                  </ListItemIcon>
+                  <Typography variant="body">
+                    <b id="bbqname">{bbq.name}</b>
+                  </Typography>
+                </Box>
+                <Box
+                  sx={{
+                  
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <Typography variant="body">{bbq.description}</Typography>
+
+                  <Typography>{formatDate(bbq.date_time)}</Typography>
+                </Box>
+              </Box>
             </ListItemText>
           ))}
         </List>
