@@ -8,7 +8,7 @@ export const tryLogin = async (email, password) => {
     localStorage.setItem('nickname', data.userDetails.nickname)
     return true
   } catch (err) {
-    return err
+    return false
   }
 }
 

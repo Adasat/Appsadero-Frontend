@@ -11,8 +11,15 @@ import AlertSuccess from '../../Components/AlertSuccess/AlertSuccess'
 function LogIn() {
   const navigate = useNavigate()
   const [showAlert, setShowAlert] = useState(false)
+  const [textAlert, setTextAlert] = useState()
+  const [severityText, setSeverityText] = useState()
+
 
   const textOk = '¡Welcome to Appsadero!'
+  const success = 'success'
+  const error = 'error'
+  const textNotOk = 'Credenciales incorrectas'
+
 
   const [password, setPassword] = useState({
     value: '',
@@ -38,12 +45,19 @@ function LogIn() {
     try {
       const res = await tryLogin(email.value, password.value)
       if (res) {
-        setShowAlert(true)
+        setTextAlert(textOk)
+        setSeverityText(success)
         const delay = setTimeout(() => {
           navigate('/home/dashboard')
-        }, 100)
+        }, 500)
         return () => clearTimeout(delay)
+      }else{
+        setTextAlert(textNotOk)
+        setSeverityText(error)
       }
+
+      setShowAlert(true)
+
     } catch (err) {
       return err
     }
@@ -103,7 +117,7 @@ function LogIn() {
                 >
                   Login
                 </Button>
-                {showAlert && <AlertSuccess text={textOk} />}
+                {showAlert && <AlertSuccess text={textAlert} severityText={severityText}/>}
                 <Grid container>
                   <Grid item xs>
                     {
