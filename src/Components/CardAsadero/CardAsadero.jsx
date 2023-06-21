@@ -173,22 +173,21 @@ function FullScreenDialog() {
             </Paper>
           </Grid>
           <Grid item xs={12} sm={6} md={3}>
-            <Typography variant="h5" textAlign="center">
-              Menú
-            </Typography>
-            <List sx={{textAlign:"center"}}>{(shoppingCart && shoppingCart.length) ? shoppingCart.map((prod, i) =>  
-            (<ListItem key={i}>- {prod.name}  {prod.price}{prod.unit}</ListItem>))
-            : 'No hay productos en tu lista'}
-            
-            <Box sx={{ textAlign: 'right', fontSize: '20px', fontWeight: 'bold'}}>
-      Total:  
-      {shoppingCart.reduce((total, prod) => total + prod.price, 0).toFixed(2)} €
-    
-  
-  </Box>
-            </List>
-            
-          </Grid>
+  <Typography variant="h5" align="center">
+    Menú
+  </Typography>
+  <List>
+    {shoppingCart && shoppingCart.length ? (
+      shoppingCart.map((prod) => (
+        <ListItem key={prod.id}>{prod.name}</ListItem>
+      ))
+    ) : (
+      <Typography variant="body1" align="center">
+        No hay productos en tu lista
+      </Typography>
+    )}
+  </List>
+</Grid>
           <Grid item xs={12} sm={12} md={3}>
             <List>
               <Typography variant="h5" textAlign="center">

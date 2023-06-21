@@ -40,7 +40,7 @@ function Dashboard() {
         </Link>
         <Divider sx={{ marginBottom: '10px' }} />
         <Typography variant="body">
-          ¿Aún no has probado a crear tu propio asadero?
+          ¿Aún no creado tu asadero?
           <br />
           Te lo ponemos facilito...!
           <br />

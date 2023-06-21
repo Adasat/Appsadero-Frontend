@@ -2,7 +2,6 @@
   color: #e49976;
 }
 .upcomingbbqlist {
-  height: 200px;
   overflow-y: scroll;
 }
 .upcomingbbqlist::-webkit-scrollbar {
@@ -15,13 +14,17 @@
 
 .list-item{
   display: flex;
+  justify-content: center;
   border-color: #e49976;
   border-style: dotted;
   border-width: 1px;
-  height: 80px;
   width: 100%;
 }
 
+.list-item:hover{
+  background-color: #546a2f;
+  
+}
 .button-header{
   width: 100%;
 }

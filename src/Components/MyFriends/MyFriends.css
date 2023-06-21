@@ -1,6 +1,5 @@
 .myfriendslist{
-    height: 200px;
-    overflow-y: scroll;
+    height: 200vh;
 }
 
 .myfriendslist::-webkit-scrollbar {
