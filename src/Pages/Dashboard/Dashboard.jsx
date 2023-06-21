@@ -1,64 +1,73 @@
-import { Card, Divider, Paper, Typography } from '@mui/material'
+import { Box, Card, Divider, Grid, Paper, Typography } from '@mui/material'
 import ManageBBQ from '../../Components/ManageBBQ/ManageBBQ'
 import UpcomingBBQ from '../../Components/UpcomingBBQ/UpcomingBBQ'
 import MyFriends from '../../Components/MyFriends/MyFriends'
+import HeaderWelcome from '../../Components/HeaderWelcome/HeaderWelcome'
 import { Link } from 'react-router-dom'
 import './Dashboard.css'
 import ButtonCustom from '../../Components/ButtonCustom/ButtonCustom'
+import { red } from '@mui/material/colors'
+import SubHeader from '../../Components/HeaderMain/SubHeader/SubHeader'
 
 function Dashboard() {
+
+  const MENU_TITLE = 'Bienvenido'
+
   return (
-    <div className="container">
+    <div className='container'>
       <Paper
-        className="welcome-tag"
-        elevation={3}
-        sx={{ borderRadius: 10, textAlign: 'center' }}
+        className="welcom-container"
+        sx={{
+          backgroundColor: '#6a9848',
+          right: 0,
+          left: 0,
+          textAlign: 'center',
+        }}
       >
-        <img src="../src/assets/appsadero_logo-2.png" alt="logo-appsadero" />
-        <Link
-          to="/home/myProfile"
-          className="link"
-          style={{ textDecoration: 'none' }}
-        >
-          <h2>Bienvenida {localStorage.getItem('first_name')}</h2>
-        </Link>
+        <div className="welcom">
+          <img src="/src/assets/appsadero_logo-2.png" alt="" />
+          <Typography fontSize={'1.em'}>
+            {' '}
+            <h2>Bienvenida/o {localStorage.getItem('first_name')}</h2>
+          </Typography>
+        </div>
       </Paper>
-      <div className="managebbq">
-        <ManageBBQ/>
-      </div>
-      <Card
-        className="createbbq"
-        elevation={3}
-        sx={{ padding: '30px', borderRadius: 10 }}
+
+      <Grid
+        container
+        component="main"
       >
-        <Link
-          to="/home/createAsadero"
-          className="link"
-          style={{ textDecoration: 'none' }}
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={4}
+          sx={{ backgroundColor: 'violet',}}
         >
-          <Typography variant="h5">Crear un asadero</Typography>
-        </Link>
-        <Divider sx={{ marginBottom: '10px' }} />
-        <Typography variant="body">
-          ¿Aún no has probado a crear tu propio asadero?
-          <br />
-          Te lo ponemos facilito...!
-          <br />
-          Haz
-          <Link to="/home/createAsadero"> click aquí</Link> y podrás
-          personalizarlo.
-        </Typography>
-        <br />
-        <ButtonCustom
-          props={{ navigate: '/home/createAsadero', text: '¡Vamos allá!' }}
-        />
-      </Card>
-      <div className="myfriends">
-        <MyFriends width={'350px'} />
-      </div>
-      <div className="upcomingbbq">
-        <UpcomingBBQ/>
-      </div>
+
+<ManageBBQ />
+
+        </Grid>
+
+        <Grid
+          item
+          xs={12}
+          sm={4}
+          md={4}
+          sx={{ backgroundColor: 'red',}}
+        >
+        </Grid>
+
+        <Grid
+          item
+          xs={12}
+          sm={6}
+          md={4}
+          sx={{ backgroundColor: 'blue', }}
+        >
+          <MyFriends></MyFriends>
+        </Grid>
+      </Grid>
     </div>
   )
 }

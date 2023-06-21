@@ -1,11 +1,22 @@
+
+.welcom{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+img{
+  background-size: cover;
+  width: 80px;
+}
+
+.main{
+  margin: 10px;
+}
+
 .container {
-  height: 100vh;
-  margin-bottom: 150px;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: auto;
-  gap: 16px;
-  padding-bottom: 180px;
+  height: 100%;
+  width: 100%;
 }
 
 .welcome-tag {
