@@ -100,7 +100,7 @@ function FullScreenDialog() {
   const handleClose = () => {
     setOpen(false);
   };
-
+/*{(shoppingCart && shoppingCart.length) ? {shoppingCart.map((prod) => <ListItem>{prod.name}</ListItem>)} : 'No hay productos en tu lista'}*/
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
@@ -153,7 +153,7 @@ function FullScreenDialog() {
             <Typography variant="h5" textAlign="center">
               Menú
             </Typography>
-            <List>{(shoppingCart && shoppingCart.length) ? {shoppingCart.map((prod) => <ListItem>{prod.name}</ListItem>)} : 'No hay productos en tu lista'}</List>
+            <List></List>
           </Grid>
           <Grid item xs={12} sm={12} md={3}>
             <List>

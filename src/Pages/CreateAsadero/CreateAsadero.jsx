@@ -1,5 +1,22 @@
-import { useEffect, useState } from 'react'
-import { Box,Dialog,DialogContent,Divider,Grid,List,ListItemButton,ListItemIcon,ListItemText,Paper,Typography, useStepContext } from '@mui/material'
+import { useState } from 'react'
+import {
+  Box,
+  Dialog,
+  DialogContent,
+  Divider,
+  Grid,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Paper,
+  Slide,
+  Toolbar,
+  Typography,
+  useStepContext,
+} from '@mui/material'
 import ButtonCustom from '../../Components/ButtonCustom/ButtonCustom'
 import Calendar from '../../Components/Calendar/Calendar'
 import 'react-day-picker/dist/style.css'
@@ -11,31 +28,31 @@ import CustomDatePicker from '../../Components/CustomDatePicker/CustomDatePicker
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu'
 import './DatePicker/DatePicker.css'
 import FriendListSelect from '../../Components/FriendListSelect/FriendListSelect'
-import SearchFriend from '../../Components/SearchFriend/SearchFriend'
-import { formatDate, formatDateDB, formatTime } from '../../validations/validations'
+import { formatDateDB, formatTime } from '../../validations/validations'
 import { addGuests, createBBQ } from '../../services/myBBQ.service'
 import dayjs from 'dayjs'
 import CategoriesNProducts from '../../Components/CategoriesNProdcut/CategoriesNProducts'
 import SubHeader from '../../Components/HeaderMain/SubHeader/SubHeader'
 import { addProductsToMenu } from '../../services/product.service'
-import { checkGridRowIdIsValid } from '@mui/x-data-grid'
 import { useNavigate } from 'react-router-dom'
 
-function CreateAsadero() {
+import Resumen from './Resumen/Resumen'
+import CloseIcon from '@mui/icons-material/Close'
 
+function CreateAsadero() {
   const navigate = useNavigate()
   const menuTitle = 'Creando Asadero'
 
-  const [name, setName] = useState('Nombre del Asadero')
-  const [description, setDescription] = useState('Descripción')
-  const [place, setPlace] = useState('Lugar')
-  const [date, setDate] = useState(dayjs('2022-04-17'))
+  const [name, setName] = useState('')
+  const [description, setDescription] = useState('')
+  const [place, setPlace] = useState('')
+  const [date, setDate] = useState()
   const [guestList, setGuestList] = useState([])
   const [startTime, setStartTime] = useState()
   const [endTime, setEndTime] = useState()
   const [payDate, setPayDate] = useState()
   const [products, setProducts] = useState()
-  
+  const [nicksUser, setNicksUser] = useState([])
   // eslint-disable-next-line no-unused-vars
   const [nickname, setNickname] = useState()
   const [openFriendPopup, setOpenFriendPopup] = useState(false)
@@ -54,7 +71,6 @@ function CreateAsadero() {
 
   const handleCloseFriends = () => {
     setOpenFriendPopup(false)
-
   }
 
   const handleCloseProducts = () => {
@@ -84,7 +100,7 @@ function CreateAsadero() {
     setDate(date)
   }
   const hanleCustomDatePicker = (payDate) => {
-    setPayDate(payDate)    
+    setPayDate(payDate)
   }
   const handleStartTimePicker = (startTime) => {
     setStartTime(startTime)
@@ -92,48 +108,54 @@ function CreateAsadero() {
   const handleEndTimePicker = (endTime) => {
     setEndTime(endTime)
   }
-  const handleFriends = (guests) => { 
+  const handleFriends = (guests) => {
     setGuestList([...guestList, guests])
   }
+
+  const handleNickNames = (nick) => {
+    setNicksUser([...nicksUser, nick])
+  }
+
+
+
   const handleProductSelection = (product) => {
     //Gets Array of Products OBJ
     setProducts(product)
   }
 
+  const asadero = {
+    name: name,
+    description: description,
+    date_time: dayjs(date).format('YYYY-MM-DD'),
+    duration: formatTime(startTime),
+    payments_accepted: formatDateDB(payDate),
+    place: place,
+  }
+
   //Continue Button
-  const createAsadero = async() => {
+  const createAsadero = async () => {
     //console.log(guestList)
-    try{
-      const asadero = {
-        name: name,
-        description: description,
-        date_time: dayjs(date).format('YYYY-MM-DD'),
-        duration: formatTime(startTime),
-        payments_accepted: formatDateDB(payDate),
-        place: place,
-      }
+    try {
+      const BbqId = await createBBQ(asadero)
 
-    const BbqId = await createBBQ(asadero)
+      console.log('Asadero Creado')
 
-    console.log('Asadero Creado')
- 
-    const guests = BbqId ? await addGuests(BbqId.id, guestList) : console.log('Not guest invited')
+      const guests = BbqId
+        ? await addGuests(BbqId.id, guestList)
+        : console.log('Not guest invited')
 
-    console.log('Invitaciones Enviadas')
-    //console.log(BbqId.id, products)
-    const menu = await addProductsToMenu(BbqId.id, products)
+      console.log('Invitaciones Enviadas')
+      //console.log(BbqId.id, products)
+      const menu = await addProductsToMenu(BbqId.id, products)
 
-    menu ? console.log('Menú Añadido') : console.log('paquete')
+      menu ? console.log('Menú Añadido') : console.log('paquete')
 
-//Añadir 
-  navigate('/home/dashboard')
-
-      
-    }catch(err){
+      //Añadir
+      navigate('/home/dashboard')
+    } catch (err) {
+      console.log(err)
       throw new Error(err)
     }
-
-
   }
 
   return (
@@ -145,14 +167,11 @@ function CreateAsadero() {
         }
         <Dialog open={openFriendPopup} onClose={handleCloseFriends}>
           <DialogContent>
-            <FriendListSelect handleFriends={handleFriends}></FriendListSelect>
+            <FriendListSelect
+              handleFriends={handleFriends}
+              handleNickNames={handleNickNames}
+            ></FriendListSelect>
             <Divider sx={{ m: 2 }}></Divider>
-            <SearchFriend
-              onChange={handleSearchInput}
-              onClick={handleSearchClick}
-            />
-            <Divider sx={{ m: 2 }}></Divider>
-
             <Box display={'flex'} justifyContent={'center'} m={2}>
               <ButtonCustom
                 handleButton={() => {
@@ -180,7 +199,24 @@ function CreateAsadero() {
           sx={{ backgroundColor: 'transparent' }}
         >
           <DialogContent>
-            <CategoriesNProducts handleProducts={handleProductSelection} />
+            <Toolbar>
+              <IconButton
+                edge="start"
+                color="inherit"
+                onClick={handleCloseProducts}
+                aria-label="close"
+              >
+                <CloseIcon />
+              </IconButton>
+              <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
+                Cerrar
+              </Typography>
+            </Toolbar>
+
+            <CategoriesNProducts
+              handleProducts={handleProductSelection}
+             
+            />
             <Box display={'flex'} justifyContent={'center'} m={2}>
               <ButtonCustom
                 handleButton={() => {
@@ -201,18 +237,7 @@ function CreateAsadero() {
             <Paper variant="elevation" elevation={18} sx={{ height: '600px' }}>
               <Calendar handleDate={handleDatePicker} />
               <Divider sx={{ m: 5 }}></Divider>
-              <Typography>{dayjs(date).format('DD/MM/YYYY')}</Typography>
-              <Box sx={{ m: '24px' }}>
-                <ButtonCustom
-                  handleButton={handleButton}
-                  props={{
-                    text: 'Atrás',
-                    navigate: '/dashboard',
-                    color: 'primary',
-                    createAsadero,
-                  }}
-                />
-              </Box>
+              <Box sx={{ m: '24px' }}></Box>
             </Paper>
           </Box>
         </Grid>
@@ -230,14 +255,17 @@ function CreateAsadero() {
                 <Typography variant="h6" component="h2">
                   Configura tu Asadero
                 </Typography>
-                <TextFieldCustom label={name} onChange={handleName} />
                 <TextFieldCustom
-                  label={description}
+                  label="Título de tu asadero"
+                  onChange={handleName}
+                />
+                <TextFieldCustom
+                  label="Descripción"
                   onChange={handleDescription}
                   multiline={true}
                   rows={2}
                 />
-                <TextFieldCustom label={place} onChange={handlePlace} />
+                <TextFieldCustom label="Lugar" onChange={handlePlace} />
               </Box>
 
               <Grid container sx={{}}>
@@ -331,12 +359,17 @@ function CreateAsadero() {
                     createAsadero()
                   }}
                   props={{
-                    text: 'Continuar',
+                    text: 'Confirmar',
                     navigate: '',
                     color: 'secondary',
                   }}
                 />
               </div>
+              <Resumen
+                asadero={asadero}
+                nicks={nicksUser}
+                menuResumen={products}
+              />
             </Paper>
           </Box>
         </Grid>
@@ -346,3 +379,5 @@ function CreateAsadero() {
 }
 
 export default CreateAsadero
+
+// fecha dayjs(date).format('DD/MM/YYYY')

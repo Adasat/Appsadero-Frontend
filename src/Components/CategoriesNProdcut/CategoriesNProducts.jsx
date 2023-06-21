@@ -1,11 +1,13 @@
 import { Box, Card, Grid, Paper, Typography } from '@mui/material'
 import { useEffect, useState } from 'react'
-import { getAllProducts, getAllProductsByCategory, getAllcategories } from '../../services/product.service'
+import {
+  getAllProducts,
+  getAllProductsByCategory,
+  getAllcategories,
+} from '../../services/product.service'
 import CategoriesChip from './CategoriesChip/CategoriesChip'
 import ProductsCategoriesList from './ProductsCategoriesList/ProductsCategoriesList'
 import ShoppingCartList from '../ShoppingCartList/ShoppingCartList'
-
-
 
 function CategoriesNProducts({ handleProducts }) {
   //Relative to Categories of Products
@@ -15,6 +17,7 @@ function CategoriesNProducts({ handleProducts }) {
   const [shoppingList, setShoopingList] = useState([])
 
   const handleClick = (categId) => {
+    
     setSelectedCategory(categId)
     filterCategories(categId)
   }
@@ -38,6 +41,7 @@ function CategoriesNProducts({ handleProducts }) {
   const handleProductSelection = (listCart) => {
     setProductCart(listCart)
     handleProducts(listCart)
+    
   }
 
   const handleShoppingCart = (shoppingCart) => {
@@ -111,7 +115,5 @@ function CategoriesNProducts({ handleProducts }) {
     </Box>
   )
 }
-
-
 
 export default CategoriesNProducts
