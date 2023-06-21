@@ -10,6 +10,7 @@ import { Alert, Box, Grid, Paper, Typography } from '@mui/material'
 import MyFriends from '../../Components/MyFriends/MyFriends'
 import SearchFriend from '../../Components/SearchFriend/SearchFriend'
 import { useParams } from 'react-router-dom'
+import SubHeader from '../../Components/HeaderMain/SubHeader/SubHeader'
 
 
 function Friends() {
@@ -74,37 +75,40 @@ function Friends() {
   }, [])
 
   return (
-    <Box marginTop={'20px'} sx={{ height: '78vh' }}>
-      <Grid container spacing={2} justifyContent={'space-around'}>
-        <Grid item xs={8} sm={6}>
-          <MyFriends width={'750px'} height={'50vh'} />
+    <>
+      <SubHeader menu='Mis amigos'/>
+      <Box marginTop={'20px'} sx={{ height: '78vh' }}>
+        <Grid container spacing={2} justifyContent={'space-around'}>
+          <Grid item xs={8} sm={6}>
+            <MyFriends width={'750px'} height={'50vh'} />
+          </Grid>
+          <Grid item xs={4} sm={3}>
+            <Paper elevation={7}>
+              <SearchFriend onChange={handleSearchInput}
+                onClick={handleButtonFriend} 
+              />
+              <Box marginBottom={2}>
+                {alert && (
+                  <Alert variant="outlined" severity={alert}>
+                    {alertMessage}
+                  </Alert>
+                )}
+              </Box>
+            </Paper>
+          </Grid>
         </Grid>
-        <Grid item xs={4} sm={3}>
-          <Paper elevation={7}>
-            <SearchFriend onChange={handleSearchInput}
-              onClick={handleButtonFriend} 
-            />
-            <Box marginBottom={2}>
-              {alert && (
-                <Alert variant="outlined" severity={alert}>
-                  {alertMessage}
-                </Alert>
-              )}
-            </Box>
-          </Paper>
-        </Grid>
-      </Grid>
-      <Box
-        marginTop={'20px'}
-        marginRight={'20px'}
-        sx={{ justifyContent: 'flex-end', textAlign: 'right' }}
-      >
-        <Typography variant="h5" sx={{ fontStyle: 'italic' }}>
-          "Un asadero sin amigos es como un parchis de un solo jugador"
-        </Typography>
-        <Typography variant="body">Nelson Mandela</Typography>
+        <Box
+          marginTop={'20px'}
+          marginRight={'20px'}
+          sx={{ justifyContent: 'flex-end', textAlign: 'right' }}
+        >
+          <Typography variant="h5" sx={{ fontStyle: 'italic' }}>
+            "Un asadero sin amigos es como un parchis de un solo jugador"
+          </Typography>
+          <Typography variant="body">Nelson Mandela</Typography>
+        </Box>
       </Box>
-    </Box>
+   </>
   )
 }
 
