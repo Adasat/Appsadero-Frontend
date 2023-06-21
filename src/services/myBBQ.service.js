@@ -1,56 +1,48 @@
-
 import { api } from './api'
 
 export const createBBQ = async (bbq) => {
-
   try {
-    const { data } = await api.post('/asadero/', { 
-    "name": bbq.name,
-    "description": bbq.description,
-    "date_time": bbq.date_time,
-    "duration": bbq.duration,
-    "confirmation_date": bbq.payments_accepted,
-    "place": bbq.place,
-    }, {
-      headers: {
-        token: localStorage.getItem('token')
+    const { data } = await api.post(
+      '/asadero/',
+      {
+        name: bbq.name,
+        description: bbq.description,
+        date_time: bbq.date_time,
+        duration: bbq.duration,
+        confirmation_date: bbq.payments_accepted,
+        place: bbq.place,
+      },
+      {
+        headers: {
+          token: localStorage.getItem('token'),
+        },
       }
-    })
+    )
     return data
-
   } catch (err) {
     throw new Error(err)
   }
 }
 
 export const addGuests = async (id, guestList) => {
-  
   try {
     await Promise.all(
       guestList.map(async (user) => {
-          return await api.put(`/asadero/${id}/user/${user}`, {}, {
+        return await api.put(
+          `/asadero/${id}/user/${user}`,
+          {},
+          {
             headers: {
-              token: localStorage.getItem('token')
-            }
-          })
-        })
+              token: localStorage.getItem('token'),
+            },
+          }
         )
-        
-      } catch (error) {
-        console.log(error)
-      }
+      })
+    )
+  } catch (error) {
+    console.log(error)
+  }
 }
-
-
-
-/* 
-headers: {
-  token: localStorage.getItem('token')
-},
- */
-
-
-
 
 //service for back end to get all my asaderos
 export const getAllMyAsaderos = async () => {
@@ -80,7 +72,6 @@ export const getMyOwnBbq = async () => {
   }
 }
 
-
 export const getOneAsadero = async (asaderoId) => {
   try {
     const { data } = await api.get(`/asadero/myAsaderos/${asaderoId}`, {
@@ -107,14 +98,46 @@ export const getUsersFromAsadero = async (asaderoId) => {
   }
 }
 
-
 export const getSharedAsaderos = async (userId2) => {
   try {
     const { data } = await api.get(`/asadero/sharedAsaderos/${userId2}`, {
-      headers:{
-        token: localStorage.getItem('token')
+      headers: {
+        token: localStorage.getItem('token'),
       },
     })
+    return data
+  } catch (error) {
+    return error
+  }
+}
+
+//service for close asadero
+export const rejectUsersFromAsadero = async (asaderoId) => {
+  try {
+    const { data } = await api.put(`/asadero/${asaderoId}/close`, {},
+      {
+        headers: {
+          token: localStorage.getItem('token'),
+        },
+      }
+    )
+    return data
+  } catch (error) {
+    return error
+  }
+}
+
+//service for updating anything on asadero
+export const updateAsadero = async (asaderoId, fields) => {
+    try {
+    const { data } = await api.patch(`/asadero/${asaderoId}`, { isOpen: fields },
+      {
+        headers: {
+          token: localStorage.getItem('token'),
+        },
+      }
+    )
+    console.log(data)
     return data
   } catch (error) {
     return error

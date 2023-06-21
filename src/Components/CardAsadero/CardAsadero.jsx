@@ -10,13 +10,21 @@ import {
 } from '@mui/material'
 import { Link, useNavigate } from 'react-router-dom'
 import { formatDate } from '../../validations/validations'
-import { getUsersFromAsadero } from '../../services/myBBQ.service'
+import {
+  getUsersFromAsadero,
+  rejectUsersFromAsadero,
+  updateAsadero,
+} from '../../services/myBBQ.service'
 import { useEffect, useState } from 'react'
 import { ExpandMore } from '@mui/icons-material'
 import ButtonCustom from '../ButtonCustom/ButtonCustom'
 
 function CardAsadero({ bbq, owner }) {
   const [users, setUsers] = useState([])
+  const [open, setOpen] = useState(true)
+  const [reject, setReject] = useState()
+  const [currentDay, setCurrentDay] = useState(new Date())
+
   const navigate = useNavigate()
 
   const listUsers = async () => {
@@ -31,6 +39,33 @@ function CardAsadero({ bbq, owner }) {
   const handleButton = () => {
     navigate('/home/createAsadero')
   }
+
+  // close payment button
+  const rejected = async () => {
+    const res = await rejectUsersFromAsadero(bbq.id)
+    await updateAsadero(bbq.id, false)
+    setReject(res)
+  }
+
+  const handleCancel = () => {
+    setOpen(false)
+    rejected()
+  }
+
+  const openVSclosed = (date) => {
+    const formattedDate = formatDate(date)
+    const currentDate = formatDate(new Date())
+    setCurrentDay(currentDate)
+    if (formattedDate >= currentDate || open === true) {
+      return true
+    } else {
+      handleCancel()
+    }
+  }
+
+  useEffect(() => {
+    openVSclosed(bbq.confirmation_date)
+  }, [currentDay, rejected])
 
   return (
     <Card>
@@ -53,16 +88,23 @@ function CardAsadero({ bbq, owner }) {
             <Typography variant="body">Invitados</Typography>
           </AccordionSummary>
           <div>
-            {users.map((el) => (
+            {users.filter((el) => el.status !== 'rejected').map((el) => (
               <Typography variant="body1" key={el.id}>
-                {el.first_name} {owner === true && `- ${el.status}`}{' '}
+                {el.first_name} {(owner === true && el.status !== 'rejected') && `- ${el.status}`}{' '}
                 {el.isChef === true && ' -> Chef'}
               </Typography>
             ))}
           </div>
           <Divider sx={{ marginBottom: '10px' }} />
           <Typography variant="body1" textAlign="right" alignContent="center">
-            {users.length > 0 ?( users.length > 1 ? `${users.length} personas` : `${users.length} persona`) : 'No hay invitados aún.'} 
+            {(() => {
+      const userFiltered = users.filter((el) => el.status !== 'rejected');
+      return userFiltered.length > 0
+        ? userFiltered.length > 1
+          ? `${userFiltered.length} personas`
+          : `${userFiltered.length} persona`
+        : 'No hay invitados aún.';
+    })()}
           </Typography>
         </Accordion>
 
@@ -70,9 +112,21 @@ function CardAsadero({ bbq, owner }) {
           <Grid container justifyContent="flex-end">
             <Grid item>
               <ButtonCustom
-                props={{ navigate: '/home/createAsadero', text: 'Editar' }}
+                props={{
+                  navigate: '/home/createAsadero',
+                  text: 'Ver detalles',
+                }}
                 handleButton={handleButton}
               />
+              {open && bbq.isOpen && (
+                <ButtonCustom
+                  props={{
+                    text: 'Cerrar plazo de pago',
+                    color: 'error',
+                  }}
+                  handleButton={handleCancel}
+                />
+              )}
             </Grid>
           </Grid>
         )}

@@ -1,5 +1,6 @@
 import { Box, Button, Container, Grid, Typography } from '@mui/material'
 import './Footer.css'
+import { Link } from 'react-router-dom'
 
 function Footer({ title }) {
   const elements = [
@@ -9,7 +10,7 @@ function Footer({ title }) {
     },
     {
       header: 'Meat the team',
-      links: ['Quiénes somos'],
+      links: [<Link to="/home/aboutUs" className='links'>Quiénes somos</Link>],
     },
     {
       header: 'Contacto',

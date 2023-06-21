@@ -26,8 +26,6 @@ function PopUpShared({ open, handleClose, dataUser }) {
     p: 4,
   }
 
-  console.log(shared)
-
   return (
     <div>
       <Modal

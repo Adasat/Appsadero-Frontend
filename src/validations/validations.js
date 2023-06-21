@@ -38,22 +38,9 @@ export const duration = (startTime, endTime) => {
 
     const startTimeFormated = parse(startTime, 'HH:mm', new Date())
     const endTimeFormated = parse(endTime, 'HH:mm', new Date())
-
     const difference = endTimeFormated.getTime() - startTimeFormated.getTime()
-
     const hours = Math.floor(difference / (1000*60*60))
-
     return hours;
 }
 
-/*
-export const checkDate = (date) => {
-    const today = formatDate()
 
-    const difference = endTimeFormated.getTime() - startTimeFormated.getTime()
-
-    const hours = Math.floor(difference / (1000*60*60))
-
-    return hours;
-}
-*/

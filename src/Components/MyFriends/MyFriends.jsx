@@ -48,12 +48,6 @@ function MyFriends({ width, height }) {
     setDataUser(el)
   }
   const handleClose = () => setOpen(false)
-  /*
-  const handleClickId = (id) => {
-    setIdSelected(id)
-    handleClick()
-  }
-*/
 
   const returnFriends = () => {
     if (friends && friends.length > 0) {
