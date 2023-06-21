@@ -13,6 +13,7 @@ import CategoriesNProducts from '../Components/CategoriesNProdcut/CategoriesNPro
 import UpcomingBBQpage from '../Pages/UpcomingBBQpage/UpcomingBBQpage'
 import ManageAsaderoPage from '../Pages/ManageAsaderoPage/ManageAsaderoPage'
 import MeetTeam from '../Pages/MeetTeam/MeetTeam'
+import DetailsBBQ from '../Components/DetailsBBQ/DetailsBBQ'
 
 
 
@@ -49,8 +50,9 @@ export const router = createBrowserRouter([
       { path: '/home/upcomingAsadero', element: <UpcomingBBQpage /> },
       { path: '/home/friends', element: <Friends /> },
       { path: '/home/abel', element: <Abel /> },
-      { path: '/home/products', element: <CategoriesNProducts/>},
-      { path: '/home/aboutUs', element: <MeetTeam/>}
+      { path: '/home/products', element: <CategoriesNProducts /> },
+      { path: '/home/aboutUs', element: <MeetTeam /> },
+      { path: '/home/prueba', element: <DetailsBBQ /> },
     ],
   },
 ])

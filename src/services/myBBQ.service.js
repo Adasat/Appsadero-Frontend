@@ -137,3 +137,19 @@ export const updateAsadero = async (asaderoId, fields) => {
     return error
   }
 }
+
+//Get cart from an bbq
+export const getCartFromAsadero = async (cartId) => {
+  try {
+    const { data } = await api.get(`/asadero/sharedAsaderos/${cartId}`, {
+      headers: {
+        token: localStorage.getItem('token'),
+      },
+    })
+    return data
+  } catch (error) {
+    return error
+  }
+}
+
+
