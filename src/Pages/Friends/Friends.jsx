@@ -3,7 +3,6 @@ import {
   addFriendByNickname,
   getAllUsers,
   getAllFriends,
-  getOneByNickname,
 } from '../../services/myFriends.service'
 import { Alert, Box, Grid, Paper, Typography } from '@mui/material'
 

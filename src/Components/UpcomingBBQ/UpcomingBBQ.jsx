@@ -92,7 +92,7 @@ function UpcomingBBQ() {
       <ButtonCustom props={{
           text: 'Todos Los Asaderos',
           className:'button-header',
-          navigate: '/home/manageAsadero',
+          navigate: '/home/upcomingAsadero',
           color: 'secondary'
         }}>
           </ButtonCustom>

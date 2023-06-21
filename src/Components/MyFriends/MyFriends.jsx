@@ -102,7 +102,7 @@ function MyFriends({ width, height }) {
       <ButtonCustom props={{
           text: 'Mis Amigos',
           className:'button-header',
-          navigate: '/home/manageAsadero',
+          navigate: '/home/friends',
           color: 'secondary'
         }}>
           </ButtonCustom>

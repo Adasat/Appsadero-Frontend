@@ -66,7 +66,7 @@ function Dashboard() {
           <ButtonCustom props={{
             text: 'Nuevo Asadero',
             className:'button-header',
-            navigate: '/home/manageAsadero',
+            navigate: '/home/createAsadero',
             color: 'primary'
           }}>
           </ButtonCustom>

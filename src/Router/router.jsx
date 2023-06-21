@@ -52,7 +52,6 @@ export const router = createBrowserRouter([
       { path: '/home/abel', element: <Abel /> },
       { path: '/home/products', element: <CategoriesNProducts /> },
       { path: '/home/aboutUs', element: <MeetTeam /> },
-      { path: '/home/prueba', element: <DetailsBBQ /> },
     ],
   },
 ])
