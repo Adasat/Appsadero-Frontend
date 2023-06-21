@@ -15,6 +15,7 @@ import SearchFriend from '../../Components/SearchFriend/SearchFriend'
 import { formatDate, formatDateDB, formatTime } from '../../validations/validations'
 import { addGuests, createBBQ } from '../../services/myBBQ.service'
 import dayjs from 'dayjs'
+import CategoriesNProducts from '../../Components/CategoriesNProdcut/CategoriesNProducts'
 
 function CreateAsadero() {
 
@@ -157,7 +158,7 @@ function CreateAsadero() {
               onChange={handleSearchInput}
               onClick={handleSearchClick}
             />
-
+            <CategoriesNProducts/>
             <Box display={'flex'} justifyContent={'space-between'} m={2}>
               <ButtonCustom
                 handleButton={() => {
@@ -176,7 +177,7 @@ function CreateAsadero() {
         <Grid item xs={12} sm={6} md={6}>
           <Box minHeight={80} sx={{ m: 4 }}>
             <Paper variant="elevation" elevation={18} sx={{ height: '600px' }}>
-              <Calendar handleDate={handleDatePicker}/>
+              <Calendar handleDate={handleDatePicker} />
               <Divider sx={{ m: 5 }}></Divider>
               <Typography>{dayjs(date).format('DD/MM/YYYY')}</Typography>
               <Box sx={{ m: '24px' }}>
