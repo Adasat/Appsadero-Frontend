@@ -44,10 +44,10 @@ function ManageBBQ() {
           <List className="upcomingbbqlist">
             {ownBbq.map((el) => (
               <ListItemText className="list-item" key={el.id}>
-                <Box>
-                  <Box
+                <Box c padding={1}>
+                  <Box 
                     display={'flex'}
-                    justifyContent={'space-around'}
+                    justifyContent={'space-between'}
                     margin={2}
                   >
                     <ListItemIcon>
@@ -61,16 +61,19 @@ function ManageBBQ() {
                     </Typography>
                   </Box>
 
+                    <div className='list-img'>
+                    <img src={`https://source.unsplash.com/random?bbq-${el.name}`} alt="" />
+                    </div>
                   <Box
                     display={'flex'}
                     >
-                  <Paper sx={{mb:1 ,padding:1}}>
+                  <Box sx={{mb:1 ,padding:1}}>
                     <Typography>{el.description}</Typography>
 
                     <Typography align='center'>
                       Pagar Antes de: {formatDate(el.confirmation_date)}
                     </Typography>
-                      </Paper>
+                      </Box>
                   </Box>
                 </Box>
               </ListItemText>
@@ -92,26 +95,21 @@ function ManageBBQ() {
   }
 
   return (
-    <Card elevation={4} sx={{ padding: '30px', borderRadius: 4, height:'100%'}}>
+    <Card elevation={4} sx={{ padding: '30px', borderRadius: 4, maxHeight: '960px' }}>
       <Typography variant="h5">
         <ButtonCustom props={{
           text: 'Editar Mis Asaderos',
           className:'button-header',
           navigate: '/home/manageAsadero',
-          color: 'secondary'
+          color: 'primary'
         }}>
           </ButtonCustom>
-{/* 
-        <Link
-          to="/home/manageAsadero"
-          className="link"
-          style={{ textDecoration: 'none' }}
-          >
-          {menuTitle}
-        </Link> */}
+
       </Typography>
       <Divider sx={{ marginBottom: '10px' }} />
+
       {returnManageBBQ()}
+
     </Card>
   )
 }

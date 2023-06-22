@@ -103,7 +103,7 @@ function MyFriends({ width, height }) {
           text: 'Mis Amigos',
           className:'button-header',
           navigate: '/home/friends',
-          color: 'secondary'
+          color: 'primary'
         }}>
           </ButtonCustom>
         {/* <Link
