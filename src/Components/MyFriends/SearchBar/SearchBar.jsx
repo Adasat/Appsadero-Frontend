@@ -12,7 +12,7 @@ function SearchBar({ handleSearch }) {
         id="search-bar"
         onChange={searchFriend}
         variant="outlined"
-        placeholder="Busca por nick..."
+        placeholder="Busca entre tus amigos por nicks..."
         size="small"
         style={{width: '80%' }}
       />

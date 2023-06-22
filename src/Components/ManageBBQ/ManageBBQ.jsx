@@ -8,14 +8,12 @@ import {
   List,
   ListItemIcon,
   ListItemText,
-  Paper,
   Typography,
 } from '@mui/material'
 import { formatDate } from '../../validations/validations'
 import ButtonCustom from '../ButtonCustom/ButtonCustom'
-import { Link, useNavigate } from 'react-router-dom'
+import {useNavigate } from 'react-router-dom'
 import { OutdoorGrill } from '@mui/icons-material'
-import { Row } from 'react-day-picker'
 
 function ManageBBQ() {
   const [ownBbq, setOwnBbq] = useState([])
@@ -26,7 +24,6 @@ function ManageBBQ() {
 
     const res = await getMyOwnBbq()
     setOwnBbq(res)
-    console.log(ownBbq)
   }
 
   useEffect(() => {
@@ -71,7 +68,7 @@ function ManageBBQ() {
                     <Typography>{el.description}</Typography>
 
                     <Typography align='center'>
-                      Pagar Antes de: {formatDate(el.confirmation_date)}
+                      Fecha límite de pago: {formatDate(el.confirmation_date)}
                     </Typography>
                       </Box>
                   </Box>
@@ -95,10 +92,10 @@ function ManageBBQ() {
   }
 
   return (
-    <Card elevation={4} sx={{ padding: '30px', borderRadius: 4, maxHeight: '960px' }}>
+    <Card elevation={24} sx={{ padding: '30px', borderRadius: 4, maxHeight: '960px' }} >
       <Typography variant="h5">
         <ButtonCustom props={{
-          text: 'Editar Mis Asaderos',
+          text: menuTitle,
           className:'button-header',
           navigate: '/home/manageAsadero',
           color: 'primary'
@@ -107,7 +104,6 @@ function ManageBBQ() {
 
       </Typography>
       <Divider sx={{ marginBottom: '10px' }} />
-
       {returnManageBBQ()}
 
     </Card>

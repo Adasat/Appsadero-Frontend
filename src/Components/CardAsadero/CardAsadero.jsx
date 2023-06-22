@@ -2,7 +2,6 @@ import {
   Accordion,
   AccordionSummary,
   AppBar,
-  Box,
   Button,
   Card,
   CardActions,
@@ -16,7 +15,6 @@ import {
   IconButton,
   List,
   ListItem,
-  ListItemText,
   Paper,
   Slide,
   Toolbar,
@@ -49,10 +47,7 @@ function CardAsadero({ bbq, owner }) {
   const [textAlert, setTextAlert] = useState('')
   const [severityText, setSeverityText] = useState('')
 
-
   const textOk = 'Invitación rechazada'
-
-   
 
   const navigate = useNavigate()
 
@@ -65,7 +60,6 @@ function CardAsadero({ bbq, owner }) {
 
   useEffect(() => {
     listUsers()
-    
   }, [bbq])
 
   const handleButton = () => {
@@ -119,30 +113,27 @@ function CardAsadero({ bbq, owner }) {
       location.reload()
     }
 
-
     const handleReject = () => {
       setOpen(false)
 
       setShowAlert(true)
       setTextAlert('Invitación rechazada')
       setTimeout(() => {
-      setShowAlert(false)
-      location.reload()
+        setShowAlert(false)
+        location.reload()
       }, 1000)
-
     }
     const handleAccept = async () => {
       setOpen(false)
       setShowAlert(true)
       setTimeout(() => {
-              setShowAlert(false)
-              location.reload()
-      }, 1000 )
+        setShowAlert(false)
+        location.reload()
+      }, 1000)
       setTextAlert('Invitación aceptada')
-       await aceptInvitationFromAsadero(bbq.id)
-     }
+      await aceptInvitationFromAsadero(bbq.id)
+    }
 
-    
     return (
       <div>
         <Button variant="outlined" onClick={handleClickOpen}>
@@ -187,7 +178,6 @@ function CardAsadero({ bbq, owner }) {
                   <CardContent>
                     <Typography textAlign={'center'} variant="h4"></Typography>
                     <Divider sx={{ marginBottom: '10px' }} />
-
                     <Typography variant="h7">
                       Descripción: {bbq.description}
                     </Typography>
@@ -237,6 +227,8 @@ function CardAsadero({ bbq, owner }) {
                 </Card>
               </Paper>
             </Grid>
+
+            
             <Grid item xs={12} sm={6} md={3}>
               <Paper elevation={24} sx={{ borderRadius: '12px' }}>
                 <Card sx={{ borderRadius: '12px' }}>
@@ -299,20 +291,14 @@ function CardAsadero({ bbq, owner }) {
               el.first_name === localStorage.getItem('first_name')
           )
           .map((el) => (
-            <Chip
-              key={el.id}
-              label="NEW"
-              color="error"
-              sx={{ m: 1 }}
-             
-            ></Chip>
+            <Chip key={el.id} label="NEW" color="error" sx={{ m: 1 }}></Chip>
           ))}
         <Link className="links" /* to={`/home/manageAsadero/${bbq.id}`} */>
           <CardHeader
             title={bbq.name}
             sx={{ textAlign: 'center', fontWeight: 'bold' }}
           />
-        </Link>            
+        </Link>
         <Divider sx={{ marginBottom: '10px' }} />
         {FullScreenDialog()}
         <CardContent>

@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { getAllFriends } from '../../services/myFriends.service'
 import {
-  Box,
   Divider,
   List,
   ListItemIcon,
@@ -54,8 +53,7 @@ function MyFriends({ width, height }) {
   const returnFriends = () => {
     if (friends && friends.length > 0) {
       return (
-        <Paper  elevation={3}
-        sx={{ padding: '24px', boxSizing: 'unset'}}>
+        <Paper sx={{ padding: '24px', boxSizing: 'unset' }}>
           <SearchBar handleSearch={handleSearch} />
           <List className="myfriendslist">
             {filterListFriend.map((el) => (
@@ -68,21 +66,20 @@ function MyFriends({ width, height }) {
                 </Typography>
                 {open && (
                   <PopUpShared
-                  open={open}
-                  handleClose={handleClose}
-                  dataUser={dataUser}
-                  
+                    open={open}
+                    handleClose={handleClose}
+                    dataUser={dataUser}
                   />
-                  )}
+                )}
               </ListItemText>
             ))}
           </List>
-            </Paper>
+        </Paper>
       )
     } else {
       return (
         <>
-          <Typography variant="body">
+          <Typography variant="h5">
             Seguimos buscando... <br />
             <Link to="/home/friends" className="link">
               Añade algún amigo.
@@ -95,17 +92,18 @@ function MyFriends({ width, height }) {
 
   return (
     <Paper
-      elevation={3}
-      sx={{ padding: '24px', borderRadius: 4, boxSizing: 'unset'}}
-      >
+      elevation={24}
+      sx={{ padding: '24px', borderRadius: 4, boxSizing: 'unset' }}
+    >
       <Typography variant="h5">
-      <ButtonCustom props={{
-          text: 'Mis Amigos',
-          className:'button-header',
-          navigate: '/home/friends',
-          color: 'primary'
-        }}>
-          </ButtonCustom>
+        <ButtonCustom
+          props={{
+            text: 'Mis Amigos',
+            className: 'button-header',
+            navigate: '/home/friends',
+            color: 'primary',
+          }}
+        ></ButtonCustom>
         {/* <Link
           to="/home/friends"
           className="link"
