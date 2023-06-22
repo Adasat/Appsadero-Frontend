@@ -95,7 +95,7 @@ function ManageBBQ() {
   }
 
   return (
-    <Card elevation={4} sx={{ padding: '30px', borderRadius: 4, maxHeight: '960px' }}>
+    <Card elevation={4} sx={{ padding: '30px', borderRadius: 4 }}>
       <Typography variant="h5">
         <ButtonCustom props={{
           text: 'Editar Mis Asaderos',

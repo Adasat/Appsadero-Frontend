@@ -39,7 +39,7 @@ function Dashboard() {
       </Paper>
 
       <Grid container spacing={4} component="main" sx={{ height: '100vh' }}>
-        <Grid item xs={12} sm={6} md={4} sx={{ backgroundColor: '' }}>
+        <Grid item xs={12} sm={12} md={4} sx={{ backgroundColor: '' }}>
           <Paper sx={{ m: 2, padding: 4, textAlign: 'center' }}>
 
 
@@ -92,8 +92,9 @@ function Dashboard() {
         </Grid>
 
 
-        <Grid item xs={12} sm={6} md={4} sx={{ backgroundColor: '' }}>
+        <Grid item xs={12} sm={12} md={4} sx={{ backgroundColor: '' }}>
           <ManageBBQ />
+        
         </Grid>
 
         <Grid item xs={12} sm={12} md={4} sx={{ backgroundColor: '' }}>
