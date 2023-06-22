@@ -85,7 +85,8 @@ function UpcomingBBQ() {
   return (
     <Card
       elevation={24}
-      sx={{ padding: '30px', borderRadius: 4, maxHeight: '960px' }}
+      sx={{ padding: '30px', borderRadius: 2, //maxHeight: '960px'
+     }} 
     >
       <Typography variant="h5">
         <ButtonCustom

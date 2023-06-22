@@ -16,7 +16,7 @@ function Dashboard() {
           left: 0,
           margin: 2,
           textAlign: 'center',
-          borderRadius: 4
+          borderRadius: 2
         }}
       >
         <div className="welcom">
@@ -30,7 +30,7 @@ function Dashboard() {
 
       <Grid container spacing={4} component="main" sx={{ height: '100vh' }}>
         <Grid item xs={12} sm={12} md={4} sx={{ backgroundColor: '' }}>
-          <Paper elevation={24} sx={{ m: 2, padding: 4, textAlign: 'center', borderRadius: 4 }}>
+          <Paper elevation={24} sx={{ m: 2, padding: 4, textAlign: 'center', borderRadius: 2 }}>
 
 
             <Grid container>

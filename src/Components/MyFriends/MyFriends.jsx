@@ -93,7 +93,7 @@ function MyFriends({ width, height }) {
   return (
     <Paper
       elevation={24}
-      sx={{ padding: '24px', borderRadius: 4, boxSizing: 'unset' }}
+      sx={{ padding: '24px', borderRadius: 2, boxSizing: 'unset' }}
     >
       <Typography variant="h5">
         <ButtonCustom
