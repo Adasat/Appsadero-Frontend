@@ -60,7 +60,7 @@ function CardAsadero({ bbq, owner }) {
 
   useEffect(() => {
     listUsers()
-  }, [bbq])
+  }, [])
 
   const handleButton = () => {
     navigate('/home/createAsadero')
@@ -88,9 +88,7 @@ function CardAsadero({ bbq, owner }) {
       handleCancel()
     }
   }
-  const handleNew = () => {
-    setNotification(true)
-  }
+  
   useEffect(() => {
     openVSclosed(bbq.confirmation_date)
   }, [currentDay, rejected])
@@ -122,6 +120,7 @@ function CardAsadero({ bbq, owner }) {
         setShowAlert(false)
         location.reload()
       }, 1000)
+      
     }
     const handleAccept = async () => {
       setOpen(false)
@@ -134,6 +133,12 @@ function CardAsadero({ bbq, owner }) {
       await aceptInvitationFromAsadero(bbq.id)
     }
 
+    const hasPendingInvitation = users.filter(
+      (el) =>
+        el.status === 'pending' &&
+        el.first_name === localStorage.getItem('first_name')
+        
+    ).length > 0
     return (
       <div>
         <Button variant="outlined" onClick={handleClickOpen}>
@@ -196,14 +201,9 @@ function CardAsadero({ bbq, owner }) {
                       {formatDate(bbq.confirmation_date)}
                     </Typography>
                   </CardContent>
-                  {users.filter(
-                    (el) =>
-                      el.status === 'pending' &&
-                      el.nickname === localStorage.getItem('nickname')
-                  ).length > 0 && (
+                  {hasPendingInvitation && (
                     <CardActions justifyContent={'center'}>
                       <Button
-                        text="Rechazar invitación"
                         variant="outlined"
                         size="large"
                         color="error"
@@ -213,7 +213,6 @@ function CardAsadero({ bbq, owner }) {
                         Rechazar invitación
                       </Button>
                       <Button
-                        label="Aceptar invitación"
                         variant="contained"
                         size="large"
                         color="success"
@@ -228,7 +227,6 @@ function CardAsadero({ bbq, owner }) {
               </Paper>
             </Grid>
 
-            
             <Grid item xs={12} sm={6} md={3}>
               <Paper elevation={24} sx={{ borderRadius: '12px' }}>
                 <Card sx={{ borderRadius: '12px' }}>
@@ -261,25 +259,29 @@ function CardAsadero({ bbq, owner }) {
                   />
 
                   <List>
-                    
-
-                    {(owner === true) ?                 
-                    users
-                      .filter((el) => el.status !== 'rejected')
-                      .map((el) => (
-                        <Typography variant="h6" key={el.id} textAlign="center">
-                          {el.first_name} - {el.status}
-                        </Typography>
-                      )) 
-                    : 
-                     users
-                      .filter((el) => el.status !== 'rejected')
-                      .map((el) => (
-                        <Typography variant="h6" key={el.id} textAlign="center">
-                          {el.first_name}
-                        </Typography> ))
-                        }
-
+                    {owner === true
+                      ? users
+                          .filter((el) => el.status !== 'rejected')
+                          .map((el) => (
+                            <Typography
+                              variant="h6"
+                              key={el.id}
+                              textAlign="center"
+                            >
+                              {el.first_name} - {el.status}
+                            </Typography>
+                          ))
+                      : users
+                          .filter((el) => el.status !== 'rejected')
+                          .map((el) => (
+                            <Typography
+                              variant="h6"
+                              key={el.id}
+                              textAlign="center"
+                            >
+                              {el.first_name}
+                            </Typography>
+                          ))}
                   </List>
                 </Card>
               </Paper>
@@ -289,7 +291,7 @@ function CardAsadero({ bbq, owner }) {
       </div>
     )
   }
-
+  
   /////////////////////////////////////////////////////////////////////////////////////
 
   return (
