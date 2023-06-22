@@ -10,7 +10,7 @@ import MyFriends from '../../Components/MyFriends/MyFriends'
 import SearchFriend from '../../Components/SearchFriend/SearchFriend'
 import { useParams } from 'react-router-dom'
 import SubHeader from '../../Components/HeaderMain/SubHeader/SubHeader'
-
+import './Friends.css'
 
 function Friends() {
   const [nickname, setNickname] = useState('')
@@ -82,10 +82,15 @@ function Friends() {
             <MyFriends width={'750px'} height={'50vh'} />
           </Grid>
           <Grid item xs={4} sm={3}>
-            <Paper elevation={7}>
+            <Paper elevation={4} sx={{height: '150px'}}>
+              <Box>
+               <div className='search-container'>
               <SearchFriend onChange={handleSearchInput}
                 onClick={handleButtonFriend} 
-              />
+                />
+                </div>
+                </Box>
+                </Paper>
               <Box marginBottom={2}>
                 {alert && (
                   <Alert variant="outlined" severity={alert}>
@@ -93,7 +98,6 @@ function Friends() {
                   </Alert>
                 )}
               </Box>
-            </Paper>
           </Grid>
         </Grid>
         <Box
