@@ -1,27 +1,21 @@
 import { useEffect, useState } from 'react'
 import { getAllMyAsaderos } from '../../services/myBBQ.service'
 import {
-  Avatar,
   Box,
   Card,
   Divider,
-  ImageList,
-  ImageListItem,
   List,
   ListItemIcon,
   ListItemText,
-  Paper,
   Typography,
 } from '@mui/material'
 import { OutdoorGrill } from '@mui/icons-material'
 import './UpcomingBBQ.css'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { formatDate } from '../../validations/validations'
 import ButtonCustom from '../ButtonCustom/ButtonCustom'
-import { blue, red, yellow } from '@mui/material/colors'
-import { ImageListItemBar } from '@mui/material';
 
-//component rendering upcoming bbq, in front as próximos asaderos
+//component rendering upcoming bbq, in front as todos los asaderos
 function UpcomingBBQ() {
   const [upcomingBBQ, setUpcomingBBQ] = useState([])
   const navigate = useNavigate()
@@ -46,10 +40,12 @@ function UpcomingBBQ() {
         <List className="upcomingbbqlist">
           {upcomingBBQ.map((bbq) => (
             <ListItemText className="list-item" key={bbq.id}>
-              <Box width={'100%'} margin={2}>
-                </Box>
+              <Box width={'100%'} margin={2}></Box>
               <Box width={'100%'} mb={2} padding={1}>
-                <Box display={'flex'} sx={{ flexDirection: 'row', justifyContent: 'space-around' }}>
+                <Box
+                  display={'flex'}
+                  sx={{ flexDirection: 'row', justifyContent: 'space-around' }}
+                >
                   <ListItemIcon>
                     <OutdoorGrill />
                   </ListItemIcon>
@@ -59,18 +55,15 @@ function UpcomingBBQ() {
                   <Typography>{formatDate(bbq.date_time)}</Typography>
                 </Box>
                 {/* <Avatar src="https://source.unsplash.com/random?bbq" sx={{ width: '100%', height: '50%', objectFit: 'cover'}}> */}
-
-                <div className='list-img'>
-                  <img src={`https://source.unsplash.com/random?bbq-${bbq.name}`} alt="" />
+                <div className="list-img">
+                  <img
+                    src={`https://source.unsplash.com/random?bbq-${bbq.name}`}
+                    alt=""
+                  />
                 </div>
-
                 <Box>
-
-
                   <Typography variant="body">{bbq.description}</Typography>
                 </Box>
-
-
               </Box>
             </ListItemText>
           ))}
@@ -90,15 +83,19 @@ function UpcomingBBQ() {
   }
 
   return (
-    <Card elevation={3} sx={{ padding: '30px', borderRadius: 4, maxHeight:'960px'}}>
+    <Card
+      elevation={24}
+      sx={{ padding: '30px', borderRadius: 4, maxHeight: '960px' }}
+    >
       <Typography variant="h5">
-        <ButtonCustom props={{
-          text: 'Todos Los Asaderos',
-          className: 'button-header',
-          navigate: '/home/upcomingAsadero',
-          color: 'primary'
-        }}>
-        </ButtonCustom>
+        <ButtonCustom
+          props={{
+            text: menuTitle,
+            className: 'button-header',
+            navigate: '/home/upcomingAsadero',
+            color: 'primary',
+          }}
+        ></ButtonCustom>
         {/*  <Link
 <          to="/home/upcomingAsadero"
           className="link"

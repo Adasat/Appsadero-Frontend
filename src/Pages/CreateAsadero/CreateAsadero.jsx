@@ -7,15 +7,12 @@ import {
   Grid,
   IconButton,
   List,
-  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
   Paper,
-  Slide,
   Toolbar,
   Typography,
-  useStepContext,
 } from '@mui/material'
 import ButtonCustom from '../../Components/ButtonCustom/ButtonCustom'
 import Calendar from '../../Components/Calendar/Calendar'
@@ -31,17 +28,19 @@ import FriendListSelect from '../../Components/FriendListSelect/FriendListSelect
 import { formatDateDB, formatTime } from '../../validations/validations'
 import { addGuests, createBBQ } from '../../services/myBBQ.service'
 import dayjs from 'dayjs'
+import customParseFormat from 'dayjs/plugin/customParseFormat'
 import CategoriesNProducts from '../../Components/CategoriesNProdcut/CategoriesNProducts'
 import SubHeader from '../../Components/HeaderMain/SubHeader/SubHeader'
 import { addProductsToMenu } from '../../services/product.service'
 import { useNavigate } from 'react-router-dom'
-
 import Resumen from './Resumen/Resumen'
 import CloseIcon from '@mui/icons-material/Close'
+import AlertSuccess from '../../Components/AlertSuccess/AlertSuccess'
 
 function CreateAsadero() {
   const navigate = useNavigate()
   const menuTitle = 'Creando Asadero'
+  dayjs.extend(customParseFormat)
 
   const [name, setName] = useState('')
   const [description, setDescription] = useState('')
@@ -54,7 +53,6 @@ function CreateAsadero() {
   const [products, setProducts] = useState()
   const [nicksUser, setNicksUser] = useState([])
   // eslint-disable-next-line no-unused-vars
-  const [nickname, setNickname] = useState()
   const [openFriendPopup, setOpenFriendPopup] = useState(false)
   const [openProductPopup, setOpenProductPopup] = useState(false)
 
@@ -62,9 +60,7 @@ function CreateAsadero() {
     //setSelectedIndex(index)
     if (index === 0) {
       setOpenFriendPopup(true)
-    }
-
-    if (index === 1) {
+    }else if (index === 1) {
       setOpenProductPopup(true)
     }
   }
@@ -78,14 +74,6 @@ function CreateAsadero() {
   }
   // eslint-disable-next-line no-unused-vars
   const handleButton = (button) => {}
-
-  const handleSearchInput = (value) => {
-    setNickname(value)
-  }
-
-  const handleSearchClick = (value) => {
-    setNickname(value)
-  }
 
   const handleName = (name) => {
     setName(name)
@@ -116,8 +104,6 @@ function CreateAsadero() {
     setNicksUser([...nicksUser, nick])
   }
 
-
-
   const handleProductSelection = (product) => {
     //Gets Array of Products OBJ
     setProducts(product)
@@ -126,32 +112,46 @@ function CreateAsadero() {
   const asadero = {
     name: name,
     description: description,
-    date_time: dayjs(date).format('YYYY-MM-DD'),
+    date_time: dayjs(date, 'DD/MM/YYYY'),
     duration: formatTime(startTime),
     payments_accepted: formatDateDB(payDate),
     place: place,
   }
 
+  const [showAlert, setShowAlert] = useState(false)
+  const [textAlert, setTextAlert] = useState()
+  const [severityText, setSeverityText] = useState()
+
+  const textOk = '¡Has creado con éxito un asadero!'
+  const textNotOk = 'Revisa los campos..!'
+  const success = 'success'
+  const error = 'error'
   //Continue Button
   const createAsadero = async () => {
     //console.log(guestList)
     try {
       const BbqId = await createBBQ(asadero)
-
-      console.log('Asadero Creado')
-
-      const guests = BbqId
-        ? await addGuests(BbqId.id, guestList)
-        : console.log('Not guest invited')
-
-      console.log('Invitaciones Enviadas')
+      //console.log('Asadero Creado')
+      const guests = await addGuests(BbqId.id, guestList)
+      //console.log('Invitaciones Enviadas')
       //console.log(BbqId.id, products)
       const menu = await addProductsToMenu(BbqId.id, products)
+      //menu ? console.log('Menú Añadido') : console.log('paquete')
+      if (BbqId && guests && menu) {
+        setTextAlert(textOk)
+       // setShowAlert(true)
+        setSeverityText(success)
+        const delay = setTimeout(() => {
+          navigate('/home/dashboard')
+        }, 2000)
+        return () => clearTimeout(delay)
+      } else {
+        setTextAlert(textNotOk)
+        setSeverityText(error)
+        alert('Por favor, revisa los campos antes de confirmar.')
+      }
+      setShowAlert(true)
 
-      menu ? console.log('Menú Añadido') : console.log('paquete')
-
-      //Añadir
-      navigate('/home/dashboard')
     } catch (err) {
       console.log(err)
       throw new Error(err)
@@ -161,6 +161,8 @@ function CreateAsadero() {
   return (
     <>
       <SubHeader menu={menuTitle} />
+      {showAlert && <AlertSuccess text={textAlert} severityText={severityText}/>}
+
       <Grid container height="100vh">
         {
           //Popup to choose Friends
@@ -213,10 +215,7 @@ function CreateAsadero() {
               </Typography>
             </Toolbar>
 
-            <CategoriesNProducts
-              handleProducts={handleProductSelection}
-             
-            />
+            <CategoriesNProducts handleProducts={handleProductSelection} />
             <Box display={'flex'} justifyContent={'center'} m={2}>
               <ButtonCustom
                 handleButton={() => {
@@ -360,7 +359,6 @@ function CreateAsadero() {
                   }}
                   props={{
                     text: 'Confirmar',
-                    navigate: '',
                     color: 'secondary',
                   }}
                 />
