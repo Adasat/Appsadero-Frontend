@@ -269,13 +269,25 @@ function CardAsadero({ bbq, owner }) {
                   />
 
                   <List>
-                    {users
+                    
+
+                    {(owner === true) ?                 
+                    users
+                      .filter((el) => el.status !== 'rejected')
+                      .map((el) => (
+                        <Typography variant="h6" key={el.id} textAlign="center">
+                          {el.first_name} - {el.status}
+                        </Typography>
+                      )) 
+                    : 
+                     users
                       .filter((el) => el.status !== 'rejected')
                       .map((el) => (
                         <Typography variant="h6" key={el.id} textAlign="center">
                           {el.first_name}
-                        </Typography>
-                      ))}
+                        </Typography> ))
+                        }
+
                   </List>
                 </Card>
               </Paper>
