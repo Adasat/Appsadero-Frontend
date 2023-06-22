@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 //import { AdapterDayjs } from '@mui/x-date-pickers-pro/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -16,7 +16,7 @@ function Calendar({handleDate}){
     
     const handleChange = (date) => {
       setDate(date)
-      setDateLabel(dayjs(date).format('YYYY-MM-DD'))
+      setDateLabel(dayjs(date).format('DD-MM-YYYY'))
       handleDate(date)
     }
 
