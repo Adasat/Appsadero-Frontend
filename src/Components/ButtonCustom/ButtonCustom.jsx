@@ -8,7 +8,7 @@ import { useState } from 'react'
 //function ButtonCustom({handleButton, navigate, disabled = false, text, className='default', color='primary'}) {
 function ButtonCustom({ handleButton, props }) {
   ButtonCustom.propTypes = {
-    handleButton: PropTypes.func.isRequired,
+    //handleButton: PropTypes.func.isRequired,
     props: PropTypes.object.isRequired,
   }
 
