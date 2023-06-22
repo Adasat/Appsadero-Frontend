@@ -47,13 +47,11 @@ function Friends() {
     if (friend) {
       setAlert('warning')
       setAlertMessage(`Esta persona ${nickname} ya está entre tus contactos`)
-    
+
     } else if (localStorage.nickname === nickname){
       setAlert('warning')
       setAlertMessage(
-        `Esta persona ${localStorage.nickname} eres tú. No puedes añadirte a tus contactos`
-      )
-    
+        `Esta persona ${localStorage.nickname} eres tú. No puedes añadirte a tus contactos`)      
     } else if (user) {
 
       await addFriendByNickname(nickname)

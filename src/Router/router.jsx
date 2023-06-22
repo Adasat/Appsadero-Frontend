@@ -13,7 +13,8 @@ import CategoriesNProducts from '../Components/CategoriesNProdcut/CategoriesNPro
 import UpcomingBBQpage from '../Pages/UpcomingBBQpage/UpcomingBBQpage'
 import ManageAsaderoPage from '../Pages/ManageAsaderoPage/ManageAsaderoPage'
 import MeetTeam from '../Pages/MeetTeam/MeetTeam'
-import DetailsBBQ from '../Components/DetailsBBQ/DetailsBBQ'
+import Vista from '../Components/WelcomeView/WelcomeView'
+import WelcomeView from '../Components/WelcomeView/WelcomeView'
 
 
 
@@ -33,6 +34,7 @@ export const router = createBrowserRouter([
     element: <LayoutMain />,
     errorElement: <NotFound />,
     children: [
+      {path: '/', element: <WelcomeView/>},
       { path: '/login', element: <Login />, loader: checkLogin },
       { path: '/signup', element: <Signup /> },
     ],
@@ -52,6 +54,7 @@ export const router = createBrowserRouter([
       { path: '/home/abel', element: <Abel /> },
       { path: '/home/products', element: <CategoriesNProducts /> },
       { path: '/home/aboutUs', element: <MeetTeam /> },
+      { path: '/home/pedro', element: <Vista/>}
     ],
   },
 ])
