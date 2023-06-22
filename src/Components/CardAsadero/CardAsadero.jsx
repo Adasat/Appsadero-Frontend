@@ -5,6 +5,7 @@ import {
   Box,
   Button,
   Card,
+  CardActions,
   CardContent,
   CardHeader,
   CardMedia,
@@ -24,6 +25,7 @@ import {
 import { Link, useNavigate } from 'react-router-dom'
 import { formatDate } from '../../validations/validations'
 import {
+  aceptInvitationFromAsadero,
   getCartFromAsadero,
   getUsersFromAsadero,
   rejectUsersFromAsadero,
@@ -32,6 +34,7 @@ import {
 import { forwardRef, useEffect, useState } from 'react'
 import { Close, ExpandMore } from '@mui/icons-material'
 import ButtonCustom from '../ButtonCustom/ButtonCustom'
+import AlertSuccess from '../AlertSuccess/AlertSuccess'
 
 function CardAsadero({ bbq, owner }) {
   const [users, setUsers] = useState([])
@@ -39,7 +42,17 @@ function CardAsadero({ bbq, owner }) {
   const [reject, setReject] = useState()
   const [currentDay, setCurrentDay] = useState(new Date())
   const [notification, setNotification] = useState(false)
+  const [acceptInvitation, setAcceptInvitation] = useState(false)
   const [shoppingCart, setShoppingCart] = useState([])
+
+  const [showAlert, setShowAlert] = useState(false)
+  const [textAlert, setTextAlert] = useState('')
+  const [severityText, setSeverityText] = useState('')
+
+
+  const textOk = 'Invitación rechazada'
+
+   
 
   const navigate = useNavigate()
 
@@ -48,12 +61,12 @@ function CardAsadero({ bbq, owner }) {
     const cartList = await getCartFromAsadero(bbq.id)
     setUsers(res.users)
     setShoppingCart(cartList)
-    console.log(cartList[0])
   }
 
   useEffect(() => {
     listUsers()
-  }, [])
+    
+  }, [bbq])
 
   const handleButton = () => {
     navigate('/home/createAsadero')
@@ -81,7 +94,9 @@ function CardAsadero({ bbq, owner }) {
       handleCancel()
     }
   }
-
+  const handleNew = () => {
+    setNotification(true)
+  }
   useEffect(() => {
     openVSclosed(bbq.confirmation_date)
   }, [currentDay, rejected])
@@ -104,13 +119,30 @@ function CardAsadero({ bbq, owner }) {
       location.reload()
     }
 
-    const totalPrice = (param) => {
-      let sum = 0
-      sum += param
-      return sum
-    }
 
-    open
+    const handleReject = () => {
+      setOpen(false)
+
+      setShowAlert(true)
+      setTextAlert('Invitación rechazada')
+      setTimeout(() => {
+      setShowAlert(false)
+      location.reload()
+      }, 1000)
+
+    }
+    const handleAccept = async () => {
+      setOpen(false)
+      setShowAlert(true)
+      setTimeout(() => {
+              setShowAlert(false)
+              location.reload()
+      }, 1000 )
+      setTextAlert('Invitación aceptada')
+       await aceptInvitationFromAsadero(bbq.id)
+     }
+
+    
     return (
       <div>
         <Button variant="outlined" onClick={handleClickOpen}>
@@ -140,9 +172,12 @@ function CardAsadero({ bbq, owner }) {
 
           <Grid container spacing={5} justifyContent={'center'} margin={1}>
             <Grid item xs={12} sm={6} md={4}>
-              <Paper elevation={24}>
-                <Card>
-                  <CardHeader title={bbq.name} sx={{ fontWeight: 'bold' }} />
+              <Paper elevation={24} sx={{ borderRadius: '12px' }}>
+                <Card sx={{ borderRadius: '12px' }}>
+                  <CardHeader
+                    title={bbq.name}
+                    sx={{ textAlign: 'center', backgroundColor: '#e49976' }}
+                  />
                   <CardMedia
                     component="img"
                     height="194"
@@ -171,42 +206,79 @@ function CardAsadero({ bbq, owner }) {
                       {formatDate(bbq.confirmation_date)}
                     </Typography>
                   </CardContent>
+                  {users.filter(
+                    (el) =>
+                      el.status === 'pending' &&
+                      el.nickname === localStorage.getItem('nickname')
+                  ).length > 0 && (
+                    <CardActions justifyContent={'center'}>
+                      <Button
+                        text="Rechazar invitación"
+                        variant="outlined"
+                        size="large"
+                        color="error"
+                        onClick={handleReject}
+                        sx={{ height: '60px', width: '150px' }}
+                      >
+                        Rechazar invitación
+                      </Button>
+                      <Button
+                        label="Aceptar invitación"
+                        variant="contained"
+                        size="large"
+                        color="success"
+                        onClick={handleAccept}
+                        sx={{ height: '60px', width: '150px' }}
+                      >
+                        Aceptar invitación
+                      </Button>
+                    </CardActions>
+                  )}
                 </Card>
               </Paper>
             </Grid>
             <Grid item xs={12} sm={6} md={3}>
-              <Typography variant="h5" align="center">
-                Menú
-              </Typography>
-              <List>
-                {shoppingCart && shoppingCart.length ? (
-                  shoppingCart.map((prod) => (
-                    <ListItem key={prod.id}>{prod.name}</ListItem>
-                  ))
-                ) : (
-                  <Typography variant="body1" align="center">
-                    No hay productos en tu lista
-                  </Typography>
-                )}
-              </List>
-            </Grid>
-            <Grid item xs={12} sm={12} md={3}>
-              <List>
-                <Typography variant="h5" textAlign="center">
-                  Lista de invitados
-                </Typography>
-                <Divider sx={{ marginBottom: '10px' }} />
+              <Paper elevation={24} sx={{ borderRadius: '12px' }}>
+                <Card sx={{ borderRadius: '12px' }}>
+                  <CardHeader
+                    title="Menú"
+                    sx={{ textAlign: 'center', backgroundColor: '#e49976' }}
+                  />
 
-                {users
-                  .filter(
-                    (el) => el.status === 'pending' || el.status === 'confirmed'
-                  )
-                  .map((el) => (
-                    <Typography variant="h6" key={el.id} textAlign="center">
-                      {el.first_name}
-                    </Typography>
-                  ))}
-              </List>
+                  <List>
+                    {shoppingCart && shoppingCart.length ? (
+                      shoppingCart.map((prod) => (
+                        <ListItem key={prod.id}>- {prod.name}</ListItem>
+                      ))
+                    ) : (
+                      <Typography variant="body1" align="center">
+                        No hay productos en tu lista
+                      </Typography>
+                    )}
+                  </List>
+                </Card>
+              </Paper>
+            </Grid>
+
+            <Grid item xs={12} sm={12} md={3}>
+              <Paper elevation={24} sx={{ borderRadius: '12px' }}>
+                <Card sx={{ borderRadius: '12px' }}>
+                  <CardHeader
+                    title="Invitados"
+                    sx={{ textAlign: 'center', backgroundColor: '#e49976' }}
+                  />
+
+                  <List>
+                    {users
+                      .filter((el) => el.status !== 'rejected')
+                      .map((el) => (
+                        <Typography variant="h6" key={el.id} textAlign="center">
+                          {el.first_name}
+                        </Typography>
+                      ))}
+                  </List>
+                </Card>
+              </Paper>
             </Grid>
           </Grid>
         </Dialog>
@@ -217,102 +289,97 @@ function CardAsadero({ bbq, owner }) {
   /////////////////////////////////////////////////////////////////////////////////////
 
   return (
-    <Card>
-      {users
-        .filter(
-          (el) =>
-            el.status === 'pending' &&
-            el.first_name === localStorage.getItem('first_name')
-        )
-        .map((el) => (
-          <Chip
-            key={el.id}
-            label="NEW"
-            color="error"
-            sx={{ m: 1 }}
-            onClick={handleNew}
-          ></Chip>
-        ))}
-      <Link className="links" /* to={`/home/manageAsadero/${bbq.id}`} */>
-        <CardHeader
-          title={bbq.name}
-          sx={{ textAlign: 'center', fontWeight: 'bold' }}
-        />
-      </Link>
-
-      {users && users !== undefined
-        ? users
-            .filter(
-              (el) =>
-                el.status === 'pending' &&
-                el.nickname === localStorage.getItem('nickname')
-            )
-            .map((el) => <Chip key={el.id} label="NEW" color="error"></Chip>)
-        : null}
-      <Divider sx={{ marginBottom: '10px' }} />
-      {FullScreenDialog()}
-      <CardContent>
-        <Typography variant="body1">{formatDate(bbq.date_time)}</Typography>
-        <Typography variant="body1">{bbq.description}</Typography>
-        <Typography variant="body1">Precio por persona: {bbq.price}</Typography>
-        <Typography>
-          Fecha de confirmación: {formatDate(bbq.confirmation_date)}
-        </Typography>
-        <Accordion>
-          <AccordionSummary expandIcon={<ExpandMore />}>
-            <Typography variant="body">Invitados</Typography>
-          </AccordionSummary>
-          <div>
-            {users
-              .filter((el) => el.status !== 'rejected')
-              .map((el) => (
-                <Typography variant="body1" key={el.id}>
-                  {el.first_name}{' '}
-                  {owner === true &&
-                    el.status !== 'rejected' &&
-                    `- ${el.status}`}{' '}
-                  {el.isChef === true && ' -> Chef'}
-                </Typography>
-              ))}
-          </div>
-          <Divider sx={{ marginBottom: '10px' }} />
-          <Typography variant="body1" textAlign="right" alignContent="center">
-            {(() => {
-              const userFiltered = users.filter(
-                (el) => el.status !== 'rejected'
-              )
-              return userFiltered.length > 0
-                ? userFiltered.length > 1
-                  ? `${userFiltered.length} personas`
-                  : `${userFiltered.length} persona`
-                : 'No hay invitados aún.'
-            })()}
+    <>
+      {showAlert && <AlertSuccess text={textAlert} severityText="success" />}
+      <Card>
+        {users
+          .filter(
+            (el) =>
+              el.status === 'pending' &&
+              el.first_name === localStorage.getItem('first_name')
+          )
+          .map((el) => (
+            <Chip
+              key={el.id}
+              label="NEW"
+              color="error"
+              sx={{ m: 1 }}
+             
+            ></Chip>
+          ))}
+        <Link className="links" /* to={`/home/manageAsadero/${bbq.id}`} */>
+          <CardHeader
+            title={bbq.name}
+            sx={{ textAlign: 'center', fontWeight: 'bold' }}
+          />
+        </Link>            
+        <Divider sx={{ marginBottom: '10px' }} />
+        {FullScreenDialog()}
+        <CardContent>
+          <Typography variant="body1">{formatDate(bbq.date_time)}</Typography>
+          <Typography variant="body1">{bbq.description}</Typography>
+          <Typography variant="body1">
+            Precio por persona: {bbq.price}
           </Typography>
-        </Accordion>
-        {owner === true && (
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-              <ButtonCustom
-                props={{
-                  navigate: '/home/createAsadero',
-                  text: 'Ver detalles',
-                }}
-                handleButton={handleButton}
-              />
-              {open && bbq.isOpen && (
+          <Typography>
+            Fecha de confirmación: {formatDate(bbq.confirmation_date)}
+          </Typography>
+          <Accordion>
+            <AccordionSummary expandIcon={<ExpandMore />}>
+              <Typography variant="body">Invitados</Typography>
+            </AccordionSummary>
+            <div>
+              {users
+                .filter((el) => el.status !== 'rejected')
+                .map((el) => (
+                  <Typography variant="body1" key={el.id}>
+                    {el.first_name}{' '}
+                    {owner === true &&
+                      el.status !== 'rejected' &&
+                      `- ${el.status}`}{' '}
+                    {el.isChef === true && ' -> Chef'}
+                  </Typography>
+                ))}
+            </div>
+            <Divider sx={{ marginBottom: '10px' }} />
+            <Typography variant="body1" textAlign="right" alignContent="center">
+              {(() => {
+                const userFiltered = users.filter(
+                  (el) => el.status !== 'rejected'
+                )
+                return userFiltered.length > 0
+                  ? userFiltered.length > 1
+                    ? `${userFiltered.length} personas`
+                    : `${userFiltered.length} persona`
+                  : 'No hay invitados aún.'
+              })()}
+            </Typography>
+          </Accordion>
+          {owner === true && (
+            <Grid container justifyContent="flex-end">
+              <Grid item>
                 <ButtonCustom
                   props={{
-                    text: 'Cerrar plazo de pago',
-                    color: 'error',
+                    navigate: '/home/createAsadero',
+                    text: 'Ver detalles',
                   }}
-                  handleButton={handleCancel}
+                  handleButton={handleButton}
                 />
-              )}
+                {open && bbq.isOpen && (
+                  <ButtonCustom
+                    props={{
+                      text: 'Cerrar plazo de pago',
+                      color: 'error',
+                    }}
+                    handleButton={handleCancel}
+                  />
+                )}
+              </Grid>
             </Grid>
-          </Grid>
-        )}
-      </CardContent>
-    </Card>
+          )}
+        </CardContent>
+      </Card>
+    </>
   )
 }
 

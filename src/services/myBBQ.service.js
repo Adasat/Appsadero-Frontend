@@ -153,3 +153,22 @@ export const getCartFromAsadero = async (cartId) => {
 }
 
 
+/// put('/:asaderoId/close/
+
+export const aceptInvitationFromAsadero = async (asaderoId) => {
+  try {
+    const { data } = await api.put(
+      `/profile/asadero/${asaderoId}/pay`,
+      {},
+      {
+        headers: {
+          token: localStorage.getItem('token'),
+        },
+      }
+    )
+    return data
+  } catch (error) {
+    return error
+  }
+}
+

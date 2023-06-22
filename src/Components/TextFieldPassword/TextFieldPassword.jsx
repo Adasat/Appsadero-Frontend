@@ -33,7 +33,7 @@ function TextFieldPassword({ handlePassword, label }) {
         ...password,
         value: e.target.value,
         validPassword: false,
-        msg: 'La contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula, un número y dos carácteresespeciales ',
+        msg: 'La contraseña debe contener al menos 8 caracteres, una mayúscula, una minúscula, un número y dos carácteres especiales (@,#,$,%,^,&,+,=,!). ',
       })
     }
   }
