@@ -50,7 +50,6 @@ export const addProductsToMenu = async (cartId, shoppingList) => {
   try {
     await Promise.all(
       shoppingList.map(async (product) => {
-        console.log(product)
         return await api.put(
           `/cart/${cartId}/product/${product.id}`,
           {},

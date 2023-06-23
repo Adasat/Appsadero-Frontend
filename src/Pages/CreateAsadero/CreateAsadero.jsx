@@ -169,15 +169,10 @@ function CreateAsadero() {
 
   //Continue Button
   const createAsadero = async () => {
-    //console.log(guestList)
     try {
       const BbqId = await createBBQ(asadero)
-      //console.log('Asadero Creado')
       const guests = await addGuests(BbqId.id, guestList)
-      //console.log('Invitaciones Enviadas')
-      //console.log(BbqId.id, products)
       const menu = await addProductsToMenu(BbqId.id, products)
-      //menu ? console.log('Menú Añadido') : console.log('paquete')
 
       localStorage.removeItem('lista')
 

@@ -47,7 +47,6 @@ function CategoriesNProducts({ handleProducts, productos }) {
   const handleShoppingCart = (shoppingCart) => {
     setShoopingList(shoppingCart)
   }
-  //console.log(shoppingList)
 
   //Call to the product services
   const showCategoriesAndProducts = async () => {
