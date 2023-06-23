@@ -1,13 +1,11 @@
-import { Card, Grid, Typography } from '@mui/material'
-import ButtonCustom from '../../ButtonCustom/ButtonCustom'
+import { Button, Card, Grid, Typography } from '@mui/material'
+
 import { useNavigate } from 'react-router-dom'
 
-function SubHeader({menu}) {
+function SubHeader({ menu }) {
   const navigate = useNavigate()
 
-  const handleButton = () => {
-    navigate('/home/dashboard')
-  }
+
   return (
     <Card elevation={3} sx={{ padding: '10px', width: '100%' }}>
       <Grid container alignItems="center">
@@ -15,10 +13,14 @@ function SubHeader({menu}) {
           <Typography variant="h6">{menu}</Typography>
         </Grid>
         <Grid item xs={6} container justifyContent="flex-end">
-          <ButtonCustom
-            props={{ navigate: '/home/dashboard', text: 'Volver' }}
-            handleButton={handleButton}
-          />
+          <Button
+            variant="contained"
+            onClick={() => {
+              navigate('/home/dashboard')
+            }}
+          >
+            Volver
+          </Button>
         </Grid>
       </Grid>
     </Card>
