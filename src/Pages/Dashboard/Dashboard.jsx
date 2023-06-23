@@ -1,14 +1,17 @@
-import { Box, Grid, Paper, Typography } from '@mui/material'
+import { Box, Button, Grid, Paper, Typography } from '@mui/material'
 import ManageBBQ from '../../Components/ManageBBQ/ManageBBQ'
 import UpcomingBBQ from '../../Components/UpcomingBBQ/UpcomingBBQ'
 import MyFriends from '../../Components/MyFriends/MyFriends'
 import './Dashboard.css'
-import ButtonCustom from '../../Components/ButtonCustom/ButtonCustom'
+import { useNavigate } from 'react-router-dom'
 
 function Dashboard() {
+  const navigate = useNavigate()
+
   return (
     <div className="container">
-      <Paper elevation={3}
+      <Paper
+        elevation={3}
         className="welcom-container"
         sx={{
           backgroundColor: '#6a9848',
@@ -16,7 +19,7 @@ function Dashboard() {
           left: 0,
           margin: 2,
           textAlign: 'center',
-          borderRadius: 4
+          borderRadius: 4,
         }}
       >
         <div className="welcom">
@@ -30,12 +33,13 @@ function Dashboard() {
 
       <Grid container spacing={4} component="main" sx={{ height: '100vh' }}>
         <Grid item xs={12} sm={12} md={4} sx={{ backgroundColor: '' }}>
-          <Paper elevation={24} sx={{ m: 2, padding: 4, textAlign: 'center', borderRadius: 4 }}>
-
-
+          <Paper
+            elevation={24}
+            sx={{ m: 2, padding: 4, textAlign: 'center', borderRadius: 4 }}
+          >
             <Grid container>
               <Grid item xs={12} sm={6} md={6} sx={{ backgroundColor: '' }}>
-                <Box 
+                <Box
                   sx={{
                     padding: '8px',
                   }}
@@ -56,14 +60,14 @@ function Dashboard() {
                     padding: '2px',
                   }}
                 >
-                  <ButtonCustom
-                    props={{
-                      text: 'Nuevo Asadero',
-                      className: 'button-header',
-                      navigate: '/home/createAsadero',
-                      color: 'primary',
+                  <Button
+                    variant="contained"
+                    onClick={() => {
+                      navigate('/home/createAsadero')
                     }}
-                  ></ButtonCustom>
+                  >
+                    Nuevo Asadero
+                  </Button>
                 </Box>
               </Grid>
             </Grid>
@@ -78,10 +82,8 @@ function Dashboard() {
           <MyFriends />
         </Grid>
 
-
         <Grid item xs={12} sm={12} md={4} sx={{ backgroundColor: '' }}>
           <ManageBBQ />
-        
         </Grid>
 
         <Grid item xs={12} sm={12} md={4} sx={{ backgroundColor: '' }}>

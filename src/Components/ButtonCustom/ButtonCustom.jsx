@@ -8,7 +8,7 @@ import { useState } from 'react'
 //function ButtonCustom({handleButton, navigate, disabled = false, text, className='default', color='primary'}) {
 function ButtonCustom({ handleButton, props }) {
   ButtonCustom.propTypes = {
-    handleButton: PropTypes.func.isRequired,
+    handleButton: PropTypes.func,
     props: PropTypes.object.isRequired,
   }
 
@@ -27,7 +27,7 @@ function ButtonCustom({ handleButton, props }) {
 
 
   return (
-    <Link to={props.navigate}>
+
       <Button
         className={props.className}
         navigate={props.navigate}
@@ -45,7 +45,7 @@ function ButtonCustom({ handleButton, props }) {
       >
         {props.text}
       </Button>
-    </Link>
+
   )
 }
 

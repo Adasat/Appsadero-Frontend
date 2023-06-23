@@ -1,5 +1,3 @@
-import { parse } from 'date-fns'
-
 //function to format the date to DD/MM/YYYY
 export const formatDate = (date) => {
   const formated = new Date(date)
@@ -34,11 +32,18 @@ export const formatTime = (time) => {
   return `${hours}:${minutes}`
 }
 
-//function to calculate bbq duration -> import parse from date-fns
-export const duration = (startTime, endTime) => {
-  const startTimeFormated = parse(startTime, 'HH:mm', new Date())
-  const endTimeFormated = parse(endTime, 'HH:mm', new Date())
-  const difference = endTimeFormated.getTime() - startTimeFormated.getTime()
-  const hours = Math.floor(difference / (1000 * 60 * 60))
-  return hours
+
+export const durationTime = (startTime, endTime) => {
+
+  const horaInicio = new Date(startTime); // Hora actual
+  const horaFin = new Date(endTime); // Hora actual
+  let duracionMilisegundos = horaFin.getTime() - horaInicio.getTime();
+
+  if (duracionMilisegundos < 0) {
+    const duracionDiaMilisegundos = 24 * 60 * 60 * 1000;
+    duracionMilisegundos += duracionDiaMilisegundos;
+  }
+  const duracionHoras = Math.floor(duracionMilisegundos / (1000 * 60 * 60));
+
+  return duracionHoras;
 }

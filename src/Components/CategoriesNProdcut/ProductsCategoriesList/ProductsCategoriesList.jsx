@@ -5,9 +5,10 @@ function ProductsCategoriesList({
   products,
   selectedCategory,
   handleProductSelection,
+  productos
 }) {
-  const [selectedRows, setSelectedRows] = useState([])
-  const [listCart, setListCart] = useState([])
+  const [selectedRows, setSelectedRows] = useState([]);
+  const [listCart, setListCart] = useState([]);
 
   const columns = [
     {
@@ -34,7 +35,7 @@ function ProductsCategoriesList({
       width: 30,
       editable: false,
     },
-  ]
+  ];
 
   const filterProducts = products.filter(
     (product) =>
@@ -44,34 +45,70 @@ function ProductsCategoriesList({
         price: product.price,
         unit: product.unit,
       }
-  )
+  );
 
   const allProducts = products.map((product) => ({
     id: product.id,
     name: product.name,
     price: product.price,
     unit: product.unit,
-  }))
+  }));
 
-  const rows = filterProducts.length > 0 ? filterProducts : allProducts
+  const rows = filterProducts.length > 0 ? filterProducts : allProducts;
 
   const handleSelectionModelChange = (e) => {
-  setListCart((prevListCart) => [...prevListCart, e.row]);
-};
+    const selectedProductId = e.row.id;
+    const isSelected = selectedRows.includes(selectedProductId);
 
-useEffect(() => {
-  handleProductSelection(listCart);
-}, [listCart, handleProductSelection]);
+    if (isSelected) {
+      // Si el producto ya estaba seleccionado, lo deseleccionamos y eliminamos del carrito
+      setSelectedRows((prevSelectedRows) =>
+        prevSelectedRows.filter((rowId) => rowId !== selectedProductId)
+      );
 
-  
+      setListCart((prevListCart) =>
+        prevListCart.filter((product) => product.id !== selectedProductId)
+      );
+    } else {
+      // Si el producto no estaba seleccionado, lo agregamos al carrito
+      setSelectedRows((prevSelectedRows) => [...prevSelectedRows, selectedProductId]);
+      setListCart((prevListCart) => [...prevListCart, e.row]);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedRows.length === 0) {
+      // Si no hay elementos seleccionados, vaciamos el carrito
+      setListCart([]);
+      
+    } else {
+      // Si hay elementos seleccionados, actualizamos el carrito
+      const updatedCart = rows.filter((row) => selectedRows.includes(row.id));
+      setListCart(updatedCart);
+    }
+  }, [selectedRows]);
+
+  useEffect(() => {
+    // Verificar los elementos seleccionados proporcionados por props
+    if (productos) {
+      const selectedRowIds = productos.map((product) => product.id);
+      setSelectedRows(selectedRowIds);
+    }
+  }, [productos]);
+
+  useEffect(() => {
+    handleProductSelection(listCart);
+  }, [listCart]);
 
   const rowsWithSelection = rows.map((row) => {
-    if (selectedRows.includes(row.id)) {
-      return { ...row, checkboxSelection: true, disabled: true }
+    const productInLocalStorage = listCart.find((product) => product.id === row.id);
+
+    if (productInLocalStorage) {
+      return { ...row, checkboxSelection: true };
     } else {
-      return { ...row, checkboxSelection: true }
+      return { ...row, checkboxSelection: false };
     }
-  })
+  });
 
   return (
     <DataGrid
@@ -90,7 +127,7 @@ useEffect(() => {
       pageSizeOptions={[5]}
       checkboxSelection={true}
     />
-  )
+  );
 }
 
-export default ProductsCategoriesList
+export default ProductsCategoriesList;

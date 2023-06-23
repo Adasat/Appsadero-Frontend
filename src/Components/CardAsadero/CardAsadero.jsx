@@ -62,10 +62,6 @@ function CardAsadero({ bbq, owner }) {
     listUsers()
   }, [bbq])
 
-  const handleButton = () => {
-    navigate('/home/createAsadero')
-  }
-
   // close payment button
   const rejected = async () => {
     const res = await rejectUsersFromAsadero(bbq.id)
@@ -356,13 +352,6 @@ function CardAsadero({ bbq, owner }) {
           {owner === true && (
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <ButtonCustom
-                  props={{
-                    navigate: '/home/createAsadero',
-                    text: 'Ver detalles',
-                  }}
-                  handleButton={handleButton}
-                />
                 {open && bbq.isOpen && (
                   <ButtonCustom
                     props={{

@@ -89,7 +89,7 @@ export default function Resumen({ asadero, nicks, menuResumen }) {
                     `Fecha: ${formatDate(asadero.date_time)}`}
                   </Typography>
                   <Typography variant="h5">
-                  {isNaN(asadero.duration) ? 'Duración:' :` Duración: ${asadero.duration}`}
+                  {isNaN(asadero.duration) ? 'Duración:' :` Duración: ${asadero.duration}horas`}
                   </Typography>
                   <Divider sx={{ marginTop: '20px' }} />
                   <Typography>
@@ -105,7 +105,7 @@ export default function Resumen({ asadero, nicks, menuResumen }) {
             <Paper elevation={24} sx={{ borderRadius: '12px' }}>
               <Card sx={{ borderRadius: '12px' }}>
                 <CardHeader
-                  title="Menú"
+                  title="Menu"
                   sx={{ textAlign: 'center', backgroundColor: '#e49976' }}
                 />
                 <List>

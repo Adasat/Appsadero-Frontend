@@ -6,7 +6,6 @@ import Login from '../Pages/Login/Login'
 import Signup from '../Pages/Signup/Signup'
 import CreateAsadero from '../Pages/CreateAsadero/CreateAsadero'
 import MyProfile from '../Pages/MyProfile/MyProfile'
-
 import Abel from '../Pages/Pruebas/Abel'
 import Friends from '../Pages/Friends/Friends'
 import CategoriesNProducts from '../Components/CategoriesNProdcut/CategoriesNProducts'

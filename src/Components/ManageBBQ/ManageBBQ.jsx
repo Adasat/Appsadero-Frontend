@@ -3,6 +3,7 @@ import { getMyOwnBbq } from '../../services/myBBQ.service'
 import '../UpcomingBBQ/UpcomingBBQ.css'
 import {
   Box,
+  Button,
   Card,
   Divider,
   List,
@@ -11,7 +12,6 @@ import {
   Typography,
 } from '@mui/material'
 import { formatDate } from '../../validations/validations'
-import ButtonCustom from '../ButtonCustom/ButtonCustom'
 import {useNavigate } from 'react-router-dom'
 import { OutdoorGrill } from '@mui/icons-material'
 
@@ -30,9 +30,6 @@ function ManageBBQ() {
     listMyOwnBbq()
   }, [])
 
-  const createbbq = () => {
-    navigate('/home/createAsadero')
-  }
 
   const returnManageBBQ = () => {
     if (ownBbq.length > 0) {
@@ -82,10 +79,7 @@ function ManageBBQ() {
       return (
         <Typography variant="body">
           Parece que no has organizado ningún asadero aún. <br />
-          <ButtonCustom
-            handleButton={createbbq}
-            props={{ navigate: '/home/createAsadero', text: '¡Organiza uno!' }}
-          />
+          <Button variant="contained" onClick={() => {navigate('/home/createAsadero')}}>¡Organiza uno!</Button>
         </Typography>
       )
     }
@@ -94,14 +88,7 @@ function ManageBBQ() {
   return (
     <Card elevation={24} sx={{ padding: '30px', borderRadius: 4, maxHeight: '960px' }} >
       <Typography variant="h5">
-        <ButtonCustom props={{
-          text: menuTitle,
-          className:'button-header',
-          navigate: '/home/manageAsadero',
-          color: 'primary'
-        }}>
-          </ButtonCustom>
-
+      <Button className='button-header' variant="contained" onClick={() => {navigate('/home/manageAsadero')}}>{menuTitle}</Button>
       </Typography>
       <Divider sx={{ marginBottom: '10px' }} />
       {returnManageBBQ()}
