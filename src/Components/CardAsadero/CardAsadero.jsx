@@ -46,8 +46,6 @@ function CardAsadero({ bbq, owner }) {
   const [textAlert, setTextAlert] = useState('')
   const [severityText, setSeverityText] = useState('')
 
-  const textOk = 'Invitación rechazada'
-
   const navigate = useNavigate()
 
   const listUsers = async () => {
@@ -255,30 +253,19 @@ function CardAsadero({ bbq, owner }) {
                   />
 
                   <List>
-                    {owner === true
-                      ? users
-                          .filter((el) => el.status !== 'rejected')
-                          .map((el) => (
-                            <Typography
-                              variant="h6"
-                              key={el.id}
-                              textAlign="center"
-                            >
+                    {owner === true ? users.filter((el) => el.status !== 'rejected').map((el) => ( 
+                      <Typography variant="h6" key={el.id} textAlign="center">
                               {el.first_name} - {el.status}
-                            </Typography>
-                          ))
-                      : users
-                          .filter((el) => el.status !== 'rejected')
-                          .map((el) => (
-                            <Typography
-                              variant="h6"
-                              key={el.id}
-                              textAlign="center"
-                            >
+                      </Typography>
+                      ))
+                    : users.filter((el) => el.status !== 'rejected').map((el) => (
+                      <Typography variant="h6" key={el.id} textAlign="center">
                               {el.first_name}
-                            </Typography>
-                          ))}
+                      </Typography>
+                    ))}
                   </List>
+
+                  
                 </Card>
               </Paper>
             </Grid>

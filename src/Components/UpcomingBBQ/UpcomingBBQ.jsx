@@ -19,7 +19,7 @@ import { formatDate } from '../../validations/validations'
 function UpcomingBBQ() {
   const [upcomingBBQ, setUpcomingBBQ] = useState([])
   const navigate = useNavigate()
-  const menuTitle = 'Todos los asaderos'
+  const menuTitle = 'Estoy invitada/o a...'
 
   const listUpcomingBBQ = async () => {
     const res = await getAllMyAsaderos()
@@ -35,6 +35,7 @@ function UpcomingBBQ() {
       return (
         <List className="upcomingbbqlist">
           {upcomingBBQ.map((bbq) => (
+            (bbq.user_asadero.isOwner !== true) &&
             <ListItemText className="list-item" key={bbq.id}>
               <Box width={'100%'} margin={2}></Box>
               <Box width={'100%'} mb={2} padding={1}>

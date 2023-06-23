@@ -8,12 +8,14 @@ import { Box } from '@mui/system'
 
 function UpcomingBBQpage() {
   const [upcomingBBQ, setUpcomingBBQ] = useState([])
-  const menuTitle = 'Todos los asaderos'
+  const menuTitle = 'Estoy invitada/o a...'
 
   const listUpcomingBBQ = async () => {
     const res = await getAllMyAsaderos()
     setUpcomingBBQ(res)
   }
+
+  console.log(upcomingBBQ)
 
   useEffect(() => {
     listUpcomingBBQ()
@@ -22,6 +24,7 @@ function UpcomingBBQpage() {
   const showUpComingBBQ = () => {
     if (upcomingBBQ.length > 0) {
       return upcomingBBQ.map((el) => (
+        (el.user_asadero.isOwner !== true) &&
         <Grid item xs={12} sm={4} md={3.5} key={el.id}>
           <CardAsadero bbq={el} owner={false}/>
         </Grid>

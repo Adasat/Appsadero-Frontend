@@ -71,8 +71,6 @@ function CreateAsadero() {
   const handleCloseProducts = () => {
     setOpenProductPopup(false)
   }
-  // eslint-disable-next-line no-unused-vars
-  const handleButton = (button) => {}
 
   const handleName = (name) => {
     name.length > 0 ? setName(name) : setName()
@@ -147,25 +145,6 @@ function CreateAsadero() {
   const textNotOk = 'Por favor, revisa los campos antes de confirmar.'
   const success = 'success'
   const error = 'error'
-
-  /*
-  const alertFunction = () => {
-    if (BbqId && guests && menu) {
-      setTextAlert(textOk)
-     // setShowAlert(true)
-      setSeverityText(success)
-      const delay = setTimeout(() => {
-        navigate('/home/dashboard')
-      }, 2000)
-      return () => clearTimeout(delay)
-    } else {
-      setTextAlert(textNotOk)
-      setSeverityText(error)
-      alert('Por favor, revisa los campos antes de confirmar.')
-    }
-    setShowAlert(true)
-  }
-  */
 
   //Continue Button
   const createAsadero = async () => {
