@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { getAllMyAsaderos } from '../../services/myBBQ.service'
 import {
   Box,
+  Button,
   Card,
   Divider,
   List,
@@ -29,10 +30,6 @@ function UpcomingBBQ() {
   useEffect(() => {
     listUpcomingBBQ()
   }, [])
-
-  const createbbq = () => {
-    navigate('/home/createAsadero')
-  }
 
   const returnUpComingBBQ = () => {
     if (upcomingBBQ.length > 0) {
@@ -73,10 +70,14 @@ function UpcomingBBQ() {
       return (
         <Typography variant="body">
           Parece que no tienes próximos asaderos. <br />
-          <ButtonCustom
-            handleButton={createbbq}
-            props={{ navigate: '/home/createAsadero', text: '¡Organiza uno!' }}
-          />
+          <Button
+            variant="contained"
+            onClick={() => {
+              navigate('/home/createAsadero')
+            }}
+          >
+            ¡Organiza uno!
+          </Button>
         </Typography>
       )
     }
@@ -89,21 +90,15 @@ function UpcomingBBQ() {
      }} 
     >
       <Typography variant="h5">
-        <ButtonCustom
-          props={{
-            text: menuTitle,
-            className: 'button-header',
-            navigate: '/home/upcomingAsadero',
-            color: 'primary',
+        <Button
+          className="button-header"
+          variant="contained"
+          onClick={() => {
+            navigate('/home/upcomingAsadero')
           }}
-        ></ButtonCustom>
-        {/*  <Link
-<          to="/home/upcomingAsadero"
-          className="link"
-          style={{ textDecoration: 'none' }}
         >
           {menuTitle}
-        </Link> */}
+        </Button>
       </Typography>
       <Divider sx={{ marginBottom: '10px' }} />
       {returnUpComingBBQ()}

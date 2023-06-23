@@ -5,11 +5,9 @@ import { api } from './api'
 export const getAllcategories = async () => {
   try {
     const { data } = await api.get('/preference/', {
-      
       headers: {
         token: localStorage.getItem('token'),
       },
-      
     })
     return data
   } catch (error) {
@@ -17,16 +15,14 @@ export const getAllcategories = async () => {
   }
 }
 
-// get all products 
+// get all products
 
 export const getAllProducts = async () => {
   try {
     const { data } = await api.get('/product/', {
-      
       headers: {
         token: localStorage.getItem('token'),
       },
-      
     })
     return data
   } catch (error) {
@@ -48,39 +44,42 @@ export const getAllProductsByCategory = async () => {
   }
 }
 
-
-
 // put product in one shopping cart
 
 export const addProductsToMenu = async (cartId, shoppingList) => {
-  
   try {
     await Promise.all(
       shoppingList.map(async (product) => {
         console.log(product)
-          return await api.put(`/cart/${cartId}/product/${product.id}`, {}, {
+        return await api.put(
+          `/cart/${cartId}/product/${product.id}`,
+          {},
+          {
             headers: {
-              token: localStorage.getItem('token')
-            }
-          })
-        })
+              token: localStorage.getItem('token'),
+            },
+          }
         )
-        
-      } catch (error) {
-        console.log(error)
-      }
+      })
+    )
+    return true
+  } catch (error) {
+    console.log(error)
+  }
 }
-
-
 
 // delete products in one shopping cart
 export const deleteProductOfTheShoppingCart = async (cartId, productId) => {
   try {
-    const { data } = await api.delete(`/${cartId}/product/${productId}`, { cartId, productId }, {
-      headers: {
-        token: localStorage.getItem('token')
-      },
-    })
+    const { data } = await api.delete(
+      `/${cartId}/product/${productId}`,
+      { cartId, productId },
+      {
+        headers: {
+          token: localStorage.getItem('token'),
+        },
+      }
+    )
     return data
   } catch (error) {
     return error

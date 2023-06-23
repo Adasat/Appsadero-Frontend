@@ -5,7 +5,6 @@ import {
   getAllFriends,
 } from '../../services/myFriends.service'
 import { Alert, Box, Grid, Paper, Typography } from '@mui/material'
-
 import MyFriends from '../../Components/MyFriends/MyFriends'
 import SearchFriend from '../../Components/SearchFriend/SearchFriend'
 import { useParams } from 'react-router-dom'
@@ -22,8 +21,6 @@ function Friends() {
 
   const {nick} = useParams()
  
-
-
   const getUsers = async () => {
     const res = await getAllUsers()
     const result = await getAllFriends()
@@ -37,9 +34,6 @@ function Friends() {
   }
 
   
-
-
-
   const handleButtonFriend = async () => {
     const user = users.find((el) => el.nickname === nickname)
     const friend = AllFriends.find((el) => el.nickname === nickname)
@@ -74,9 +68,18 @@ function Friends() {
   return (
     <>
       <SubHeader menu='Mis amigos'/>
-      <Box marginTop={'20px'} sx={{ height: '78vh' }}>
-        <Grid container spacing={2} justifyContent={'space-around'}>
-          <Grid item xs={8} sm={6}>
+<Box
+  marginTop={'20px'}
+  sx={{
+    height: '78vh',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  }}
+>
+  <Grid container spacing={2} justifyContent={'space-around'}>
+          <Grid item xs={4} sm={6}>
             <MyFriends width={'750px'} height={'50vh'} />
           </Grid>
           <Grid item xs={4} sm={3}>

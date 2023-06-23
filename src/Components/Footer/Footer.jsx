@@ -10,7 +10,7 @@ function Footer({ title }) {
     },
     {
       header: 'Meat the team',
-      links: [<Link to="/home/aboutUs" className='links'>Quiénes somos</Link>],
+      links: ['Quiénes somos'],
     },
     {
       header: 'Contacto',

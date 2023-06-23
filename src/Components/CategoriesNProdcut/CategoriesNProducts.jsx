@@ -9,7 +9,7 @@ import CategoriesChip from './CategoriesChip/CategoriesChip'
 import ProductsCategoriesList from './ProductsCategoriesList/ProductsCategoriesList'
 import ShoppingCartList from '../ShoppingCartList/ShoppingCartList'
 
-function CategoriesNProducts({ handleProducts }) {
+function CategoriesNProducts({ handleProducts, productos }) {
   //Relative to Categories of Products
   const [categories, setCategories] = useState([])
   const [selectedCategory, setSelectedCategory] = useState(null)
@@ -101,6 +101,7 @@ function CategoriesNProducts({ handleProducts }) {
               products={products}
               selectedCategory={selectedCategory}
               handleProductSelection={handleProductSelection}
+              productos={productos}
             />
           </Grid>
           <Grid item xs={6} sm={4} md={3}>

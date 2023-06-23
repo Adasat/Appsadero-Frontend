@@ -14,7 +14,6 @@ export const createBBQ = async (bbq) => {
         token: localStorage.getItem('token')
       }
     })
-    console.log(data)
     return data
   } catch (err) {
     throw new Error(err)
@@ -33,6 +32,7 @@ export const addGuests = async (id, guestList) => {
         )
       })
     )
+    return true
   } catch (error) {
     console.log(error)
   }

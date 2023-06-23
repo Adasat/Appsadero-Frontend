@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { getAllFriends } from '../../services/myFriends.service'
 import {
+  Button,
   Divider,
   List,
   ListItemIcon,
@@ -8,7 +9,7 @@ import {
   Paper,
   Typography,
 } from '@mui/material'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AccountCircle } from '@mui/icons-material'
 import './MyFriends.css'
 import SearchBar from './SearchBar/SearchBar'
@@ -16,6 +17,8 @@ import PopUpShared from './PopUpShared/PopUpShared'
 import ButtonCustom from '../ButtonCustom/ButtonCustom'
 
 function MyFriends({ width, height }) {
+  const navigate = useNavigate()
+
   const [friends, setFriends] = useState([])
   const [filterListFriend, setfilterListFriend] = useState([])
   const [open, setOpen] = useState(false)
@@ -79,7 +82,7 @@ function MyFriends({ width, height }) {
     } else {
       return (
         <>
-          <Typography variant="h5">
+          <Typography variant="body">
             Seguimos buscando... <br />
             <Link to="/home/friends" className="link">
               Añade algún amigo.
@@ -96,21 +99,15 @@ function MyFriends({ width, height }) {
       sx={{ padding: '24px', borderRadius: 2, boxSizing: 'unset' }}
     >
       <Typography variant="h5">
-        <ButtonCustom
-          props={{
-            text: 'Mis Amigos',
-            className: 'button-header',
-            navigate: '/home/friends',
-            color: 'primary',
+        <Button
+          variant="contained"
+          onClick={() => {
+            navigate('/home/friends')
           }}
-        ></ButtonCustom>
-        {/* <Link
-          to="/home/friends"
-          className="link"
-          style={{ textDecoration: 'none' }}
-          >
-          Mis amigos
-        </Link> */}
+          sx={{ width: '100%' }}
+        >
+          Mis Amigos
+        </Button>
       </Typography>
       <Divider sx={{ marginBottom: '10px' }} />
       {returnFriends()}

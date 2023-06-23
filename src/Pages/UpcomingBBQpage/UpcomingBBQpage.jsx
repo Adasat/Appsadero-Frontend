@@ -4,6 +4,7 @@ import { getAllMyAsaderos } from '../../services/myBBQ.service'
 import { Card, Grid, Typography } from '@mui/material'
 import CardAsadero from '../../Components/CardAsadero/CardAsadero'
 import { Link } from 'react-router-dom'
+import { Box } from '@mui/system'
 
 function UpcomingBBQpage() {
   const [upcomingBBQ, setUpcomingBBQ] = useState([])
@@ -47,20 +48,22 @@ function UpcomingBBQpage() {
     <>
       <SubHeader menu={menuTitle} />
       <Grid
-        container
-        direction="row"
-        spacing={3}
-        columns={{ xs: 4, sm: 8, md: 12 }}
-        justifyContent="center"
-        alignItems="center"
-        sx={{ width: '100vw', height: '90vh' }}
-      >
-        <Grid item xs={12}>
+      container
+      direction="row"
+      spacing={3}
+      columns={{ xs: 4, sm: 8, md: 12 }}
+      justifyContent="center"
+      alignItems="center"
+      sx={{ width: '100vw', height: '90vh' }}
+    >
+      <Grid item xs={12}>
+        <Box sx={{ overflow: 'auto', maxHeight: '80vh' }}>
           <Grid container spacing={3} justifyContent="center">
             {showUpComingBBQ()}
           </Grid>
-        </Grid>
+        </Box>
       </Grid>
+    </Grid>
     </>
   )
 }

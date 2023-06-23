@@ -5,6 +5,7 @@
     margin: 8px;
     margin-top: 24px;
     margin-left: 4px;
+    padding: 20px;
 }
 
 .container-timers{
@@ -21,5 +22,6 @@
     display: flex;
     justify-content: end;
     margin-top: 32px;
+    gap:50px;
 }
 
