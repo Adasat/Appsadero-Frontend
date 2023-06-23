@@ -15,10 +15,6 @@ import MeetTeam from '../Pages/MeetTeam/MeetTeam'
 import Vista from '../Components/WelcomeView/WelcomeView'
 import WelcomeView from '../Components/WelcomeView/WelcomeView'
 
-
-
-
-
 const checkLogin = () => {
   return localStorage.getItem('token') ? redirect('/home/dashboard') : null
 }

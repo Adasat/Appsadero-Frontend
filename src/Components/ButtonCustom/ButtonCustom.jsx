@@ -1,51 +1,36 @@
 /* eslint-disable react/prop-types */
 import { Button } from '@mui/material'
-import PropTypes from 'prop-types'
-import { Link } from 'react-router-dom'
 import './ButtonCustom.css'
-import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 //function ButtonCustom({handleButton, navigate, disabled = false, text, className='default', color='primary'}) {
-function ButtonCustom({ handleButton, props }) {
-  ButtonCustom.propTypes = {
-    handleButton: PropTypes.func,
-    props: PropTypes.object.isRequired,
-  }
+function ButtonCustom({
+  onClick,
+  navigate,
+  disabled = false,
+  text,
+  className = 'default',
+  color = 'primary',
+}) {
+  const goTo = useNavigate()
 
-  const [buttonProps, setButtonProps] = useState({
-    className: 'default',
-    navigate: 'navigate',
-    disabled: false,
-    text: 'text',
-    color: 'primary',
-  })
-  // eslint-disable-next-line no-unused-vars
-  const handleClick = (button) => {
-    setButtonProps({ ...buttonProps, props })
-    handleButton(button)
+  const handleClick = (e) => {
+    e.preventDefault()
+    if (onClick) onClick()
+    if (navigate && navigate !== '') goTo(navigate)
   }
-
 
   return (
-
-      <Button
-        className={props.className}
-        navigate={props.navigate}
-        disabled={props.disabled}
-        onClick={handleClick}
-        color={props.color}
-        size="large"
-        variant="contained"
-        sx={
-          {
-            // Height: '24px',
-            //backgroundColor: 'red'
-          }
-        }
-      >
-        {props.text}
-      </Button>
-
+    <Button
+      className={className}
+      disabled={disabled}
+      onClick={handleClick}
+      color={color}
+      size="large"
+      variant="contained"
+    >
+      {text}
+    </Button>
   )
 }
 
