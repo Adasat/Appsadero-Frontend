@@ -47,6 +47,8 @@ function LogIn() {
       if (res) {
         setTextAlert(textOk)
         setSeverityText(success)
+        setShowAlert(true)
+
         const delay = setTimeout(() => {
           navigate('/home/dashboard')
         }, 500)

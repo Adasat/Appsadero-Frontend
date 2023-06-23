@@ -14,7 +14,6 @@ import { OutdoorGrill } from '@mui/icons-material'
 import './UpcomingBBQ.css'
 import { useNavigate } from 'react-router-dom'
 import { formatDate } from '../../validations/validations'
-import ButtonCustom from '../ButtonCustom/ButtonCustom'
 
 //component rendering upcoming bbq, in front as todos los asaderos
 function UpcomingBBQ() {

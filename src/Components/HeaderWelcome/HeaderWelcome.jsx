@@ -1,18 +1,9 @@
 import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material'
 import { Link, useNavigate } from 'react-router-dom'
-import ButtonCustom from '../ButtonCustom/ButtonCustom'
 
 function HeaderWelcome({ title }) {
 
   const navigate = useNavigate()
-
-  const handleLogin = () => {
-   
-  }
-
-  const handleSignup = () => {
-    
-  }
 
   return (
     <>

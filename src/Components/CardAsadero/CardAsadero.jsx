@@ -31,7 +31,6 @@ import {
 } from '../../services/myBBQ.service'
 import { forwardRef, useEffect, useState } from 'react'
 import { Close, ExpandMore } from '@mui/icons-material'
-import ButtonCustom from '../ButtonCustom/ButtonCustom'
 import AlertSuccess from '../AlertSuccess/AlertSuccess'
 
 function CardAsadero({ bbq, owner }) {
@@ -135,9 +134,10 @@ function CardAsadero({ bbq, owner }) {
         el.first_name === localStorage.getItem('first_name')
         
     ).length > 0
+    
     return (
       <div>
-        <Button variant="outlined" onClick={handleClickOpen}>
+        <Button color='secondary' variant="outlined" onClick={() => handleClickOpen}>
           Ver más detalles
         </Button>
         <Dialog
@@ -203,7 +203,7 @@ function CardAsadero({ bbq, owner }) {
                         variant="outlined"
                         size="large"
                         color="error"
-                        onClick={handleReject}
+                        onClick={() => {handleReject}}
                         sx={{ height: '60px', width: '150px' }}
                       >
                         Rechazar invitación
@@ -212,7 +212,7 @@ function CardAsadero({ bbq, owner }) {
                         variant="contained"
                         size="large"
                         color="success"
-                        onClick={handleAccept}
+                        onClick={() => {handleAccept}}
                         sx={{ height: '60px', width: '150px' }}
                       >
                         Aceptar invitación
@@ -355,13 +355,7 @@ function CardAsadero({ bbq, owner }) {
             <Grid container justifyContent="flex-end">
               <Grid item>
                 {open && bbq.isOpen && (
-                  <ButtonCustom
-                    props={{
-                      text: 'Cerrar plazo de pago',
-                      color: 'error',
-                    }}
-                    handleButton={handleCancel}
-                  />
+                 <Button color='error' variant="contained" onClick={() => {handleCancel}}>Cerrar plazo de pago</Button>
                 )}
               </Grid>
             </Grid>
